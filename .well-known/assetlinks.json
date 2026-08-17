@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.nur.sahayak",
+      "sha256_cert_fingerprints": [
+        "14:6D:E9:7D:0F:52:EA:43:1E:E5:60:E2:B0:02:5E:7E:6D:65:43:5D:7A:0E:07:C0:4A:A2:48:6E:16:51:04:03"
+      ]
+    }
+  }
+]

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_bg">
+
+    <!-- Red-Green Gradient Header Bar -->
+    <LinearLayout
+        android:id="@+id/headerTerms"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/header_gradient"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp">
+
+        <ImageButton
+            android:id="@+id/btnBackTerms"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_close"
+            app:tint="@color/white"
+            android:contentDescription="Back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="শর্তাবলী ও নিয়মাবলি"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/headerTerms"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Pure White Background Card for High Contrast Text -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="3dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ব্যবহার নির্দেশিকা ও শর্তাবলী"
+                        android:textColor="@color/primary_green"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginVertical="12dp"
+                        android:background="#E0E0E0" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingExtra="5dp"
+                        android:text="১. সহায়ক (Sahayak) অ্যাপের সকল তথ্য লালপুর উপজেলার সর্বসাধারণের কল্যাণে ব্যবহারের জন্য তৈরি করা হয়েছে।\n\n২. অ্যাপের পাবলিক বক্সে কোনো ধরনের উসকানিমূলক, রাজনৈতিক বা অসৌজন্যমূলক বক্তব্য প্রকাশ সম্পূর্ণ নিষিদ্ধ।\n\n৩. অসাধু উদ্দেশ্যে কারো ব্যক্তিগত কন্টাক্ট নম্বর অপব্যবহার করা আইনত দণ্ডনীয় অপরাধ।\n\n৪. কোনো ভুল তথ্য চোখে পড়লে অ্যাপের মাধ্যমে রিপোর্ট বা সংশোধন অনুরোধ পাঠানোর আহ্বান জানানো হচ্ছে।"
+                        android:textColor="#212121"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

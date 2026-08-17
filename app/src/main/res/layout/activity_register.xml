@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_bg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <!-- Top Red-Green Gradient Notch Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="80dp"
+            android:background="@drawable/header_gradient"
+            android:gravity="bottom|center_horizontal"
+            android:paddingTop="32dp"
+            android:paddingBottom="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="নতুন একাউন্ট তৈরি করুন"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <ImageView
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:src="@drawable/flogo"
+                android:contentDescription="Logo" />
+
+            <!-- First & Last Name Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="6dp"
+                    app:boxBackgroundColor="@color/white"
+                    app:boxStrokeColor="@color/primary_green"
+                    app:hintTextColor="@color/primary_green"
+                    android:textColorHint="#757575">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etFirstName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="প্রথম নাম"
+                        android:textColor="#000000"
+                        android:textColorHint="#757575" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    app:boxBackgroundColor="@color/white"
+                    app:boxStrokeColor="@color/primary_green"
+                    app:hintTextColor="@color/primary_green"
+                    android:textColorHint="#757575">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etLastName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="শেষ নাম"
+                        android:textColor="#000000"
+                        android:textColorHint="#757575" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <!-- Age & Mobile Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    app:boxBackgroundColor="@color/white"
+                    app:boxStrokeColor="@color/primary_green"
+                    app:hintTextColor="@color/primary_green"
+                    android:textColorHint="#757575">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etAge"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="বয়স"
+                        android:inputType="number"
+                        android:textColor="#000000"
+                        android:textColorHint="#757575" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    app:boxBackgroundColor="@color/white"
+                    app:boxStrokeColor="@color/primary_green"
+                    app:hintTextColor="@color/primary_green"
+                    android:textColorHint="#757575">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etMobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="মোবাইল নম্বর"
+                        android:inputType="phone"
+                        android:textColor="#000000"
+                        android:textColorHint="#757575" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <!-- Email Input -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:boxBackgroundColor="@color/white"
+                app:boxStrokeColor="@color/primary_green"
+                app:hintTextColor="@color/primary_green"
+                android:textColorHint="#757575">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etRegEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="ইমেইল এড্রেস"
+                    android:inputType="textEmailAddress"
+                    android:textColor="#000000"
+                    android:textColorHint="#757575" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Password with Green Eye Toggle -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:boxBackgroundColor="@color/white"
+                app:boxStrokeColor="@color/primary_green"
+                app:hintTextColor="@color/primary_green"
+                android:textColorHint="#757575"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/primary_green"
+                app:endIconTint="@color/primary_green">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etRegPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="পাসওয়ার্ড"
+                    android:inputType="textPassword"
+                    android:textColor="#000000"
+                    android:textColorHint="#757575" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Confirm Password with Green Eye Toggle -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:boxBackgroundColor="@color/white"
+                app:boxStrokeColor="@color/primary_green"
+                app:hintTextColor="@color/primary_green"
+                android:textColorHint="#757575"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/primary_green"
+                app:endIconTint="@color/primary_green">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etConfirmPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="কনফার্ম পাসওয়ার্ড"
+                    android:inputType="textPassword"
+                    android:textColor="#000000"
+                    android:textColorHint="#757575" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Submit Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnRegisterSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="18dp"
+                android:backgroundTint="@color/primary_green"
+                android:text="রেজিস্টার করুন"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:cornerRadius="8dp" />
+
+            <!-- Google Sign-Up Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnGoogleRegister"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="@color/white"
+                android:text="Sign up with GOOGLE"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:icon="@drawable/ic_google"
+                app:iconTint="@null"
+                app:strokeColor="#CCCCCC"
+                app:strokeWidth="1dp"
+                app:cornerRadius="8dp" />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

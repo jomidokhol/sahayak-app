@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_bg">
+
+    <!-- Top Red-Green Gradient Header Bar matching User Screenshot -->
+    <LinearLayout
+        android:id="@+id/headerBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="88dp"
+        android:background="@drawable/header_gradient"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="32dp"
+        android:paddingBottom="10dp">
+
+        <!-- ONLY Logo Image on Left (No separate app name text) -->
+        <ImageView
+            android:id="@+id/ivHeaderLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/logo"
+            android:contentDescription="Logo" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- Header Add Post/Contact (+) Button -->
+        <ImageButton
+            android:id="@+id/btnHeaderAddPost"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_add"
+            app:tint="@color/white"
+            android:visibility="gone"
+            android:contentDescription="Add Post" />
+
+        <!-- Header Search Button -->
+        <ImageButton
+            android:id="@+id/btnHeaderSearch"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="6dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_search"
+            app:tint="@color/white"
+            android:contentDescription="Search" />
+
+        <!-- Header Login Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnHeaderLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginStart="6dp"
+            android:backgroundTint="@color/white"
+            android:text="লগইন"
+            android:textColor="@color/primary_green"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:cornerRadius="18dp"
+            android:paddingHorizontal="12dp" />
+
+    </LinearLayout>
+
+    <!-- Scrolling Notice Bar (Big Text + Infinite Smooth Marquee) -->
+    <LinearLayout
+        android:id="@+id/noticeBar"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_below="@id/headerBar"
+        android:background="#2E7D32"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_notice"
+            app:tint="@color/white"
+            android:contentDescription="Notice Icon" />
+
+        <!-- Continuous Scrolling MarqueeTextView with 15sp Bold Text -->
+        <com.nur.sahayak.utils.MarqueeTextView
+            android:id="@+id/tvNoticeText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:text="লালপুর উপজেলায় আপনাকে স্বাগতম!"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/btnCloseNotice"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_close"
+            app:tint="@color/white"
+            android:contentDescription="Close Notice" />
+
+    </LinearLayout>
+
+    <!-- Fragment Container -->
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/noticeBar"
+        android:layout_above="@id/bottomNavigation" />
+
+    <!-- Bottom Navigation Bar -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        app:elevation="8dp"
+        app:itemIconSize="22dp"
+        app:itemTextColor="@color/nav_item_color"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_nav_menu" />
+
+</RelativeLayout>

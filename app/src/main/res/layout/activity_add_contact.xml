@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_bg">
+
+    <!-- Red-Green Gradient Header Bar positioned below Notch -->
+    <LinearLayout
+        android:id="@+id/headerAddContact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="88dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/header_gradient"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="32dp"
+        android:paddingBottom="12dp">
+
+        <ImageButton
+            android:id="@+id/btnBackAddContact"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_close"
+            app:tint="@color/white"
+            android:contentDescription="Back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="নতুন কন্টাক্ট যুক্ত করুন"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/headerAddContact"
+        android:padding="16dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="3dp"
+            android:layout_marginBottom="24dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <!-- 1. Name Input -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="১. ব্যক্তি / প্রতিষ্ঠানের নাম (*):"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etNewContactName"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/badge_bg"
+                    android:backgroundTint="#F8F9FA"
+                    android:hint="যেমন: ডাঃ রফিকুল ইসলাম / নূর অটো গ্যারেজ"
+                    android:paddingHorizontal="14dp"
+                    android:textColor="#000000"
+                    android:textColorHint="#757575"
+                    android:textSize="14sp" />
+
+                <!-- 2. Designation / Title Input -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="২. পদবি বা বিবরণ:"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etNewContactTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/badge_bg"
+                    android:backgroundTint="#F8F9FA"
+                    android:hint="যেমন: মেডিসিন ও শিশু বিশেষজ্ঞ / দক্ষ মেকানিক"
+                    android:paddingHorizontal="14dp"
+                    android:textColor="#000000"
+                    android:textColorHint="#757575"
+                    android:textSize="14sp" />
+
+                <!-- 3. Location Input -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="৩. ঠিকানা বা এলাকা:"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etNewContactLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/badge_bg"
+                    android:backgroundTint="#F8F9FA"
+                    android:hint="যেমন: লালপুর বাজার, নাটোর"
+                    android:paddingHorizontal="14dp"
+                    android:textColor="#000000"
+                    android:textColorHint="#757575"
+                    android:textSize="14sp" />
+
+                <!-- 4. Category Dropdown Button -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="৪. সেবার ক্যাটাগরি (*):"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSelectCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="6dp"
+                    android:backgroundTint="#F8F9FA"
+                    android:text="ক্যাটাগরি নির্বাচন করুন ▾"
+                    android:textColor="@color/primary_green"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:gravity="start|center_vertical"
+                    app:strokeColor="#CCCCCC"
+                    app:strokeWidth="1dp"
+                    app:cornerRadius="8dp" />
+
+                <!-- 5. Phone Input -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="৫. মোবাইল নম্বর (*):"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etNewContactPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/badge_bg"
+                    android:backgroundTint="#F8F9FA"
+                    android:hint="যেমন: 01711XXXXXX"
+                    android:inputType="phone"
+                    android:paddingHorizontal="14dp"
+                    android:textColor="#000000"
+                    android:textColorHint="#757575"
+                    android:textSize="14sp" />
+
+                <!-- 6. WhatsApp Input (Optional) -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="৬. WhatsApp নম্বর (ঐচ্ছিক):"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etNewContactWhatsapp"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/badge_bg"
+                    android:backgroundTint="#F8F9FA"
+                    android:hint="যেমন: 8801711XXXXXX"
+                    android:inputType="phone"
+                    android:paddingHorizontal="14dp"
+                    android:textColor="#000000"
+                    android:textColorHint="#757575"
+                    android:textSize="14sp" />
+
+                <!-- 7. Facebook Link (Optional) -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="৭. Facebook লিংক (ঐচ্ছিক):"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etNewContactFacebook"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/badge_bg"
+                    android:backgroundTint="#F8F9FA"
+                    android:hint="যেমন: https://facebook.com/username"
+                    android:paddingHorizontal="14dp"
+                    android:textColor="#000000"
+                    android:textColorHint="#757575"
+                    android:textSize="14sp" />
+
+                <!-- Submit Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSaveContactSubmit"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="22dp"
+                    android:backgroundTint="@color/primary_green"
+                    android:text="কন্টাক্ট সেভ করুন"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="8dp" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </ScrollView>
+</RelativeLayout>

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_bg">
+
+    <!-- Red-Green Gradient Header Bar positioned below Notch -->
+    <LinearLayout
+        android:id="@+id/headerCreatePost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="88dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/header_gradient"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="32dp"
+        android:paddingBottom="12dp">
+
+        <ImageButton
+            android:id="@+id/btnBackCreatePost"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_close"
+            app:tint="@color/white"
+            android:contentDescription="Back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="নতুন পোস্ট তৈরি করুন"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/headerCreatePost"
+        android:layout_above="@id/btnSubmitPost"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- User Info Header Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="12dp">
+
+                <ImageView
+                    android:id="@+id/ivPostUserAvatar"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:src="@drawable/draft_user"
+                    android:contentDescription="Avatar" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvPostUserName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="সম্মানিত ইউজার"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvPostVisibilityStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="পাবলিক পোস্ট"
+                        android:textColor="#666666"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Expanded Input Box -->
+            <EditText
+                android:id="@+id/etPostContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="180dp"
+                android:background="@drawable/badge_bg"
+                android:backgroundTint="@color/white"
+                android:gravity="top|start"
+                android:hint="আপনার বক্তব্য বা প্রশ্ন লিখুন (সর্বোচ্চ ১০০১ শব্দ)..."
+                android:textColor="#000000"
+                android:textColorHint="#757575"
+                android:padding="16dp"
+                android:textSize="15sp"
+                android:lineSpacingExtra="4dp" />
+
+            <!-- Word Counter -->
+            <TextView
+                android:id="@+id/tvWordCounter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="6dp"
+                android:text="শব্দ সংখ্যা: ০ / ১০০১"
+                android:textColor="#666666"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <!-- Post Creation Tools Toolbar -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="পোস্টের অতিরিক্ত টুলস:"
+                android:textColor="@color/primary_green"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <!-- 1. Schedule Tool -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnToolSchedule"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="4dp"
+                    android:backgroundTint="@color/white"
+                    android:text="সিডিউল"
+                    android:textColor="#212121"
+                    android:textSize="12sp"
+                    app:icon="@drawable/ic_schedule"
+                    app:iconTint="@color/primary_green"
+                    app:strokeColor="#CCCCCC"
+                    app:cornerRadius="8dp" />
+
+                <!-- 2. Temporary Expiry Tool -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnToolTemporary"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="2dp"
+                    android:backgroundTint="@color/white"
+                    android:text="মেয়াদ"
+                    android:textColor="#212121"
+                    android:textSize="12sp"
+                    app:icon="@drawable/ic_timer"
+                    app:iconTint="@color/primary_green"
+                    app:strokeColor="#CCCCCC"
+                    app:cornerRadius="8dp" />
+
+                <!-- 3. Anonymous Toggle Tool -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnToolAnonymous"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_weight="1.1"
+                    android:layout_marginStart="4dp"
+                    android:backgroundTint="@color/white"
+                    android:text="Anonymous"
+                    android:textColor="#212121"
+                    android:textSize="11sp"
+                    app:icon="@drawable/ic_anonymous"
+                    app:iconTint="@color/primary_green"
+                    app:strokeColor="#CCCCCC"
+                    app:cornerRadius="8dp" />
+
+            </LinearLayout>
+
+            <!-- Active Options Badges/Status View -->
+            <LinearLayout
+                android:id="@+id/llActiveToolBadges"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:visibility="gone">
+
+                <!-- Schedule Badge -->
+                <TextView
+                    android:id="@+id/tvActiveScheduleBadge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/badge_bg"
+                    android:backgroundTint="#E8F5E9"
+                    android:textColor="@color/primary_green"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="4dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="4dp"
+                    android:visibility="gone" />
+
+                <!-- Expiry Badge -->
+                <TextView
+                    android:id="@+id/tvActiveExpiryBadge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/badge_bg"
+                    android:backgroundTint="#FFF3E0"
+                    android:textColor="#E65100"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="4dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Submit Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSubmitPost"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/primary_green"
+        android:text="পোস্ট প্রকাশ করুন"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:cornerRadius="10dp" />
+
+</RelativeLayout>

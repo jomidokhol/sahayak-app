@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="3dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="#EAEAEA">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Main Card Content with Gradient Background -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gradient_card_bg"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Top Header Row: Red Category Badge on Left, White Location & Share on Right -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <!-- Red Capsule Category Badge matching Screenshot -->
+                <TextView
+                    android:id="@+id/tvContactCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/badge_bg"
+                    android:backgroundTint="#E53935"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="5dp"
+                    android:text="মুদি খানা"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <!-- Location on Top Right matching Screenshot (White Bold Text) -->
+                <TextView
+                    android:id="@+id/tvContactLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="6dp" />
+
+                <!-- Share Icon Button -->
+                <ImageButton
+                    android:id="@+id/btnShareContact"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_share"
+                    app:tint="@color/white"
+                    android:contentDescription="Share Contact" />
+            </LinearLayout>
+
+            <!-- Name (Bold Dark Green matching Screenshot) -->
+            <TextView
+                android:id="@+id/tvContactName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="#004D36"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- Title / Designation (Dark Black) -->
+            <TextView
+                android:id="@+id/tvContactTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="#212121"
+                android:textSize="14sp" />
+
+            <!-- Bottom Action Buttons matching Screenshot Colors -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <!-- Call Button (Dark Green) -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCall"
+                    android:layout_width="0dp"
+                    android:layout_height="42dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#004D36"
+                    android:text="কল করুন"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:icon="@drawable/ic_phone"
+                    app:iconTint="@color/white"
+                    app:cornerRadius="8dp" />
+
+                <!-- WhatsApp Button (Bright Green) -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnWhatsapp"
+                    android:layout_width="0dp"
+                    android:layout_height="42dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:backgroundTint="#25D366"
+                    android:text="WHATSAPP"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:icon="@drawable/ic_whatsapp"
+                    app:iconTint="@color/white"
+                    app:cornerRadius="8dp"
+                    android:visibility="gone" />
+
+                <!-- Facebook Button (Bright Blue) -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnFacebook"
+                    android:layout_width="0dp"
+                    android:layout_height="42dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:backgroundTint="#1877F2"
+                    android:text="FACEBOOK"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:icon="@drawable/ic_facebook"
+                    app:iconTint="@color/white"
+                    app:cornerRadius="8dp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Category Watermark Icon placed at Bottom-Right matching Screenshot -->
+        <ImageView
+            android:id="@+id/ivWatermark"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="12dp"
+            android:alpha="0.22"
+            android:scaleType="centerInside"
+            android:src="@drawable/flogo"
+            android:contentDescription="Watermark" />
+
+    </RelativeLayout>
+</com.google.android.material.card.MaterialCardView>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "362613541781",
+    "firebase_url": "https://sohayok-cbd50-default-rtdb.firebaseio.com",
+    "project_id": "sohayok-cbd50",
+    "storage_bucket": "sohayok-cbd50.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362613541781:android:2e2bddbe7aaa4e306d449c",
+        "android_client_info": {
+          "package_name": "com.nur.sahayak"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "362613541781-i4gqirlvm8h72co1en04h8chgj690kb2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nur.sahayak",
+            "certificate_hash": "857d2d1ff3581ffecd34c212e4d354c6a996994b"
+          }
+        },
+        {
+          "client_id": "362613541781-cu3q8etis0mnl3r6pthif5ulsnp2t96v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBs0qLvT9-rqP2CgtVu0cuD4kKUpdEcmDI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "362613541781-cu3q8etis0mnl3r6pthif5ulsnp2t96v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

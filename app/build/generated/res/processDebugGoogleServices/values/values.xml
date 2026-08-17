@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">362613541781-cu3q8etis0mnl3r6pthif5ulsnp2t96v.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://sohayok-cbd50-default-rtdb.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">362613541781</string>
+    <string name="google_api_key" translatable="false">AIzaSyBs0qLvT9-rqP2CgtVu0cuD4kKUpdEcmDI</string>
+    <string name="google_app_id" translatable="false">1:362613541781:android:2e2bddbe7aaa4e306d449c</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBs0qLvT9-rqP2CgtVu0cuD4kKUpdEcmDI</string>
+    <string name="google_storage_bucket" translatable="false">sohayok-cbd50.firebasestorage.app</string>
+    <string name="project_id" translatable="false">sohayok-cbd50</string>
+</resources>

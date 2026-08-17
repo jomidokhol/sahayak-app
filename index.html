@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>সহায়ক - লালপুর উপজেলা জরুরি ডিজিটাল সেবা</title>
+    <link rel="icon" href="flogo.png">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, sans-serif; }
+        body { background: #f0f4f2; color: #212121; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 16px; }
+        .card { background: #ffffff; width: 100%; max-width: 440px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 106, 78, 0.12); overflow: hidden; text-align: center; border: 1px solid #e0eae5; }
+        .header-bg { background: linear-gradient(135deg, #F42A41 0%, #006A4E 100%); padding: 36px 20px 24px; color: white; }
+        .logo-img { width: 90px; height: 90px; border-radius: 50%; background: white; padding: 6px; box-shadow: 0 6px 16px rgba(0,0,0,0.15); margin-bottom: 12px; }
+        .title { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+        .subtitle { font-size: 14px; opacity: 0.92; }
+        .content { padding: 28px 24px; }
+        .badge { display: inline-block; background: #e8f5e9; color: #006A4E; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: bold; margin-bottom: 16px; }
+        .message { font-size: 15px; color: #444; line-height: 1.6; margin-bottom: 24px; }
+        .btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 14px; border-radius: 12px; font-size: 16px; font-weight: bold; text-decoration: none; cursor: pointer; transition: all 0.2s ease; margin-bottom: 12px; }
+        .btn-app { background: #006A4E; color: white; border: none; box-shadow: 0 4px 12px rgba(0, 106, 78, 0.25); }
+        .btn-app:hover { background: #00523d; }
+        .btn-download { background: #ffffff; color: #006A4E; border: 2px solid #006A4E; }
+        .btn-download:hover { background: #f0fdf4; }
+        .footer-note { font-size: 12px; color: #888; margin-top: 16px; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="header-bg">
+        <img src="flogo.png" alt="সহায়ক লোগো" class="logo-img" onerror="this.src='logo2.png'">
+        <h1 class="title">সহায়ক (Sahayak)</h1>
+        <p class="subtitle">লালপুর উপজেলা জরুরি তথ্য ও ডিজিটাল সেবা</p>
+    </div>
+
+    <div class="content">
+        <div id="typeBadge" class="badge">শেয়ার করা কনটেন্ট</div>
+        <p id="shareMsg" class="message">
+            এই তথ্যটি সহজে এবং পূর্ণাঙ্গভাবে দেখতে <strong>সহায়ক অ্যান্ড্রয়েড অ্যাপে</strong> প্রবেশ করুন।
+        </p>
+
+        <!-- Button 1: Open in App -->
+        <a id="btnOpenApp" href="#" class="btn btn-app">
+            📱 অ্যাপে দেখুন (Open in App)
+        </a>
+
+        <!-- Button 2: Download APK -->
+        <a href="sahayak.apk" download="sahayak.apk" class="btn btn-download">
+            📥 সহায়ক অ্যাপ ডাউনলোড করুন (APK)
+        </a>
+
+        <p class="footer-note">নাটোর জেলার লালপুর উপজেলার নাগরিকদের জন্য নির্মিত</p>
+    </div>
+</div>
+
+<script>
+    // Detect Current Deep Link Path
+    const currentPath = window.location.pathname;
+    const fullUrl = window.location.href;
+    const btnOpenApp = document.getElementById('btnOpenApp');
+    const typeBadge = document.getElementById('typeBadge');
+    const shareMsg = document.getElementById('shareMsg');
+
+    // Intent scheme for Android Deep Linking
+    const intentUrl = "intent://" + window.location.host + currentPath + "#Intent;scheme=https;package=com.nur.sahayak;end";
+
+    if (currentPath.includes('/contact/')) {
+        typeBadge.innerText = "📞 জরুরি কন্টাক্ট সেবা";
+        shareMsg.innerHTML = "শেয়ার করা কন্টাক্ট নম্বর ও বিস্তারিত তথ্য দেখতে সহায়ক অ্যাপে প্রবেশ করুন।";
+    } else if (currentPath.includes('/news/')) {
+        typeBadge.innerText = "📰 লালপুর সংবাদ";
+        shareMsg.innerHTML = "সম্পূর্ণ সংবাদটি বিস্তারিত পড়তে সহায়ক অ্যাপে প্রবেশ করুন।";
+    }
+
+    btnOpenApp.href = intentUrl;
+
+    // Auto-attempt to open the App if on mobile
+    window.onload = function() {
+        if (/Android/i.test(navigator.userAgent)) {
+            setTimeout(function() {
+                window.location.href = intentUrl;
+            }, 600);
+        }
+    };
+</script>
+
+</body>
+</html>

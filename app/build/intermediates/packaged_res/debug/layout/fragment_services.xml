@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_bg">
+
+    <!-- Scroll-Aware Native AppBarLayout -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarServices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray_bg"
+        app:elevation="0dp">
+
+        <!-- Search & Filter Header with scroll|enterAlways|snap flags -->
+        <LinearLayout
+            android:id="@+id/llServicesHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            app:layout_scrollFlags="scroll|enterAlways|snap">
+
+            <!-- Search Bar with Green Vector Icon -->
+            <EditText
+                android:id="@+id/etSearch"
+                android:layout_width="0dp"
+                android:layout_height="46dp"
+                android:layout_weight="1"
+                android:background="@drawable/badge_bg"
+                android:backgroundTint="@color/white"
+                android:drawableStart="@drawable/ic_search"
+                android:drawableTint="@color/primary_green"
+                app:drawableTint="@color/primary_green"
+                android:drawablePadding="10dp"
+                android:hint="নাম, এলাকা বা সেবার নাম লিখুন..."
+                android:textColor="#000000"
+                android:textColorHint="#757575"
+                android:paddingHorizontal="14dp"
+                android:textSize="14sp" />
+
+            <!-- Compact Dropdown Filter Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnFilterDropdown"
+                android:layout_width="wrap_content"
+                android:layout_height="46dp"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="@color/white"
+                android:text="ফিল্টার ▾"
+                android:textColor="@color/primary_green"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:strokeColor="@color/primary_green"
+                app:strokeWidth="1.5dp"
+                app:cornerRadius="8dp" />
+
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Main Content with SwipeRefreshLayout -->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout 
+        android:id="@+id/swipeRefreshServices"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Empty State View -->
+            <LinearLayout
+                android:id="@+id/llEmptyState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="32dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/flogo"
+                    android:alpha="0.4"
+                    android:contentDescription="Empty" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="এই ক্যাটাগরিতে এখনো কোনো ডাটা যোগ করা হয়নি।"
+                    android:textColor="#757575"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <!-- Contacts RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvContacts"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="12dp"
+                android:paddingTop="8dp"
+                android:clipToPadding="false" />
+
+        </FrameLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

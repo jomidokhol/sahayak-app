@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardNewsSkeleton"
+    android:layout_width="match_parent"
+    android:layout_height="210dp"
+    android:layout_marginBottom="16dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#E0E8E5">
+
+        <!-- Glassy Shimmer Container -->
+        <View
+            android:id="@+id/vNewsSkeletonBg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#D0DCD7" />
+
+        <View
+            android:layout_width="160dp"
+            android:layout_height="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="16dp"
+            android:background="#BAC9C3" />
+
+    </RelativeLayout>
+</com.google.android.material.card.MaterialCardView>

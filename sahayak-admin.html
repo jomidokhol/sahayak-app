@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>সহায়ক - লালপুর এডমিন প্যানেল (Approval System & News)</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f0f2f5; margin: 0; padding: 12px; color: #333; }
+        .container { max-width: 680px; margin: 0 auto; }
+        .header { background: #006A4E; color: white; text-align: center; padding: 15px; border-radius: 10px; margin-bottom: 15px; }
+        .header h1 { margin: 0; font-size: 22px; }
+        .header p { margin: 5px 0 0 0; font-size: 13px; opacity: 0.9; }
+        
+        .card { background: white; border-radius: 10px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+        .card h2 { color: #F42A41; margin-top: 0; font-size: 16px; border-bottom: 2px solid #F42A41; padding-bottom: 6px; }
+        
+        label { display: block; font-weight: bold; margin-top: 10px; font-size: 13px; }
+        input, select, textarea { width: 100%; padding: 10px; margin-top: 4px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; }
+        
+        .toolbar { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; margin-bottom: 6px; background: #eef2f5; padding: 8px; border-radius: 6px; border: 1px solid #d0d7de; }
+        .tool-btn { background: #006A4E; color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 12px; font-weight: bold; cursor: pointer; margin-top: 0; width: auto; }
+        .tool-btn:hover { background-color: #00523d; }
+        .tool-btn-accent { background: #1877F2; }
+        
+        .preview-box { border: 1px dashed #006A4E; background: #ffffff; padding: 12px; border-radius: 6px; margin-top: 8px; min-height: 80px; max-height: 250px; overflow-y: auto; font-size: 14px; line-height: 1.5; }
+        .preview-box img { max-width: 100%; height: auto; border-radius: 6px; }
+
+        button { background: #006A4E; color: white; border: none; padding: 12px; border-radius: 6px; font-size: 15px; font-weight: bold; width: 100%; cursor: pointer; margin-top: 12px; }
+        button:hover { background-color: #00523d; }
+        button.btn-danger { background: #dc3545; }
+        button.btn-warning { background: #ffc107; color: #000; }
+        button.btn-success { background: #28a745; }
+        button.btn-cancel { background: #6c757d; margin-top: 6px; }
+
+        .alert { padding: 12px; border-radius: 6px; font-weight: bold; margin-bottom: 15px; display: none; text-align: center; font-size: 14px; }
+        .alert-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .alert-error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+
+        .item-card { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 12px; margin-top: 10px; }
+        .item-card h4 { margin: 0 0 5px 0; color: #006A4E; font-size: 16px; }
+        .item-card p { margin: 3px 0; font-size: 13px; color: #555; }
+        .btn-group { display: flex; gap: 8px; margin-top: 8px; }
+        .btn-group button { width: 50%; padding: 8px; font-size: 12px; margin-top: 0; }
+        .badge { display: inline-block; background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: bold; margin-bottom: 4px; }
+    </style>
+
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>সহায়ক (Sahayak) - এডমিন প্যানেল</h1>
+        <p>লালপুর উপজেলা কন্টাক্ট এপ্রুভাল ও নিউজ ড্যাশবোর্ড</p>
+    </div>
+
+    <div id="alertBox" class="alert"></div>
+
+    <!-- Section 0: ImgBB API Key Configuration -->
+    <div class="card" style="background: #f0f7f4; border: 1px solid #006A4E;">
+        <h2>🔑 ImgBB ইমেজ আপলোড API Key সেটিং</h2>
+        <label for="imgbbApiKeyInput">ImgBB API Key (*):</label>
+        <input type="text" id="imgbbApiKeyInput" placeholder="আপনার ImgBB API Key পেস্ট করুন">
+        <button onclick="saveImgbbApiKey()" style="background: #28a745;">API Key সেভ করুন</button>
+    </div>
+
+    <!-- Section 1: Scrolling Notice -->
+    <div class="card">
+        <h2>১. স্ক্রলিং নোটিশ আপডেট (অ্যাপের ওপরের চিকন বার)</h2>
+        <label for="newsInput">নোটিশ বার্তা:</label>
+        <textarea id="newsInput" rows="2" placeholder="যেমন: আগামী কাল লালপুরে বিদ্যুৎ সরবরাহ বন্ধ থাকবে..."></textarea>
+        <button onclick="updateNotice()">নোটিশ সেভ করুন</button>
+    </div>
+
+    <!-- Section 2: News Upload -->
+    <div class="card">
+        <h2>২. নতুন খবর ও কভার যোগ করুন</h2>
+        <label for="newsTitle">সংবাদের শিরোনাম (*):</label>
+        <input type="text" id="newsTitle" placeholder="যেমন: লালপুর হাসপাতালে নতুন অ্যাম্বুলেন্স সংযোজন">
+
+        <label for="newsReporter">প্রতিবেদক (অপশনাল):</label>
+        <input type="text" id="newsReporter" placeholder="যেমন: নিজস্ব প্রতিবেদক / রহিম মিয়া">
+
+        <label for="newsImageUrl">কভার ইমেজের লিংক (Image URL):</label>
+        <input type="text" id="newsImageUrl" placeholder="যেমন: https://i.ibb.co/example.jpg">
+
+        <label for="newsDetail">সংবাদের বিস্তারিত বিবরণ:</label>
+        <div class="toolbar">
+            <button type="button" class="tool-btn" onclick="insertTag('<b>', '</b>')"><b>B</b> গাঢ়</button>
+            <button type="button" class="tool-btn" onclick="insertTag('<i>', '</i>')"><i>I</i> বাঁকা</button>
+            <button type="button" class="tool-btn" onclick="insertTag('<u>', '</u>')"><u>U</u> আন্ডারলাইন</button>
+            <button type="button" class="tool-btn" onclick="insertTag('<h1>', '</h1>')">H1 হেডিং</button>
+            <button type="button" class="tool-btn" onclick="insertTag('<br>\n', '')">↵ লাইন ব্রেক</button>
+            <button type="button" class="tool-btn tool-btn-accent" onclick="insertLink()">🔗 লিংক</button>
+            <button type="button" class="tool-btn tool-btn-accent" onclick="insertInlineImage()">🖼️ ছবি</button>
+        </div>
+
+        <textarea id="newsDetail" rows="6" oninput="updateNewsPreview()" placeholder="সংবাদের বিস্তারিত বিষয়বস্তু এখানে লিখুন..."></textarea>
+
+        <label>লাইভ এইচটিএমএল প্রিভিউ:</label>
+        <div id="newsPreviewBox" class="preview-box"><i>এখানে খবরের লাইভ প্রিভিউ দেখা যাবে...</i></div>
+
+        <button onclick="publishNewsArticle()">খবর পাবলিশ করুন</button>
+    </div>
+
+    <!-- Section 3: Open Chat Admin -->
+    <div class="card">
+        <h2>৩. ওপেন চ্যাট পোস্ট প্যানেল</h2>
+        <div style="background: #eef9f5; border: 1px solid #28a745; padding: 12px; border-radius: 8px; margin-bottom: 15px;">
+            <h4 style="margin:0 0 10px 0; color:#006A4E;">✍️ কাস্টম UID ব্যবহার করে ওপেন চ্যাটে পোস্ট করুন</h4>
+            <label for="adminChatUid">ইউজারের UID:</label>
+            <input type="text" id="adminChatUid" placeholder="যেমন: UID_123456789">
+            <label for="adminChatName">ইউজারের নাম:</label>
+            <input type="text" id="adminChatName" placeholder="যেমন: এডমিন">
+            <label for="adminChatContent">পোস্টের বক্তব্য (*):</label>
+            <textarea id="adminChatContent" rows="3" placeholder="ওপেন চ্যাটে প্রদর্শনের জন্য পোস্টের বার্তা..."></textarea>
+            <button onclick="postToOpenChat()" style="background: #28a745; margin-top: 10px;">পোস্ট প্রকাশ করুন</button>
+        </div>
+        <button onclick="loadOpenChatPosts()" style="background: #2196F3; margin-bottom: 10px;">চ্যাট পোস্ট রিফ্রেশ করুন 🔄</button>
+        <div id="pendingPostsContainer"><p style="text-align: center; color: #777;">লোড হচ্ছে...</p></div>
+    </div>
+
+    <!-- Section 4: Add Admin Contact -->
+    <div class="card">
+        <h2 id="formTitle">৪. নতুন কন্টাক্ট যোগ করুন (সরাসরি পাবলিশ হবে)</h2>
+        <input type="hidden" id="editKey">
+        <label for="category">ক্যাটাগরি:</label>
+        <select id="category">
+            <option value="doctor">ডাক্তার</option>
+            <option value="hospital">হাসপাতাল</option>
+            <option value="police">পুলিশ স্টেশন</option>
+            <option value="fire">ফায়ার সার্ভিস</option>
+            <option value="mechanic">মেকানিক ও গ্যারেজ</option>
+            <option value="electronics">ইলেকট্রনিক্স</option>
+            <option value="mobile">মোবাইল সার্ভিস</option>
+            <option value="grocery">মুদি খানা</option>
+            <option value="pharmacy">ফার্মেসি</option>
+            <option value="diagnostic">ডায়াগনস্টিক</option>
+            <option value="computer">কম্পিউটার</option>
+            <option value="hotel">হোটেল</option>
+            <option value="restaurant">রেস্টুরেন্ট</option>
+            <option value="petrol">পেট্রোল পাম্প</option>
+            <option value="gas">গ্যাস সেবা</option>
+            <option value="ambulance">অ্যাম্বুলেন্স</option>
+            <option value="courier">কুরিয়ার</option>
+            <option value="other">অন্যান্য সেবা</option>
+        </select>
+        <label for="name">নাম (*):</label>
+        <input type="text" id="name">
+        <label for="title">পদবি / বিবরণ:</label>
+        <input type="text" id="title">
+        <label for="phone">মোবাইল নম্বর (*):</label>
+        <input type="text" id="phone">
+        <label for="location">ঠিকানা / এলাকা:</label>
+        <input type="text" id="location">
+        <label for="whatsapp">WhatsApp নম্বর (অপশনাল):</label>
+        <input type="text" id="whatsapp">
+        <label for="facebook">Facebook লিংক (অপশনাল):</label>
+        <input type="text" id="facebook">
+
+        <button id="saveBtn" onclick="saveContact()">কন্টাক্ট সেভ করুন</button>
+        <button id="cancelBtn" class="btn-cancel" onclick="resetForm()" style="display:none;">ক্যানসেল করুন</button>
+    </div>
+
+    <!-- Section 5: Pending Approvals -->
+    <div class="card" style="border: 2px solid #ffc107;">
+        <h2 style="color: #ff9800;">৫. পেন্ডিং কন্টাক্ট রিকোয়েস্ট (Pending Approvals)</h2>
+        <p style="font-size:13px; color:#555;">ইউজারদের যোগ করা কন্টাক্টগুলো এখানে জমা হবে। একসেপ্ট করলে পাবলিশ হবে।</p>
+        <div id="pendingContactsContainer">
+            <p style="text-align: center; color: #777;">লোড হচ্ছে...</p>
+        </div>
+    </div>
+
+    <!-- Section 6: All Approved Contacts -->
+    <div class="card">
+        <h2>৬. পাবলিশ করা সকল কন্টাক্ট তালিকা</h2>
+        <div id="contactsContainer">
+            <p style="text-align: center; color: #777;">ডাটা লোড হচ্ছে...</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyDU1pxKC9sWm9BV-2HUY7646qvkPrwLXvY",
+        authDomain: "sohayok-cbd50.firebaseapp.com",
+        databaseURL: "https://sohayok-cbd50-default-rtdb.firebaseio.com",
+        projectId: "sohayok-cbd50",
+        storageBucket: "sohayok-cbd50.firebasestorage.app",
+        messagingSenderId: "362613541781",
+        appId: "1:362613541781:web:a5fd8e11ec8554056d449c",
+        measurementId: "G-686DJLJYMQ"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    function showAlert(msg, isSuccess) {
+        const alertBox = document.getElementById('alertBox');
+        alertBox.innerText = msg;
+        alertBox.className = 'alert ' + (isSuccess ? 'alert-success' : 'alert-error');
+        alertBox.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setTimeout(() => { alertBox.style.display = 'none'; }, 4000);
+    }
+
+    function insertTag(startTag, endTag) {
+        const textarea = document.getElementById('newsDetail');
+        const start = textarea.selectionStart;
+        const end = textarea.selectionEnd;
+        const selectedText = textarea.value.substring(start, end);
+        let replacement = startTag + selectedText + (endTag || '');
+        if (!selectedText && endTag) replacement = startTag + "লেখা রাখুন" + endTag;
+        textarea.value = textarea.value.substring(0, start) + replacement + textarea.value.substring(end);
+        updateNewsPreview();
+    }
+    function insertLink() { const url = prompt("লিংক (URL):", "https://"); if (url) { const linkText = prompt("টেক্সট:", "এখানে ক্লিক করুন"); insertTag(`<a href="${url}" target="_blank">${linkText||'লিংক'}</a>`, ''); } }
+    function insertInlineImage() { const imgUrl = prompt("ইমেজ ইউআরএল:", "https://i.ibb.co/"); if (imgUrl) insertTag(`<img src="${imgUrl}" alt="ছবি" />`, ''); }
+    function updateNewsPreview() { document.getElementById('newsPreviewBox').innerHTML = document.getElementById('newsDetail').value || '<i>এখানে খবরের লাইভ প্রিভিউ দেখা যাবে...</i>'; }
+
+    // ImgBB
+    function saveImgbbApiKey() {
+        const apiKey = document.getElementById('imgbbApiKeyInput').value.trim();
+        if (!apiKey) return;
+        db.collection('settings').doc('config').set({ imgbbApiKey: apiKey, updatedAt: firebase.firestore.Timestamp.now() }, { merge: true })
+        .then(() => showAlert("ImgBB API Key সেভ হয়েছে!", true));
+    }
+    db.collection('settings').doc('config').onSnapshot(doc => { if (doc.exists && doc.data().imgbbApiKey) document.getElementById('imgbbApiKeyInput').value = doc.data().imgbbApiKey; });
+
+    // Notice
+    function updateNotice() {
+        const text = document.getElementById('newsInput').value;
+        db.collection('settings').doc('notice').set({ text: text, updatedAt: firebase.firestore.Timestamp.now() })
+        .then(() => showAlert("নোটিশ সেভ হয়েছে!", true));
+    }
+    db.collection('settings').doc('notice').onSnapshot(doc => { if (doc.exists) document.getElementById('newsInput').value = doc.data().text || ''; });
+
+    // News
+    function publishNewsArticle() {
+        const title = document.getElementById('newsTitle').value;
+        const reporter = document.getElementById('newsReporter').value;
+        const imageUrl = document.getElementById('newsImageUrl').value;
+        const desc = document.getElementById('newsDetail').value;
+
+        if (!title.trim()) return showAlert("শিরোনাম আবশ্যক!", false);
+
+        db.collection('news_list').add({
+            title: title,
+            reporter: reporter,
+            imageUrl: imageUrl,
+            desc: desc,
+            viewCount: 0,
+            timestamp: firebase.firestore.Timestamp.now()
+        }).then(() => {
+            showAlert("সংবাদটি সেভ হয়েছে!", true);
+            document.getElementById('newsTitle').value = '';
+            document.getElementById('newsReporter').value = '';
+            document.getElementById('newsImageUrl').value = '';
+            document.getElementById('newsDetail').value = '';
+            updateNewsPreview();
+        });
+    }
+
+    // Open Chat
+    function postToOpenChat() {
+        const uid = document.getElementById('adminChatUid').value.trim() || 'admin_user';
+        const name = document.getElementById('adminChatName').value.trim() || 'লালপুরবাসী';
+        const content = document.getElementById('adminChatContent').value.trim();
+
+        if (!content) return showAlert("বক্তব্য দিন!", false);
+
+        db.collection('openchat').add({
+            userid: uid,
+            userName: name,
+            content: content,
+            likesCount: 0,
+            repliesCount: 0,
+            uploadtime: firebase.firestore.Timestamp.now()
+        }).then(() => {
+            showAlert("ওপেন চ্যাটে পোস্ট প্রকাশিত হয়েছে!", true);
+            document.getElementById('adminChatContent').value = '';
+        });
+    }
+
+    function loadOpenChatPosts() {
+        const container = document.getElementById('pendingPostsContainer');
+        db.collection('openchat').orderBy('uploadtime', 'desc').limit(20).onSnapshot(snapshot => {
+            container.innerHTML = '';
+            if (snapshot.empty) return container.innerHTML = '<p>কোনো পোস্ট নেই।</p>';
+            snapshot.forEach(doc => {
+                const post = doc.data();
+                const timeStr = post.uploadtime ? new Date(post.uploadtime.toDate()).toLocaleString('bn-BD') : 'এখন';
+                const card = document.createElement('div');
+                card.className = 'item-card';
+                card.innerHTML = `
+                    <h4>লেখক: ${escapeHtml(post.userName)} (UID: ${escapeHtml(post.userid)})</h4>
+                    <p>${escapeHtml(post.content)}</p>
+                    <p><small>সময়: ${timeStr} | Likes: ${post.likesCount || 0} | Replies: ${post.repliesCount || 0}</small></p>
+                    <div class="btn-group"><button class="btn-danger" onclick="deleteOpenChatPost('${doc.id}')">মুছে ফেলুন</button></div>
+                `;
+                container.appendChild(card);
+            });
+        });
+    }
+    function deleteOpenChatPost(key) { if (confirm("মুছে ফেলতে চান?")) db.collection('openchat').doc(key).delete(); }
+
+    // Contact Logic
+    function saveContact() {
+        const editKey = document.getElementById('editKey').value;
+        const category = document.getElementById('category').value;
+        const name = document.getElementById('name').value;
+        const title = document.getElementById('title').value;
+        const phone = document.getElementById('phone').value;
+        const location = document.getElementById('location').value;
+        const whatsapp = document.getElementById('whatsapp').value;
+        const facebook = document.getElementById('facebook').value;
+
+        if (!name.trim() || !phone.trim()) return showAlert("নাম ও নম্বর আবশ্যক!", false);
+
+        const data = { category, name, title, phone, location, whatsapp, facebook, isApproved: true, createdBy: 'admin', createdAt: firebase.firestore.Timestamp.now() };
+
+        if (editKey) {
+            db.collection('contacts').doc(editKey).update(data).then(() => { showAlert("আপডেট হয়েছে!", true); resetForm(); });
+        } else {
+            db.collection('contacts').add(data).then(() => { showAlert("সেভ হয়েছে!", true); resetForm(); });
+        }
+    }
+
+    // Pending Approvals
+    db.collection('contacts').where('isApproved', '==', false).onSnapshot(snapshot => {
+        const container = document.getElementById('pendingContactsContainer');
+        container.innerHTML = '';
+        if (snapshot.empty) {
+            container.innerHTML = '<p style="text-align: center; color: #777;">কোনো পেন্ডিং রিকোয়েস্ট নেই।</p>';
+            return;
+        }
+        snapshot.forEach(doc => {
+            const key = doc.id;
+            const item = doc.data();
+            const card = document.createElement('div');
+            card.className = 'item-card';
+            card.style.borderLeft = "4px solid #ffc107";
+            card.innerHTML = `
+                <span class="badge">${getCategoryName(item.category)}</span>
+                <h4>${escapeHtml(item.name)}</h4>
+                <p><strong>বিবরণ:</strong> ${escapeHtml(item.title)}</p>
+                <p><strong>মোবাইল:</strong> ${escapeHtml(item.phone)}</p>
+                <p><strong>ঠিকানা:</strong> ${escapeHtml(item.location)}</p>
+                <p style="color:#d32f2f; font-size:12px;">Submitted by UID: ${escapeHtml(item.createdBy || 'Unknown')}</p>
+                <div class="btn-group">
+                    <button class="btn-success" onclick="approveContact('${key}')">✅ একসেপ্ট</button>
+                    <button class="btn-danger" onclick="rejectContact('${key}')">❌ রিজেক্ট</button>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    });
+
+    function approveContact(key) {
+        if(confirm("এই কন্টাক্টটি অনুমোদন করতে চান?")) {
+            db.collection('contacts').doc(key).update({ isApproved: true })
+            .then(() => showAlert("কন্টাক্ট অনুমোদিত হয়েছে!", true));
+        }
+    }
+    function rejectContact(key) {
+        if(confirm("এই কন্টাক্টটি ডিলিট করতে চান?")) {
+            db.collection('contacts').doc(key).delete()
+            .then(() => showAlert("কন্টাক্ট বাতিল করা হয়েছে!", true));
+        }
+    }
+
+    // Approved Contacts
+    db.collection('contacts').where('isApproved', '==', true).onSnapshot(snapshot => {
+        const container = document.getElementById('contactsContainer');
+        container.innerHTML = '';
+        if (snapshot.empty) return container.innerHTML = '<p style="text-align: center;">কোনো কন্টাক্ট নেই।</p>';
+        
+        snapshot.forEach(doc => {
+            const key = doc.id;
+            const item = doc.data();
+            const card = document.createElement('div');
+            card.className = 'item-card';
+            card.innerHTML = `
+                <span class="badge">${getCategoryName(item.category)}</span>
+                <h4>${escapeHtml(item.name)}</h4>
+                <p><strong>বিবরণ:</strong> ${escapeHtml(item.title)} | <strong>মোবাইল:</strong> ${escapeHtml(item.phone)}</p>
+                <div class="btn-group">
+                    <button class="btn-warning" onclick="editContact('${key}', '${escapeJs(item.category)}', '${escapeJs(item.name)}', '${escapeJs(item.title)}', '${escapeJs(item.phone)}', '${escapeJs(item.location)}', '${escapeJs(item.whatsapp||'')}', '${escapeJs(item.facebook||'')}')">এডিট</button>
+                    <button class="btn-danger" onclick="rejectContact('${key}')">মুছে ফেলুন</button>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    });
+
+    function editContact(key, category, name, title, phone, location, whatsapp, facebook) {
+        document.getElementById('editKey').value = key;
+        document.getElementById('category').value = category;
+        document.getElementById('name').value = name;
+        document.getElementById('title').value = title;
+        document.getElementById('phone').value = phone;
+        document.getElementById('location').value = location;
+        document.getElementById('whatsapp').value = whatsapp;
+        document.getElementById('facebook').value = facebook;
+        document.getElementById('formTitle').innerText = "কন্টাক্ট এডিট করুন";
+        document.getElementById('saveBtn').innerText = "আপডেট করুন";
+        document.getElementById('cancelBtn').style.display = "block";
+        window.scrollTo({ top: 300, behavior: 'smooth' });
+    }
+
+    function resetForm() {
+        document.getElementById('editKey').value = '';
+        document.getElementById('name').value = '';
+        document.getElementById('title').value = '';
+        document.getElementById('phone').value = '';
+        document.getElementById('location').value = '';
+        document.getElementById('whatsapp').value = '';
+        document.getElementById('facebook').value = '';
+        document.getElementById('formTitle').innerText = "৪. নতুন কন্টাক্ট যোগ করুন";
+        document.getElementById('saveBtn').innerText = "কন্টাক্ট সেভ করুন";
+        document.getElementById('cancelBtn').style.display = "none";
+    }
+
+    function getCategoryName(cat) {
+        const categories = { 'doctor':'ডাক্তার', 'hospital':'হাসপাতাল', 'police':'পুলিশ স্টেশন', 'fire':'ফায়ার সার্ভিস', 'mechanic':'মেকানিক', 'electronics':'ইলেকট্রনিক্স', 'mobile':'মোবাইল সার্ভিস', 'grocery':'মুদি খানা', 'pharmacy':'ফার্মেসি', 'diagnostic':'ডায়াগনস্টিক', 'computer':'কম্পিউটার', 'hotel':'হোটেল', 'restaurant':'রেস্টুরেন্ট', 'petrol':'পেট্রোল পাম্প', 'gas':'গ্যাস সেবা', 'ambulance':'অ্যাম্বুলেন্স', 'courier':'কুরিয়ার', 'other':'অন্যান্য' };
+        return categories[cat] || cat;
+    }
+    function escapeHtml(str) { return (str || '').replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+    function escapeJs(str) { return (str || '').replace(/'/g, "\\'").replace(/"/g, '\\"'); }
+
+    window.onload = function() { loadOpenChatPosts(); };
+</script></body></html>

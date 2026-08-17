@@ -1,0 +1,92 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.5/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:checkKotlinGradlePluginConfigurationErrors
+> Task :app:generateDebugResValues
+> Task :app:processDebugGoogleServices
+> Task :app:checkDebugAarMetadata
+> Task :app:mapDebugSourceSetPaths
+> Task :app:generateDebugResources
+> Task :app:packageDebugResources
+> Task :app:parseDebugLocalResources
+> Task :app:createDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksDebug
+> Task :app:mergeDebugResources
+> Task :app:processDebugMainManifest
+> Task :app:processDebugManifest
+> Task :app:javaPreCompileDebug
+> Task :app:mergeDebugShaders
+> Task :app:processDebugManifestForPackage
+> Task :app:compileDebugShaders NO-SOURCE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :app:mergeDebugAssets
+> Task :app:compressDebugAssets
+> Task :app:desugarDebugFileDependencies
+> Task :app:checkDebugDuplicateClasses
+> Task :app:processDebugResources
+> Task :app:mergeExtDexDebug
+> Task :app:mergeLibDexDebug
+> Task :app:mergeDebugJniLibFolders
+> Task :app:mergeDebugNativeLibs NO-SOURCE
+> Task :app:stripDebugDebugSymbols NO-SOURCE
+> Task :app:validateSigningDebug
+> Task :app:writeDebugAppMetadata
+> Task :app:writeDebugSigningConfigVersions
+> Task :app:compileDebugKotlin
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/AddContactActivity.kt:44:26 'setter for systemUiVisibility: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/AddContactActivity.kt:45:18 'SYSTEM_UI_FLAG_LAYOUT_STABLE: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/AddContactActivity.kt:45:55 'SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/CreatePostActivity.kt:69:26 'setter for systemUiVisibility: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/CreatePostActivity.kt:70:18 'SYSTEM_UI_FLAG_LAYOUT_STABLE: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/CreatePostActivity.kt:70:55 'SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/CropImageActivity.kt:55:26 'setter for systemUiVisibility: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/CropImageActivity.kt:56:18 'SYSTEM_UI_FLAG_LAYOUT_STABLE: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/CropImageActivity.kt:56:55 'SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/DeveloperActivity.kt:21:26 'setter for systemUiVisibility: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/DeveloperActivity.kt:22:18 'SYSTEM_UI_FLAG_LAYOUT_STABLE: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/DeveloperActivity.kt:22:55 'SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/EditProfileActivity.kt:88:26 'setter for systemUiVisibility: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/EditProfileActivity.kt:89:18 'SYSTEM_UI_FLAG_LAYOUT_STABLE: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/EditProfileActivity.kt:89:55 'SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/LoginActivity.kt:50:26 'setter for systemUiVisibility: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/LoginActivity.kt:51:18 'SYSTEM_UI_FLAG_LAYOUT_STABLE: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/LoginActivity.kt:51:55 'SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/MainActivity.kt:49:30 'setter for systemUiVisibility: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/MainActivity.kt:50:22 'SYSTEM_UI_FLAG_LAYOUT_STABLE: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/MainActivity.kt:50:59 'SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/NewsDetailActivity.kt:44:26 'setter for systemUiVisibility: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/NewsDetailActivity.kt:45:18 'SYSTEM_UI_FLAG_LAYOUT_STABLE: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/NewsDetailActivity.kt:45:55 'SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/NewsDetailActivity.kt:157:17 Variable 'sepiaText' is never used
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/RegisterActivity.kt:50:26 'setter for systemUiVisibility: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/RegisterActivity.kt:51:18 'SYSTEM_UI_FLAG_LAYOUT_STABLE: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/RegisterActivity.kt:51:55 'SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/SplashActivity.kt:31:26 'setter for systemUiVisibility: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/SplashActivity.kt:32:18 'SYSTEM_UI_FLAG_LAYOUT_STABLE: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/SplashActivity.kt:33:21 'SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/SplashActivity.kt:34:21 'SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/SplashActivity.kt:35:21 'SYSTEM_UI_FLAG_FULLSCREEN: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/SplashActivity.kt:36:21 'SYSTEM_UI_FLAG_HIDE_NAVIGATION: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/SplashActivity.kt:37:21 'SYSTEM_UI_FLAG_IMMERSIVE_STICKY: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/TermsActivity.kt:16:26 'setter for systemUiVisibility: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/TermsActivity.kt:17:18 'SYSTEM_UI_FLAG_LAYOUT_STABLE: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/TermsActivity.kt:17:55 'SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/adapters/NewsAdapter.kt:89:18 'fromHtml(String!): Spanned!' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/fragments/HomeFragment.kt:163:26 This declaration overrides deprecated member but not marked as deprecated itself. Please add @Deprecated annotation or suppress. See https://youtrack.jetbrains.com/issue/KT-47902 for details
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/fragments/HomeFragment.kt:164:23 'onReceivedError(WebView!, Int, String!, String!): Unit' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/utils/MarqueeTextView.kt:18:51 'scaledDensity: Float' is deprecated. Deprecated in Java
+
+> Task :app:compileDebugJavaWithJavac NO-SOURCE
+> Task :app:dexBuilderDebug
+> Task :app:mergeDebugGlobalSynthetics
+> Task :app:processDebugJavaRes
+> Task :app:mergeProjectDexDebug
+> Task :app:mergeDebugJavaResource
+> Task :app:packageDebug
+> Task :app:createDebugApkListingFileRedirect
+> Task :app:assembleDebug
+
+BUILD SUCCESSFUL in 1m 33s
+34 actionable tasks: 34 executed

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#80000000"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <!-- Pure White Water Ripple Waves Container -->
+        <RelativeLayout
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:gravity="center">
+
+            <View
+                android:id="@+id/vWave1"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/badge_bg"
+                android:backgroundTint="#80FFFFFF" />
+
+            <View
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/badge_bg"
+                android:backgroundTint="#FFFFFF" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvLoadingMsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="আপলোড ও সেভ হচ্ছে..."
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</RelativeLayout>

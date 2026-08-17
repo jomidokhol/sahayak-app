@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_bg">
+
+    <!-- Scroll-Aware Native AppBarLayout -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarNews"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray_bg"
+        app:elevation="0dp">
+
+        <!-- Search Header with scroll|enterAlways|snap flags -->
+        <LinearLayout
+            android:id="@+id/llNewsHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            app:layout_scrollFlags="scroll|enterAlways|snap">
+
+            <EditText
+                android:id="@+id/etNewsSearch"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:background="@drawable/badge_bg"
+                android:backgroundTint="@color/white"
+                android:drawableStart="@drawable/ic_search"
+                android:drawableTint="@color/primary_green"
+                app:drawableTint="@color/primary_green"
+                android:drawablePadding="10dp"
+                android:hint="সংবাদ খুঁজুন..."
+                android:textColor="#000000"
+                android:textColorHint="#757575"
+                android:paddingHorizontal="14dp"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout 
+        android:id="@+id/swipeRefreshNews"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvEmptyNews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="বর্তমানে কোনো খবর বা নোটিশ নেই।"
+                android:textColor="#757575"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvNewsList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="12dp"
+                android:paddingTop="8dp"
+                android:clipToPadding="false" />
+
+        </FrameLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_bg">
+
+    <!-- Red-Green Gradient Header Bar -->
+    <LinearLayout
+        android:id="@+id/headerDev"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/header_gradient"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp">
+
+        <ImageButton
+            android:id="@+id/btnBackDev"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_close"
+            app:tint="@color/white"
+            android:contentDescription="Back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="ডেভেলপার পেজ"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/headerDev"
+        android:paddingBottom="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Facebook-Style Cover & Avatar Container -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="250dp">
+
+                <!-- 16:9 Cover Banner (dev-banner.png) -->
+                <ImageView
+                    android:id="@+id/ivDevCover"
+                    android:layout_width="match_parent"
+                    android:layout_height="190dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/dev_banner"
+                    android:contentDescription="Dev Cover" />
+
+                <!-- Overlapping Circular Avatar (developer.png) -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="135dp"
+                    app:cardCornerRadius="55dp"
+                    app:cardElevation="6dp"
+                    app:strokeWidth="3dp"
+                    app:strokeColor="#FFFFFF">
+
+                    <ImageView
+                        android:id="@+id/ivDevAvatar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/developer"
+                        android:contentDescription="Dev Avatar" />
+                </com.google.android.material.card.MaterialCardView>
+
+            </RelativeLayout>
+
+            <!-- Developer Name -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"
+                android:text="Nur Muhammad"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.02" />
+
+            <!-- Single Horizontal Row Social Media Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp"
+                android:layout_marginTop="16dp">
+
+                <!-- Mail Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnDevMail"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="4dp"
+                    android:backgroundTint="#EA4335"
+                    android:text="Mail"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:icon="@drawable/ic_mail"
+                    app:iconTint="@color/white"
+                    app:cornerRadius="8dp" />
+
+                <!-- Facebook Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnDevFb"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="2dp"
+                    android:backgroundTint="#1877F2"
+                    android:text="Facebook"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:icon="@drawable/ic_facebook"
+                    app:iconTint="@color/white"
+                    app:cornerRadius="8dp" />
+
+                <!-- WhatsApp Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnDevWa"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="4dp"
+                    android:backgroundTint="#25D366"
+                    android:text="WhatsApp"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:icon="@drawable/ic_whatsapp"
+                    app:iconTint="@color/white"
+                    app:cornerRadius="8dp" />
+
+            </LinearLayout>
+
+            <!-- Pure White Background Card for High Contrast Text -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="3dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="অ্যাপ ডেভেলপমেন্ট ও প্রযুক্তি"
+                        android:textColor="@color/primary_green"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginVertical="12dp"
+                        android:background="#E0E0E0" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingExtra="5dp"
+                        android:text="সহায়ক (Sahayak) অ্যাপটি নাটোর জেলার লালপুর উপজেলার নাগরিকদের সুবিধার্থে সর্বাধুনিক অ্যান্ড্রয়েড ডেভেলপমেন্ট টেকনোলজি ব্যবহার করে প্রস্তুত করা হয়েছে।\n\nঅ্যাপে ব্যবহৃত প্রধান প্রযুক্তিসমূহ:\n• প্রগ্রামিং ভাষা: Kotlin (কটলিন)\n• ডাটাবেজ আর্কিটেকচার: Google Cloud Firestore (রিয়েলটাইম সিঙ্ক)\n• নিরাপত্তা ও একাউন্টস: Firebase Authentication &amp; Google OAuth 2.0\n• ইউআই ও স্টাইলিং: Google Material Design 3, Vector Graphics &amp; Animations\n• চিত্র প্রসেসিং: ImgBB Cloud API &amp; Glide Image Engine\n\nডেভেলপার নুর মুহম্মদ-এর মূল লক্ষ্য লালপুর উপজেলার প্রতিটি নাগরিকের হাতে প্রয়োজনীয় কন্টাক্ট ইনফরমেশন ও জরুরি সেবা এক ক্লিকে সহজে পৌঁছে দেওয়া।"
+                        android:textColor="#212121"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

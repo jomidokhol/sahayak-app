@@ -1,0 +1,446 @@
+[
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_item_my_post.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/item_my_post.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_spinner_item.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/spinner_item.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_ic_minus.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/ic_minus.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_cat_courier.png.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/cat_courier.png"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_layout_top_banner.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/layout_top_banner.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_cat_pharmacy.png.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/cat_pharmacy.png"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_dialog_auth_ripple.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/dialog_auth_ripple.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_news_card_gradient_bg.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/news_card_gradient_bg.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_dev_banner.png.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/dev_banner.png"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/anim_fade_in.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/anim/fade_in.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_ic_mail.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/ic_mail.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_fragment_open_chat.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/fragment_open_chat.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_banner_bottom_fade.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/banner_bottom_fade.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_activity_news_detail.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/activity_news_detail.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_cat_gas.png.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/cat_gas.png"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_activity_crop_image.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/activity_crop_image.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/anim_shimmer_pulse.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/anim/shimmer_pulse.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_draft_cover.png.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/draft_cover.png"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_header_gradient.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/header_gradient.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/menu_bottom_nav_menu.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/menu/bottom_nav_menu.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_fragment_profile.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/fragment_profile.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_cat_hotel.png.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/cat_hotel.png"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/anim_ripple_red.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/anim/ripple_red.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/font_english.ttf.flat",
+        "source": "com.nur.sahayak.app-main-43:/font/english.ttf"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/anim_wave_pulse_ring.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/anim/wave_pulse_ring.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_activity_edit_profile.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/activity_edit_profile.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_ic_send.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/ic_send.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_ic_more_vert.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/ic_more_vert.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_item_open_chat_skeleton.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/item_open_chat_skeleton.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_cat_electronics.png.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/cat_electronics.png"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_cat_diagnostic.png.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/cat_diagnostic.png"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_ic_notice.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/ic_notice.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_item_contact.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/item_contact.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_ic_login.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/ic_login.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_ic_profile.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/ic_profile.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_ic_plus.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/ic_plus.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/color_nav_item_color.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/color/nav_item_color.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/font_bangla_font.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/font/bangla_font.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_skeleton_bg.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/skeleton_bg.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_activity_terms.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/activity_terms.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_bottom_sheet_create_choice.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/bottom_sheet_create_choice.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_developer.png.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/developer.png"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_cat_petrol.png.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/cat_petrol.png"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_ic_like_outline.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/ic_like_outline.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/anim_punch_hole_in.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/anim/punch_hole_in.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_item_news_card.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/item_news_card.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_item_reply_card.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/item_reply_card.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_ic_services.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/ic_services.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_activity_splash.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/activity_splash.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_flash_screen.png.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/flash_screen.png"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_activity_register.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/activity_register.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_ic_news.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/ic_news.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_ic_share.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/ic_share.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_fragment_home.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_ic_facebook.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/ic_facebook.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_ic_comment.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/ic_comment.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_cat_mechanic.png.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/cat_mechanic.png"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_ic_chat.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/ic_chat.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_cat_mobile.png.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/cat_mobile.png"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_activity_main.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/anim_ripple_green.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/anim/ripple_green.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_dialog_loading_wave.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/dialog_loading_wave.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_fragment_news.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/fragment_news.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_item_news_carousel_skeleton.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/item_news_carousel_skeleton.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_badge_bg.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/badge_bg.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/font_bangla2.ttf.flat",
+        "source": "com.nur.sahayak.app-main-43:/font/bangla2.ttf"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_ic_add.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/ic_add.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_ic_sun.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/ic_sun.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_item_news_carousel.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/item_news_carousel.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_logo.png.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/logo.png"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_ic_whatsapp.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/ic_whatsapp.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_cat_police.png.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/cat_police.png"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_ic_phone.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/ic_phone.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_activity_create_post.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/activity_create_post.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_item_open_chat_card.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/item_open_chat_card.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_ic_anonymous.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/ic_anonymous.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_item_public_post.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/item_public_post.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_cat_doctor.png.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/cat_doctor.png"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/font_bangla.ttf.flat",
+        "source": "com.nur.sahayak.app-main-43:/font/bangla.ttf"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_item_profile_post_card.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/item_profile_post_card.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_ic_google.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/ic_google.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_news_loading.png.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/news_loading.png"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_gradient_card_bg.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/gradient_card_bg.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_ic_search.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/ic_search.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_layout_punch_hole_toast.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/layout_punch_hole_toast.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_cat_restaurant.png.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/cat_restaurant.png"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_activity_add_contact.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/activity_add_contact.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_ic_home.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/ic_home.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_ic_edit.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/ic_edit.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_ic_like_filled.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/ic_like_filled.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_fragment_services.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/fragment_services.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_logo2.png.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/logo2.png"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_item_post_skeleton.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/item_post_skeleton.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_ic_schedule.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/ic_schedule.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/anim_punch_hole_out.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/anim/punch_hole_out.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_flogo.png.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/flogo.png"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_cat_fire.png.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/cat_fire.png"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_cat_ambulance.png.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/cat_ambulance.png"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_cat_computer.png.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/cat_computer.png"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_activity_login.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/activity_login.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_draft_user.png.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/draft_user.png"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_ic_close.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/ic_close.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_app_icon.png.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/app_icon.png"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_card_gradient_bg.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/card_gradient_bg.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/anim_wave_pulse_1.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/anim/wave_pulse_1.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_cat_other.png.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/cat_other.png"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_ic_timer.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/ic_timer.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_cat_grocery.png.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/cat_grocery.png"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_item_category.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/item_category.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/layout_activity_developer.xml.flat",
+        "source": "com.nur.sahayak.app-main-43:/layout/activity_developer.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-merged_res-41:/drawable_cat_hospital.png.flat",
+        "source": "com.nur.sahayak.app-main-43:/drawable/cat_hospital.png"
+    }
+]
