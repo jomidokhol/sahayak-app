@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121212">
+
+    <!-- Red-Green Gradient Header Bar (Notch supported) -->
+    <LinearLayout
+        android:id="@+id/headerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="88dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/header_gradient"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="32dp"
+        android:paddingBottom="12dp"
+        android:elevation="4dp">
+
+        <ImageButton
+            android:id="@+id/btnBackCrop"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_close"
+            app:tint="@color/white"
+            android:contentDescription="Back" />
+
+        <TextView
+            android:id="@+id/tvCropTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="ছবি পছন্দমতো ক্রপ করুন"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Interactive Image Crop Container -->
+    <FrameLayout
+        android:id="@+id/containerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/headerCrop"
+        android:layout_above="@id/btnDoneCrop">
+
+        <!-- Target Image (Draggable & Zoomable) -->
+        <ImageView
+            android:id="@+id/ivCropTarget"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="matrix"
+            android:contentDescription="Target Image" />
+
+        <!-- Custom Transparent Mask Overlay -->
+        <com.nur.sahayak.utils.CropOverlayView
+            android:id="@+id/vCropOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </FrameLayout>
+
+    <!-- Done Crop Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnDoneCrop"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/primary_green"
+        android:text="✂️ ক্রপ সম্পন্ন করুন"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:cornerRadius="10dp" />
+
+</RelativeLayout>

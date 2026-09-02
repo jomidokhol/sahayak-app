@@ -3,46 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>সহায়ক - লালপুর এডমিন প্যানেল (Approval System & News)</title>
+    <title>সহায়ক - লালপুর এডমিন ড্যাশবোর্ড</title>
+    <link rel="icon" href="flogo.png">
     <style>
-        * { box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f0f2f5; margin: 0; padding: 12px; color: #333; }
-        .container { max-width: 680px; margin: 0 auto; }
-        .header { background: #006A4E; color: white; text-align: center; padding: 15px; border-radius: 10px; margin-bottom: 15px; }
-        .header h1 { margin: 0; font-size: 22px; }
-        .header p { margin: 5px 0 0 0; font-size: 13px; opacity: 0.9; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background-color: #f0f4f2; color: #212121; min-height: 100vh; overflow-x: hidden; }
+
+        .top-header { background: linear-gradient(135deg, #F42A41 0%, #006A4E 100%); color: white; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 12px rgba(0, 106, 78, 0.2); position: sticky; top: 0; z-index: 100; }
+        .header-title-box { display: flex; align-items: center; gap: 10px; }
+        .header-title-box img { width: 34px; height: 34px; border-radius: 50%; background: white; padding: 2px; }
+        .header-title-box h1 { font-size: 18px; font-weight: bold; }
         
-        .card { background: white; border-radius: 10px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
-        .card h2 { color: #F42A41; margin-top: 0; font-size: 16px; border-bottom: 2px solid #F42A41; padding-bottom: 6px; }
-        
-        label { display: block; font-weight: bold; margin-top: 10px; font-size: 13px; }
-        input, select, textarea { width: 100%; padding: 10px; margin-top: 4px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; }
-        
-        .toolbar { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; margin-bottom: 6px; background: #eef2f5; padding: 8px; border-radius: 6px; border: 1px solid #d0d7de; }
-        .tool-btn { background: #006A4E; color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 12px; font-weight: bold; cursor: pointer; margin-top: 0; width: auto; }
+        .menu-btn { background: rgba(255, 255, 255, 0.2); border: none; color: white; width: 40px; height: 40px; border-radius: 50%; font-size: 22px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+        .menu-btn:hover { background: rgba(255, 255, 255, 0.35); }
+
+        .drawer-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; display: none; backdrop-filter: blur(2px); }
+        .drawer { position: fixed; top: 0; right: -290px; width: 280px; height: 100%; background: white; z-index: 1000; box-shadow: -4px 0 20px rgba(0,0,0,0.15); transition: right 0.3s ease; display: flex; flex-direction: column; }
+        .drawer.open { right: 0; }
+        .drawer-header { background: #006A4E; color: white; padding: 24px 18px; }
+        .drawer-header h3 { font-size: 18px; }
+        .drawer-header p { font-size: 12px; opacity: 0.85; margin-top: 4px; }
+        .drawer-menu { list-style: none; padding: 12px 0; flex: 1; overflow-y: auto; }
+        .drawer-menu li a { display: flex; align-items: center; gap: 12px; padding: 14px 20px; color: #333; text-decoration: none; font-size: 14px; font-weight: 600; border-left: 4px solid transparent; transition: 0.2s; }
+        .drawer-menu li a:hover, .drawer-menu li a.active { background: #e8f5e9; color: #006A4E; border-left-color: #006A4E; }
+
+        .main-container { max-width: 720px; margin: 20px auto; padding: 0 16px 40px; }
+        .page-section { display: none; }
+        .page-section.active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+        .card { background: white; border-radius: 14px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 14px rgba(0,0,0,0.06); border: 1px solid #e0eae5; }
+        .card h2 { color: #006A4E; margin-bottom: 14px; font-size: 17px; border-bottom: 2px solid #006A4E; padding-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
+        label { display: block; font-weight: bold; margin-top: 12px; font-size: 13px; color: #333; }
+        input, select, textarea { width: 100%; padding: 11px; margin-top: 6px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; background: #fafafa; }
+        input:focus, textarea:focus { border-color: #006A4E; outline: none; background: #fff; }
+
+        .toolbar { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; margin-bottom: 6px; background: #eef2f5; padding: 8px; border-radius: 8px; border: 1px solid #d0d7de; }
+        .tool-btn { background: #006A4E; color: white; border: none; padding: 6px 11px; border-radius: 5px; font-size: 12px; font-weight: bold; cursor: pointer; }
         .tool-btn:hover { background-color: #00523d; }
         .tool-btn-accent { background: #1877F2; }
+        .tool-btn-yt { background: #FF0000; }
+        .tool-btn-phone { background: #004D36; }
+        .tool-btn-wa { background: #25D366; }
         
-        .preview-box { border: 1px dashed #006A4E; background: #ffffff; padding: 12px; border-radius: 6px; margin-top: 8px; min-height: 80px; max-height: 250px; overflow-y: auto; font-size: 14px; line-height: 1.5; }
+        .preview-box { border: 1px dashed #006A4E; background: #ffffff; padding: 14px; border-radius: 8px; margin-top: 8px; min-height: 80px; max-height: 280px; overflow-y: auto; font-size: 14px; line-height: 1.6; }
         .preview-box img { max-width: 100%; height: auto; border-radius: 6px; }
+        .preview-box iframe { width: 100%; aspect-ratio: 16 / 9; border-radius: 8px; border: 0; margin: 8px 0; }
+        .preview-box .action-pill { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 14px; font-size: 13px; font-weight: bold; margin: 2px; }
 
-        button { background: #006A4E; color: white; border: none; padding: 12px; border-radius: 6px; font-size: 15px; font-weight: bold; width: 100%; cursor: pointer; margin-top: 12px; }
-        button:hover { background-color: #00523d; }
-        button.btn-danger { background: #dc3545; }
-        button.btn-warning { background: #ffc107; color: #000; }
-        button.btn-success { background: #28a745; }
-        button.btn-cancel { background: #6c757d; margin-top: 6px; }
+        button.btn-primary { background: #006A4E; color: white; border: none; padding: 12px; border-radius: 8px; font-size: 15px; font-weight: bold; width: 100%; cursor: pointer; margin-top: 14px; }
+        button.btn-primary:hover { background-color: #00523d; }
+        button.btn-danger { background: #dc3545; color: white; }
+        button.btn-success { background: #28a745; color: white; }
+        button.btn-warning { background: #ffc107; color: #212121; }
+        button.btn-cancel { background: #6c757d; color: white; margin-top: 8px; }
 
-        .alert { padding: 12px; border-radius: 6px; font-weight: bold; margin-bottom: 15px; display: none; text-align: center; font-size: 14px; }
+        .alert { padding: 12px; border-radius: 8px; font-weight: bold; margin-bottom: 16px; display: none; text-align: center; font-size: 14px; }
         .alert-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
         .alert-error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
 
-        .item-card { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 12px; margin-top: 10px; }
-        .item-card h4 { margin: 0 0 5px 0; color: #006A4E; font-size: 16px; }
+        .item-card { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 10px; padding: 14px; margin-top: 10px; }
+        .item-card h4 { margin-bottom: 4px; color: #006A4E; font-size: 16px; }
         .item-card p { margin: 3px 0; font-size: 13px; color: #555; }
-        .btn-group { display: flex; gap: 8px; margin-top: 8px; }
-        .btn-group button { width: 50%; padding: 8px; font-size: 12px; margin-top: 0; }
-        .badge { display: inline-block; background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: bold; margin-bottom: 4px; }
+        .btn-group { display: flex; gap: 8px; margin-top: 10px; }
+        .btn-group button { width: 50%; padding: 9px; font-size: 13px; font-weight: bold; border-radius: 6px; border: none; cursor: pointer; }
+        .badge { display: inline-block; background: #e8f5e9; color: #006A4E; padding: 3px 10px; border-radius: 14px; font-size: 11px; font-weight: bold; margin-bottom: 6px; }
+
+        #loadingOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #ffffff; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.4s ease; }
+        .pulse-logo { width: 90px; height: 90px; border-radius: 50%; box-shadow: 0 0 0 0 rgba(0, 106, 78, 0.7); animation: pulseRing 1.5s infinite; }
+        @keyframes pulseRing { 0% { box-shadow: 0 0 0 0 rgba(0, 106, 78, 0.7); } 70% { box-shadow: 0 0 0 20px rgba(0, 106, 78, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 106, 78, 0); } }
+        .loading-text { margin-top: 16px; font-size: 16px; font-weight: bold; color: #006A4E; letter-spacing: 0.5px; }
     </style>
 
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
@@ -50,136 +80,252 @@
 </head>
 <body>
 
-<div class="container">
-    <div class="header">
-        <h1>সহায়ক (Sahayak) - এডমিন প্যানেল</h1>
-        <p>লালপুর উপজেলা কন্টাক্ট এপ্রুভাল ও নিউজ ড্যাশবোর্ড</p>
+<div id="loadingOverlay">
+    <img src="flogo.png" alt="सहায়ক লোগো" class="pulse-logo" onerror="this.src='logo2.png'">
+    <div class="loading-text">ডাটাবেজের সাথে সংযোগ হচ্ছে...</div>
+</div>
+
+<div class="top-header">
+    <div class="header-title-box">
+        <img src="flogo.png" alt="Logo" onerror="this.src='logo2.png'">
+        <h1 id="pageHeadingTitle">ড্যাশবোর্ড ও সেটিংস</h1>
     </div>
+    <button id="btnMenuToggle" class="menu-btn" onclick="toggleDrawer()" title="মেনু">⋮</button>
+</div>
+
+<div id="drawerOverlay" class="drawer-overlay" onclick="toggleDrawer()"></div>
+<div id="sideDrawer" class="drawer">
+    <div class="drawer-header">
+        <h3>সহায়ক এডমিন প্যানেল</h3>
+        <p>লালপুর উপজেলা ডিজিটাল কন্ট্রোল</p>
+    </div>
+    <ul class="drawer-menu">
+        <li><a href="#dashboard" class="active" onclick="switchPage('pageDashboard', 'ড্যাশবোর্ড ও সেটিংস', this)">🏠 ড্যাশবোর্ড ও নোটিশ</a></li>
+        <li><a href="#news" onclick="switchPage('pageNews', 'খবর ও সংবাদ প্রকাশ', this)">📰 সংবাদ ও খবর প্রকাশ</a></li>
+        <li><a href="#openchat" onclick="switchPage('pageOpenChat', 'ওপেন চ্যাট মডারেশন', this)">💬 ওপেন চ্যাট মডারেশন</a></li>
+        <li><a href="#contacts" onclick="switchPage('pageContacts', 'কন্টাক্ট ও এপ্রুভাল', this)">📞 কন্টাক্ট ও এপ্রুভাল</a></li>
+        <li><a href="#terms" onclick="switchPage('pageTerms', 'ব্যবহার নির্দেশিকা ও শর্তাবলী', this)">📜 নিয়মাবলি ও শর্তাবলী</a></li>
+        <li><a href="#paymentplan" onclick="switchPage('pagePaymentPlan', 'পেমেন্ট ও প্ল্যান সেটিংস', this)">💳 পেমেন্ট ও প্ল্যান সেটিংস</a></li>
+    </ul>
+</div>
+
+<div class="main-container">
 
     <div id="alertBox" class="alert"></div>
 
-    <!-- Section 0: ImgBB API Key Configuration -->
-    <div class="card" style="background: #f0f7f4; border: 1px solid #006A4E;">
-        <h2>🔑 ImgBB ইমেজ আপলোড API Key সেটিং</h2>
-        <label for="imgbbApiKeyInput">ImgBB API Key (*):</label>
-        <input type="text" id="imgbbApiKeyInput" placeholder="আপনার ImgBB API Key পেস্ট করুন">
-        <button onclick="saveImgbbApiKey()" style="background: #28a745;">API Key সেভ করুন</button>
-    </div>
-
-    <!-- Section 1: Scrolling Notice -->
-    <div class="card">
-        <h2>১. স্ক্রলিং নোটিশ আপডেট (অ্যাপের ওপরের চিকন বার)</h2>
-        <label for="newsInput">নোটিশ বার্তা:</label>
-        <textarea id="newsInput" rows="2" placeholder="যেমন: আগামী কাল লালপুরে বিদ্যুৎ সরবরাহ বন্ধ থাকবে..."></textarea>
-        <button onclick="updateNotice()">নোটিশ সেভ করুন</button>
-    </div>
-
-    <!-- Section 2: News Upload -->
-    <div class="card">
-        <h2>২. নতুন খবর ও কভার যোগ করুন</h2>
-        <label for="newsTitle">সংবাদের শিরোনাম (*):</label>
-        <input type="text" id="newsTitle" placeholder="যেমন: লালপুর হাসপাতালে নতুন অ্যাম্বুলেন্স সংযোজন">
-
-        <label for="newsReporter">প্রতিবেদক (অপশনাল):</label>
-        <input type="text" id="newsReporter" placeholder="যেমন: নিজস্ব প্রতিবেদক / রহিম মিয়া">
-
-        <label for="newsImageUrl">কভার ইমেজের লিংক (Image URL):</label>
-        <input type="text" id="newsImageUrl" placeholder="যেমন: https://i.ibb.co/example.jpg">
-
-        <label for="newsDetail">সংবাদের বিস্তারিত বিবরণ:</label>
-        <div class="toolbar">
-            <button type="button" class="tool-btn" onclick="insertTag('<b>', '</b>')"><b>B</b> গাঢ়</button>
-            <button type="button" class="tool-btn" onclick="insertTag('<i>', '</i>')"><i>I</i> বাঁকা</button>
-            <button type="button" class="tool-btn" onclick="insertTag('<u>', '</u>')"><u>U</u> আন্ডারলাইন</button>
-            <button type="button" class="tool-btn" onclick="insertTag('<h1>', '</h1>')">H1 হেডিং</button>
-            <button type="button" class="tool-btn" onclick="insertTag('<br>\n', '')">↵ লাইন ব্রেক</button>
-            <button type="button" class="tool-btn tool-btn-accent" onclick="insertLink()">🔗 লিংক</button>
-            <button type="button" class="tool-btn tool-btn-accent" onclick="insertInlineImage()">🖼️ ছবি</button>
+    <!-- PAGE 1: DASHBOARD & NOTICE -->
+    <div id="pageDashboard" class="page-section active">
+        <div class="card" style="border: 1px solid #006A4E; background: #f0f7f4;">
+            <h2>🔑 ImgBB ইমেজ আপলোড API Key</h2>
+            <label for="imgbbApiKeyInput">ImgBB API Key (*):</label>
+            <input type="text" id="imgbbApiKeyInput" placeholder="আপনার ImgBB API Key পেস্ট করুন">
+            <button class="btn-primary" onclick="saveImgbbApiKey()">API Key সেভ করুন</button>
         </div>
 
-        <textarea id="newsDetail" rows="6" oninput="updateNewsPreview()" placeholder="সংবাদের বিস্তারিত বিষয়বস্তু এখানে লিখুন..."></textarea>
-
-        <label>লাইভ এইচটিএমএল প্রিভিউ:</label>
-        <div id="newsPreviewBox" class="preview-box"><i>এখানে খবরের লাইভ প্রিভিউ দেখা যাবে...</i></div>
-
-        <button onclick="publishNewsArticle()">খবর পাবলিশ করুন</button>
-    </div>
-
-    <!-- Section 3: Open Chat Admin -->
-    <div class="card">
-        <h2>৩. ওপেন চ্যাট পোস্ট প্যানেল</h2>
-        <div style="background: #eef9f5; border: 1px solid #28a745; padding: 12px; border-radius: 8px; margin-bottom: 15px;">
-            <h4 style="margin:0 0 10px 0; color:#006A4E;">✍️ কাস্টম UID ব্যবহার করে ওপেন চ্যাটে পোস্ট করুন</h4>
-            <label for="adminChatUid">ইউজারের UID:</label>
-            <input type="text" id="adminChatUid" placeholder="যেমন: UID_123456789">
-            <label for="adminChatName">ইউজারের নাম:</label>
-            <input type="text" id="adminChatName" placeholder="যেমন: এডমিন">
-            <label for="adminChatContent">পোস্টের বক্তব্য (*):</label>
-            <textarea id="adminChatContent" rows="3" placeholder="ওপেন চ্যাটে প্রদর্শনের জন্য পোস্টের বার্তা..."></textarea>
-            <button onclick="postToOpenChat()" style="background: #28a745; margin-top: 10px;">পোস্ট প্রকাশ করুন</button>
-        </div>
-        <button onclick="loadOpenChatPosts()" style="background: #2196F3; margin-bottom: 10px;">চ্যাট পোস্ট রিফ্রেশ করুন 🔄</button>
-        <div id="pendingPostsContainer"><p style="text-align: center; color: #777;">লোড হচ্ছে...</p></div>
-    </div>
-
-    <!-- Section 4: Add Admin Contact -->
-    <div class="card">
-        <h2 id="formTitle">৪. নতুন কন্টাক্ট যোগ করুন (সরাসরি পাবলিশ হবে)</h2>
-        <input type="hidden" id="editKey">
-        <label for="category">ক্যাটাগরি:</label>
-        <select id="category">
-            <option value="doctor">ডাক্তার</option>
-            <option value="hospital">হাসপাতাল</option>
-            <option value="police">পুলিশ স্টেশন</option>
-            <option value="fire">ফায়ার সার্ভিস</option>
-            <option value="mechanic">মেকানিক ও গ্যারেজ</option>
-            <option value="electronics">ইলেকট্রনিক্স</option>
-            <option value="mobile">মোবাইল সার্ভিস</option>
-            <option value="grocery">মুদি খানা</option>
-            <option value="pharmacy">ফার্মেসি</option>
-            <option value="diagnostic">ডায়াগনস্টিক</option>
-            <option value="computer">কম্পিউটার</option>
-            <option value="hotel">হোটেল</option>
-            <option value="restaurant">রেস্টুরেন্ট</option>
-            <option value="petrol">পেট্রোল পাম্প</option>
-            <option value="gas">গ্যাস সেবা</option>
-            <option value="ambulance">অ্যাম্বুলেন্স</option>
-            <option value="courier">কুরিয়ার</option>
-            <option value="other">অন্যান্য সেবা</option>
-        </select>
-        <label for="name">নাম (*):</label>
-        <input type="text" id="name">
-        <label for="title">পদবি / বিবরণ:</label>
-        <input type="text" id="title">
-        <label for="phone">মোবাইল নম্বর (*):</label>
-        <input type="text" id="phone">
-        <label for="location">ঠিকানা / এলাকা:</label>
-        <input type="text" id="location">
-        <label for="whatsapp">WhatsApp নম্বর (অপশনাল):</label>
-        <input type="text" id="whatsapp">
-        <label for="facebook">Facebook লিংক (অপশনাল):</label>
-        <input type="text" id="facebook">
-
-        <button id="saveBtn" onclick="saveContact()">কন্টাক্ট সেভ করুন</button>
-        <button id="cancelBtn" class="btn-cancel" onclick="resetForm()" style="display:none;">ক্যানসেল করুন</button>
-    </div>
-
-    <!-- Section 5: Pending Approvals -->
-    <div class="card" style="border: 2px solid #ffc107;">
-        <h2 style="color: #ff9800;">৫. পেন্ডিং কন্টাক্ট রিকোয়েস্ট (Pending Approvals)</h2>
-        <p style="font-size:13px; color:#555;">ইউজারদের যোগ করা কন্টাক্টগুলো এখানে জমা হবে। একসেপ্ট করলে পাবলিশ হবে।</p>
-        <div id="pendingContactsContainer">
-            <p style="text-align: center; color: #777;">লোড হচ্ছে...</p>
+        <div class="card">
+            <h2>📢 স্ক্রলিং নোটিশ আপডেট (অ্যাপের ওপরের চিকন বার)</h2>
+            <label for="newsInput">নোটিশ বার্তা:</label>
+            <textarea id="newsInput" rows="3" placeholder="যেমন: আগামী কাল লালপুরে বিদ্যুৎ সরবরাহ বন্ধ থাকবে..."></textarea>
+            <button class="btn-primary" onclick="updateNotice()">নোটিশ সেভ করুন</button>
         </div>
     </div>
 
-    <!-- Section 6: All Approved Contacts -->
-    <div class="card">
-        <h2>৬. পাবলিশ করা সকল কন্টাক্ট তালিকা</h2>
-        <div id="contactsContainer">
-            <p style="text-align: center; color: #777;">ডাটা লোড হচ্ছে...</p>
+    <!-- PAGE 2: NEWS MANAGEMENT -->
+    <div id="pageNews" class="page-section">
+        <div class="card">
+            <h2>📰 নতুন খবর ও কভার যোগ করুন</h2>
+            <label for="newsTitle">সংবাদের শিরোনাম (*):</label>
+            <input type="text" id="newsTitle" placeholder="যেমন: লালপুর হাসপাতালে নতুন অ্যাম্বুলেন্স সংযোজন">
+
+            <label for="newsReporter">প্রতিবেদক (ঐচ্ছিক):</label>
+            <input type="text" id="newsReporter" placeholder="যেমন: নিজস্ব প্রতিবেদক / মোঃ করিম">
+
+            <label for="newsImageUrl">কভার ইমেজের লিংক (Image URL):</label>
+            <input type="text" id="newsImageUrl" placeholder="যেমন: https://i.ibb.co/example.jpg">
+
+            <label for="newsDetail">সংবাদের বিস্তারিত বিবরণ (নতুন টুলস সহ):</label>
+            <div class="toolbar">
+                <button type="button" class="tool-btn" onclick="insertTagTarget('newsDetail', '<b>', '</b>')"><b>B</b> গাঢ়</button>
+                <button type="button" class="tool-btn" onclick="insertTagTarget('newsDetail', '<i>', '</i>')"><i>I</i> বাঁকা</button>
+                <button type="button" class="tool-btn" onclick="insertTagTarget('newsDetail', '<u>', '</u>')"><u>U</u> আন্ডারলাইন</button>
+                <button type="button" class="tool-btn" onclick="insertTagTarget('newsDetail', '<h1>', '</h1>')">H1 হেডিং</button>
+                <button type="button" class="tool-btn" onclick="insertTagTarget('newsDetail', '<br>\n', '')">↵ লাইন ব্রেক</button>
+                <button type="button" class="tool-btn tool-btn-phone" onclick="insertPhoneTag('newsDetail')">📞 ফোন</button>
+                <button type="button" class="tool-btn tool-btn-wa" onclick="insertWaTag('newsDetail')">💬 WhatsApp</button>
+                <button type="button" class="tool-btn tool-btn-accent" onclick="insertLinkTarget('newsDetail')">🔗 লিংক</button>
+                <button type="button" class="tool-btn tool-btn-accent" onclick="insertInlineImageTarget('newsDetail')">🖼️ ছবি</button>
+                <button type="button" class="tool-btn tool-btn-yt" onclick="insertYouTubeEmbedTarget('newsDetail')">🎥 YouTube</button>
+                <button type="button" class="tool-btn" onclick="insertTagTarget('newsDetail', '<li>', '</li>')">• বুলেট</button>
+            </div>
+
+            <textarea id="newsDetail" rows="7" oninput="updateNewsPreview()" placeholder="সংবাদের বিস্তারিত বিষয়বস্তু এখানে লিখুন..."></textarea>
+
+            <label>লাইভ প্রিভিউ (Live Preview):</label>
+            <div id="newsPreviewBox" class="preview-box"><i>এখানে খবরের লাইভ প্রিভিউ দেখা যাবে...</i></div>
+
+            <button class="btn-primary" onclick="publishNewsArticle()">খবর পাবলিশ করুন</button>
+        </div>
+
+        <div class="card">
+            <h2>📑 প্রকাশিত খবরের তালিকা</h2>
+            <div id="publishedNewsContainer"><p style="text-align: center; color: #777;">লোড হচ্ছে...</p></div>
         </div>
     </div>
+
+    <!-- PAGE 3: OPEN CHAT -->
+    <div id="pageOpenChat" class="page-section">
+        <div class="card">
+            <h2>💬 ওপেন চ্যাটে পোস্ট প্রকাশ করুন</h2>
+            <div style="background: #eef9f5; border: 1px solid #28a745; padding: 14px; border-radius: 8px;">
+                <label for="adminChatUid">কাস্টম UID (ঐচ্ছিক - ফাঁকা রাখলে 'admin' হবে):</label>
+                <input type="text" id="adminChatUid" placeholder="যেমন: UID_123456">
+
+                <label for="adminChatName">ইউজারের নাম (ঐচ্ছিক):</label>
+                <input type="text" id="adminChatName" placeholder="যেমন: এডমিন / লালপুরবাসী">
+
+                <label for="adminChatContent">পোস্টের বার্তা (*):</label>
+                <textarea id="adminChatContent" rows="3" placeholder="ওপেন চ্যাটে পোস্টের বার্তা লিখুন..."></textarea>
+
+                <button class="btn-primary" onclick="postToOpenChat()" style="background: #28a745; margin-top: 10px;">পোস্ট প্রকাশ করুন</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>📋 ওপেন চ্যাট পোস্টসমূহ ও মডারেশন</h2>
+            <button class="btn-primary" onclick="loadOpenChatPosts()" style="background: #2196F3; margin-bottom: 12px; margin-top:0;">পোস্ট তালিকা রিফ্রেশ 🔄</button>
+            <div id="openChatPostsContainer"><p style="text-align: center; color: #777;">লোড হচ্ছে...</p></div>
+        </div>
+    </div>
+
+    <!-- PAGE 4: CONTACTS & APPROVALS -->
+    <div id="pageContacts" class="page-section">
+        <div class="card" style="border: 2px solid #ff9800;">
+            <h2 style="color: #ff9800;">⏳ পেন্ডিং কন্টাক্ট রিকোয়েস্ট (Pending Approvals)</h2>
+            <p style="font-size:13px; color:#555; margin-bottom:10px;">ইউজারদের সাবমিট করা কন্টাক্ট যাচাই করে অনুমোদন বা বাতিল করুন।</p>
+            <div id="pendingContactsContainer"><p style="text-align: center; color: #777;">লোড হচ্ছে...</p></div>
+        </div>
+
+        <div class="card">
+            <h2 id="formTitle">➕ নতুন কন্টাক্ট যোগ করুন (সরাসরি পাবলিশ হবে)</h2>
+            <input type="hidden" id="editKey">
+            <label for="category">ক্যাটাগরি:</label>
+            <select id="category">
+                <option value="doctor">ডাক্তার</option>
+                <option value="hospital">হাসপাতাল</option>
+                <option value="police">পুলিশ স্টেশন</option>
+                <option value="fire">ফায়ার সার্ভিস</option>
+                <option value="mechanic">মেকানিক ও গ্যারেজ</option>
+                <option value="electronics">ইলেকট্রনিক্স</option>
+                <option value="mobile">মোবাইল সার্ভিস</option>
+                <option value="grocery">মুদি খানা</option>
+                <option value="pharmacy">ফার্মেসি</option>
+                <option value="diagnostic">ডায়াগনস্টিক</option>
+                <option value="computer">কম্পিউটার</option>
+                <option value="hotel">হোটেল</option>
+                <option value="restaurant">রেস্টুরেন্ট</option>
+                <option value="petrol">পেট্রোল পাম্প</option>
+                <option value="gas">গ্যাস সেবা</option>
+                <option value="ambulance">অ্যাম্বুলেন্স</option>
+                <option value="courier">কুরিয়ার</option>
+                <option value="other">অন্যান্য সেবা</option>
+            </select>
+            <label for="name">নাম (*):</label>
+            <input type="text" id="name" placeholder="যেমন: ডাঃ রফিকুল ইসলাম">
+            <label for="title">পদবি / বিবরণ:</label>
+            <input type="text" id="title" placeholder="যেমন: মেডিসিন ও শিশু বিশেষজ্ঞ">
+            <label for="phone">মোবাইল নম্বর (*):</label>
+            <input type="text" id="phone" placeholder="যেমন: 01711XXXXXX">
+            <label for="location">ঠিকানা / এলাকা:</label>
+            <input type="text" id="location" placeholder="যেমন: লালপুর বাজার">
+            <label for="whatsapp">WhatsApp নম্বর (ঐচ্ছিক):</label>
+            <input type="text" id="whatsapp" placeholder="যেমন: 8801711XXXXXX">
+            <label for="facebook">Facebook লিংক (ঐচ্ছিক):</label>
+            <input type="text" id="facebook" placeholder="যেমন: https://facebook.com/username">
+
+            <button id="saveBtn" class="btn-primary" onclick="saveContact()">কন্টাক্ট সেভ করুন</button>
+            <button id="cancelBtn" class="btn-cancel" onclick="resetForm()" style="display:none; width: 100%;">ক্যানসেল করুন</button>
+        </div>
+
+        <div class="card">
+            <h2>📑 অনুমোদিত সকল কন্টাক্ট তালিকা</h2>
+            <div id="contactsContainer"><p style="text-align: center; color: #777;">লোড হচ্ছে...</p></div>
+        </div>
+    </div>
+
+    <!-- PAGE 5: TERMS & RULES -->
+    <div id="pageTerms" class="page-section">
+        <div class="card">
+            <h2>📜 ব্যবহার নির্দেশিকা ও শর্তাবলী এডিটর</h2>
+            <p style="font-size: 13px; color: #555; margin-bottom: 8px;">অ্যাপের প্রোফাইল পেজের "শর্তাবলী ও নিয়মাবলি" পেজের কনটেন্ট এবং ভিডিও এখান থেকে নিয়ন্ত্রণ করুন।</p>
+
+            <div class="toolbar">
+                <button type="button" class="tool-btn" onclick="insertTagTarget('termsContentInput', '<b>', '</b>')"><b>B</b> গাঢ়</button>
+                <button type="button" class="tool-btn" onclick="insertTagTarget('termsContentInput', '<i>', '</i>')"><i>I</i> বাঁকা</button>
+                <button type="button" class="tool-btn" onclick="insertTagTarget('termsContentInput', '<u>', '</u>')"><u>U</u> আন্ডারলাইন</button>
+                <button type="button" class="tool-btn" onclick="insertTagTarget('termsContentInput', '<h1>', '</h1>')">H1 হেডিং</button>
+                <button type="button" class="tool-btn" onclick="insertTagTarget('termsContentInput', '<br>\n', '')">↵ লাইন ব্রেক</button>
+                <button type="button" class="tool-btn tool-btn-phone" onclick="insertPhoneTag('termsContentInput')">📞 ফোন</button>
+                <button type="button" class="tool-btn tool-btn-wa" onclick="insertWaTag('termsContentInput')">💬 WhatsApp</button>
+                <button type="button" class="tool-btn tool-btn-accent" onclick="insertLinkTarget('termsContentInput')">🔗 লিংক</button>
+                <button type="button" class="tool-btn tool-btn-accent" onclick="insertInlineImageTarget('termsContentInput')">🖼️ ছবি</button>
+                <button type="button" class="tool-btn tool-btn-yt" onclick="insertYouTubeEmbedTarget('termsContentInput')">🎥 YouTube</button>
+                <button type="button" class="tool-btn" onclick="insertTagTarget('termsContentInput', '<li>', '</li>')">• বুলেট</button>
+            </div>
+
+            <textarea id="termsContentInput" rows="9" oninput="updateTermsPreview()" placeholder="নিয়মাবলি বা শর্তাবলীর বিষয়বস্তু লিখুন..."></textarea>
+
+            <label>লাইভ প্রিভিউ (Live Preview):</label>
+            <div id="termsPreviewBox" class="preview-box"><i>এখানে শর্তাবলীর লাইভ প্রিভিউ দেখা যাবে...</i></div>
+
+            <button class="btn-primary" onclick="saveTermsSettings()">শর্তাবলী সেভ করুন</button>
+        </div>
+    </div>
+
+    <!-- PAGE 6: PAYMENT & PLAN SETTINGS -->
+    <div id="pagePaymentPlan" class="page-section">
+        <div class="card" style="border: 1px solid #006A4E;">
+            <h2>💳 বিকাশ ও নগদ পেমেন্ট গেটওয়ে কনফিগারেশন</h2>
+            <p style="font-size: 13px; color: #555; margin-bottom: 6px;">অ্যাপে চেকআউট পেজের রিয়েলটাইম পেমেন্ট রিকোয়েস্ট চালানোর জন্য গেটওয়ে ক্রেডেনশিয়াল সেভ করুন।</p>
+
+            <label for="gatewayUrlInput">পেমেন্ট গেটওয়ে বেস ইউআরএল (Domain URL):</label>
+            <input type="text" id="gatewayUrlInput" placeholder="যেমন: https://pay-p2p.vercel.app">
+
+            <label for="merchantIdInput">মার্চেন্ট আইডি (Merchant ID *):</label>
+            <input type="text" id="merchantIdInput" placeholder="যেমন: MER-123456">
+
+            <label for="bkashApiKeyInput">বিকাশ এপিআই কী (bKash API Key):</label>
+            <input type="text" id="bkashApiKeyInput" placeholder="যেমন: BK-XXXXXXX">
+
+            <label for="nagadApiKeyInput">নগদ এপিআই কী (Nagad API Key):</label>
+            <input type="text" id="nagadApiKeyInput" placeholder="যেমন: NG-XXXXXXX">
+
+            <button class="btn-primary" onclick="savePaymentConfig()">পেমেন্ট গেটওয়ে সেটিংস সেভ করুন</button>
+        </div>
+
+        <div class="card">
+            <h2>🛡️ ভেরিফিকেশন সাবস্ক্রিপশন প্ল্যান ও ডিসকাউন্ট রেট</h2>
+            <p style="font-size: 13px; color: #555; margin-bottom: 8px;">১ মাস, ৬ মাস ও ১ বছরের প্ল্যানের দাম এবং ডিসকাউন্ট পার্সেন্টেজ নির্ধারণ করুন।</p>
+
+            <label for="monthlyPriceInput">১ মাসের মূল দাম (টাকা *):</label>
+            <input type="number" id="monthlyPriceInput" oninput="updatePlanCalculationPreview()" placeholder="যেমন: 50">
+
+            <label for="discount6mInput">৬ মাসের ডিসকাউন্ট পার্সেন্ট (%):</label>
+            <input type="number" id="discount6mInput" oninput="updatePlanCalculationPreview()" placeholder="যেমন: 15">
+
+            <label for="discount12mInput">১ বছরের ডিসকাউন্ট পার্সেন্ট (%):</label>
+            <input type="number" id="discount12mInput" oninput="updatePlanCalculationPreview()" placeholder="যেমন: 30">
+
+            <label style="margin-top: 16px;">📊 লাইভ প্রাইস ক্যালকুলেশন প্রিভিউ (অ্যাপে যেমন দেখাবে):</label>
+            <div class="preview-box" style="background: #fdfdfd; min-height: auto;">
+                <p id="preview1M" style="color: #006A4E; font-size: 15px; margin-bottom: 6px; font-weight: bold;">১ মাস: ৳৫০</p>
+                <p id="preview6M" style="color: #212121; font-size: 14px; margin-bottom: 6px;">৬ মাস: <del>৳৩০০</del> <strong>৳২৫৫</strong> (১৫% ছাড়)</p>
+                <p id="preview12M" style="color: #212121; font-size: 14px;">১ বছর: <del>৳৬০০</del> <strong>৳৪২০</strong> (৩০% ছাড়)</p>
+            </div>
+
+            <button class="btn-primary" onclick="saveVerificationPlans()">প্ল্যান ও ডিসকাউন্ট সেভ করুন</button>
+        </div>
+    </div>
+
 </div>
 
 <script>
@@ -197,6 +343,37 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            const loader = document.getElementById('loadingOverlay');
+            loader.style.opacity = '0';
+            setTimeout(() => { loader.style.display = 'none'; }, 400);
+        }, 600);
+    });
+
+    function toggleDrawer() {
+        const drawer = document.getElementById('sideDrawer');
+        const overlay = document.getElementById('drawerOverlay');
+        const isOpen = drawer.classList.contains('open');
+        if (isOpen) {
+            drawer.classList.remove('open');
+            overlay.style.display = 'none';
+        } else {
+            drawer.classList.add('open');
+            overlay.style.display = 'block';
+        }
+    }
+
+    function switchPage(pageId, title, element) {
+        document.querySelectorAll('.page-section').forEach(page => page.classList.remove('active'));
+        document.getElementById(pageId).classList.add('active');
+        document.getElementById('pageHeadingTitle').innerText = title;
+        document.querySelectorAll('.drawer-menu a').forEach(a => a.classList.remove('active'));
+        if (element) element.classList.add('active');
+        toggleDrawer();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     function showAlert(msg, isSuccess) {
         const alertBox = document.getElementById('alertBox');
         alertBox.innerText = msg;
@@ -206,24 +383,89 @@
         setTimeout(() => { alertBox.style.display = 'none'; }, 4000);
     }
 
-    function insertTag(startTag, endTag) {
-        const textarea = document.getElementById('newsDetail');
+    function insertTagTarget(targetId, startTag, endTag) {
+        const textarea = document.getElementById(targetId);
         const start = textarea.selectionStart;
         const end = textarea.selectionEnd;
         const selectedText = textarea.value.substring(start, end);
         let replacement = startTag + selectedText + (endTag || '');
         if (!selectedText && endTag) replacement = startTag + "লেখা রাখুন" + endTag;
         textarea.value = textarea.value.substring(0, start) + replacement + textarea.value.substring(end);
-        updateNewsPreview();
+        if (targetId === 'newsDetail') updateNewsPreview();
+        if (targetId === 'termsContentInput') updateTermsPreview();
     }
-    function insertLink() { const url = prompt("লিংক (URL):", "https://"); if (url) { const linkText = prompt("টেক্সট:", "এখানে ক্লিক করুন"); insertTag(`<a href="${url}" target="_blank">${linkText||'লিংক'}</a>`, ''); } }
-    function insertInlineImage() { const imgUrl = prompt("ইমেজ ইউআরএল:", "https://i.ibb.co/"); if (imgUrl) insertTag(`<img src="${imgUrl}" alt="ছবি" />`, ''); }
-    function updateNewsPreview() { document.getElementById('newsPreviewBox').innerHTML = document.getElementById('newsDetail').value || '<i>এখানে খবরের লাইভ প্রিভিউ দেখা যাবে...</i>'; }
+
+    // Phone Tag Tool
+    function insertPhoneTag(targetId) {
+        const num = prompt("ফোন নম্বর প্রদান করুন (যেমন: 01711XXXXXX):", "017");
+        if (num) {
+            insertTagTarget(targetId, `<phone>${num.trim()}</phone>`, '');
+        }
+    }
+
+    // WhatsApp Tag Tool
+    function insertWaTag(targetId) {
+        const num = prompt("WhatsApp নম্বর প্রদান করুন (যেমন: 01711XXXXXX):", "017");
+        if (num) {
+            insertTagTarget(targetId, `<wa>${num.trim()}</wa>`, '');
+        }
+    }
+
+    function insertLinkTarget(targetId) {
+        const url = prompt("লিংক (URL):", "https://");
+        if (url) {
+            const linkText = prompt("টেক্সট:", "এখানে ক্লিক করুন");
+            insertTagTarget(targetId, `<a href="${url}" target="_blank">${linkText || 'লিংক'}</a>`, '');
+        }
+    }
+
+    function insertInlineImageTarget(targetId) {
+        const imgUrl = prompt("ইমেজ ইউআরএল (Image URL):", "https://i.ibb.co/");
+        if (imgUrl) insertTagTarget(targetId, `<img src="${imgUrl}" alt="ছবি" />`, '');
+    }
+
+    function insertYouTubeEmbedTarget(targetId) {
+        const input = prompt("ইউটিউব ভিডিও লিংক (URL) বা আইফ্রেম কোড দিন:\n(যেমন: https://www.youtube.com/watch?v=... বা https://youtu.be/...)");
+        if (!input) return;
+
+        if (input.includes("<iframe")) {
+            insertTagTarget(targetId, '\n<div class="video-container">' + input + '</div>\n', '');
+            return;
+        }
+
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+        const match = input.match(regExp);
+
+        if (match && match[2].length === 11) {
+            const videoId = match[2];
+            const embedHtml = `\n<div class="video-container"><iframe src="https://www.youtube.com/embed/${videoId}?enablejsapi=1&origin=https://app-sahayak.vercel.app&playsinline=1" referrerpolicy="strict-origin-when-cross-origin" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>\n`;
+            insertTagTarget(targetId, embedHtml, '');
+        } else {
+            alert("সঠিক ইউটিউব ভিডিও লিংক প্রদান করুন!");
+        }
+    }
+
+    function parseCustomTagsForPreview(text) {
+        let parsed = text || '';
+        parsed = parsed.replace(/<phone>(.*?)<\/phone>/gi, '<span class="action-pill" style="background:#E8F5E9; color:#006A4E; border:1px solid #006A4E;">📞 $1</span>');
+        parsed = parsed.replace(/<wa>(.*?)<\/wa>/gi, '<span class="action-pill" style="background:#E8F8F0; color:#25D366; border:1px solid #25D366;">💬 $1 (WhatsApp)</span>');
+        return parsed;
+    }
+
+    function updateNewsPreview() {
+        const raw = document.getElementById('newsDetail').value;
+        document.getElementById('newsPreviewBox').innerHTML = parseCustomTagsForPreview(raw) || '<i>এখানে খবরের লাইভ প্রিভিউ দেখা যাবে...</i>';
+    }
+
+    function updateTermsPreview() {
+        const raw = document.getElementById('termsContentInput').value;
+        document.getElementById('termsPreviewBox').innerHTML = parseCustomTagsForPreview(raw) || '<i>এখানে শর্তাবলীর লাইভ প্রিভিউ দেখা যাবে...</i>';
+    }
 
     // ImgBB
     function saveImgbbApiKey() {
         const apiKey = document.getElementById('imgbbApiKeyInput').value.trim();
-        if (!apiKey) return;
+        if (!apiKey) return showAlert("API Key দিন!", false);
         db.collection('settings').doc('config').set({ imgbbApiKey: apiKey, updatedAt: firebase.firestore.Timestamp.now() }, { merge: true })
         .then(() => showAlert("ImgBB API Key সেভ হয়েছে!", true));
     }
@@ -254,7 +496,7 @@
             viewCount: 0,
             timestamp: firebase.firestore.Timestamp.now()
         }).then(() => {
-            showAlert("সংবাদটি সেভ হয়েছে!", true);
+            showAlert("সংবাদটি সফলভাবে পাবলিশ হয়েছে!", true);
             document.getElementById('newsTitle').value = '';
             document.getElementById('newsReporter').value = '';
             document.getElementById('newsImageUrl').value = '';
@@ -263,13 +505,31 @@
         });
     }
 
+    db.collection('news_list').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
+        const container = document.getElementById('publishedNewsContainer');
+        container.innerHTML = '';
+        if (snapshot.empty) return container.innerHTML = '<p style="text-align: center; color: #777;">কোনো সংবাদ পাওয়া যায়নি।</p>';
+        snapshot.forEach(doc => {
+            const item = doc.data();
+            const timeStr = item.timestamp ? new Date(item.timestamp.toDate()).toLocaleString('bn-BD') : 'এখন';
+            const card = document.createElement('div');
+            card.className = 'item-card';
+            card.innerHTML = `
+                <h4>${escapeHtml(item.title)}</h4>
+                <p><small>প্রতিবেদক: ${escapeHtml(item.reporter || 'নিজস্ব প্রতিবেদক')} | ভিউ: ${item.viewCount || 0} | সময়: ${timeStr}</small></p>
+                <div class="btn-group"><button class="btn-danger" style="width:100%;" onclick="deleteNews('${doc.id}')">মুছে ফেলুন (Delete)</button></div>
+            `;
+            container.appendChild(card);
+        });
+    });
+    function deleteNews(id) { if (confirm("সংবাদটি মুছে ফেলতে চান?")) db.collection('news_list').doc(id).delete(); }
+
     // Open Chat
     function postToOpenChat() {
         const uid = document.getElementById('adminChatUid').value.trim() || 'admin_user';
         const name = document.getElementById('adminChatName').value.trim() || 'লালপুরবাসী';
         const content = document.getElementById('adminChatContent').value.trim();
-
-        if (!content) return showAlert("বক্তব্য দিন!", false);
+        if (!content) return showAlert("পোস্টের বক্তব্য দিন!", false);
 
         db.collection('openchat').add({
             userid: uid,
@@ -285,10 +545,10 @@
     }
 
     function loadOpenChatPosts() {
-        const container = document.getElementById('pendingPostsContainer');
+        const container = document.getElementById('openChatPostsContainer');
         db.collection('openchat').orderBy('uploadtime', 'desc').limit(20).onSnapshot(snapshot => {
             container.innerHTML = '';
-            if (snapshot.empty) return container.innerHTML = '<p>কোনো পোস্ট নেই।</p>';
+            if (snapshot.empty) return container.innerHTML = '<p style="text-align: center; color: #777;">কোনো পোস্ট নেই।</p>';
             snapshot.forEach(doc => {
                 const post = doc.data();
                 const timeStr = post.uploadtime ? new Date(post.uploadtime.toDate()).toLocaleString('bn-BD') : 'এখন';
@@ -298,15 +558,15 @@
                     <h4>লেখক: ${escapeHtml(post.userName)} (UID: ${escapeHtml(post.userid)})</h4>
                     <p>${escapeHtml(post.content)}</p>
                     <p><small>সময়: ${timeStr} | Likes: ${post.likesCount || 0} | Replies: ${post.repliesCount || 0}</small></p>
-                    <div class="btn-group"><button class="btn-danger" onclick="deleteOpenChatPost('${doc.id}')">মুছে ফেলুন</button></div>
+                    <div class="btn-group"><button class="btn-danger" style="width:100%;" onclick="deleteOpenChatPost('${doc.id}')">মুছে ফেলুন (Delete)</button></div>
                 `;
                 container.appendChild(card);
             });
         });
     }
-    function deleteOpenChatPost(key) { if (confirm("মুছে ফেলতে চান?")) db.collection('openchat').doc(key).delete(); }
+    function deleteOpenChatPost(key) { if (confirm("পোস্টটি মুছে ফেলতে চান?")) db.collection('openchat').doc(key).delete(); }
 
-    // Contact Logic
+    // Contacts
     function saveContact() {
         const editKey = document.getElementById('editKey').value;
         const category = document.getElementById('category').value;
@@ -328,20 +588,16 @@
         }
     }
 
-    // Pending Approvals
     db.collection('contacts').where('isApproved', '==', false).onSnapshot(snapshot => {
         const container = document.getElementById('pendingContactsContainer');
         container.innerHTML = '';
-        if (snapshot.empty) {
-            container.innerHTML = '<p style="text-align: center; color: #777;">কোনো পেন্ডিং রিকোয়েস্ট নেই।</p>';
-            return;
-        }
+        if (snapshot.empty) return container.innerHTML = '<p style="text-align: center; color: #777;">কোনো পেন্ডিং রিকোয়েস্ট নেই।</p>';
         snapshot.forEach(doc => {
             const key = doc.id;
             const item = doc.data();
             const card = document.createElement('div');
             card.className = 'item-card';
-            card.style.borderLeft = "4px solid #ffc107";
+            card.style.borderLeft = "4px solid #ff9800";
             card.innerHTML = `
                 <span class="badge">${getCategoryName(item.category)}</span>
                 <h4>${escapeHtml(item.name)}</h4>
@@ -358,25 +614,13 @@
         });
     });
 
-    function approveContact(key) {
-        if(confirm("এই কন্টাক্টটি অনুমোদন করতে চান?")) {
-            db.collection('contacts').doc(key).update({ isApproved: true })
-            .then(() => showAlert("কন্টাক্ট অনুমোদিত হয়েছে!", true));
-        }
-    }
-    function rejectContact(key) {
-        if(confirm("এই কন্টাক্টটি ডিলিট করতে চান?")) {
-            db.collection('contacts').doc(key).delete()
-            .then(() => showAlert("কন্টাক্ট বাতিল করা হয়েছে!", true));
-        }
-    }
+    function approveContact(key) { if (confirm("অনুমোদন করতে চান?")) db.collection('contacts').doc(key).update({ isApproved: true }); }
+    function rejectContact(key) { if (confirm("বাতিল করতে চান?")) db.collection('contacts').doc(key).delete(); }
 
-    // Approved Contacts
     db.collection('contacts').where('isApproved', '==', true).onSnapshot(snapshot => {
         const container = document.getElementById('contactsContainer');
         container.innerHTML = '';
         if (snapshot.empty) return container.innerHTML = '<p style="text-align: center;">কোনো কন্টাক্ট নেই।</p>';
-        
         snapshot.forEach(doc => {
             const key = doc.id;
             const item = doc.data();
@@ -388,7 +632,7 @@
                 <p><strong>বিবরণ:</strong> ${escapeHtml(item.title)} | <strong>মোবাইল:</strong> ${escapeHtml(item.phone)}</p>
                 <div class="btn-group">
                     <button class="btn-warning" onclick="editContact('${key}', '${escapeJs(item.category)}', '${escapeJs(item.name)}', '${escapeJs(item.title)}', '${escapeJs(item.phone)}', '${escapeJs(item.location)}', '${escapeJs(item.whatsapp||'')}', '${escapeJs(item.facebook||'')}')">এডিট</button>
-                    <button class="btn-danger" onclick="rejectContact('${key}')">মুছে ফেলুন</button>
+                    <button class="btn-danger" onclick="deleteContact('${key}')">মুছে ফেলুন</button>
                 </div>
             `;
             container.appendChild(card);
@@ -418,10 +662,96 @@
         document.getElementById('location').value = '';
         document.getElementById('whatsapp').value = '';
         document.getElementById('facebook').value = '';
-        document.getElementById('formTitle').innerText = "৪. নতুন কন্টাক্ট যোগ করুন";
+        document.getElementById('formTitle').innerText = "➕ নতুন কন্টাক্ট যোগ করুন";
         document.getElementById('saveBtn').innerText = "কন্টাক্ট সেভ করুন";
         document.getElementById('cancelBtn').style.display = "none";
     }
+
+    // Terms & Rules
+    function saveTermsSettings() {
+        const content = document.getElementById('termsContentInput').value;
+        db.collection('settings').doc('terms').set({ content: content, updatedAt: firebase.firestore.Timestamp.now() }, { merge: true })
+        .then(() => showAlert("শর্তাবলী সফলভাবে সেভ হয়েছে!", true));
+    }
+    db.collection('settings').doc('terms').onSnapshot(doc => {
+        if (doc.exists) {
+            const data = doc.data();
+            document.getElementById('termsContentInput').value = data.content || data.desc || '';
+            updateTermsPreview();
+        }
+    });
+
+    // Payment Config
+    function savePaymentConfig() {
+        const gatewayUrl = document.getElementById('gatewayUrlInput').value.trim();
+        const merchantId = document.getElementById('merchantIdInput').value.trim();
+        const bkashApiKey = document.getElementById('bkashApiKeyInput').value.trim();
+        const nagadApiKey = document.getElementById('nagadApiKeyInput').value.trim();
+
+        if (!merchantId) return showAlert("মার্চেন্ট আইডি প্রদান করুন!", false);
+
+        db.collection('settings').doc('payment_config').set({
+            gatewayUrl: gatewayUrl || 'https://pay-p2p.vercel.app',
+            merchantId: merchantId,
+            bkashApiKey: bkashApiKey,
+            nagadApiKey: nagadApiKey,
+            updatedAt: firebase.firestore.Timestamp.now()
+        }, { merge: true })
+        .then(() => showAlert("পেমেন্ট গেটওয়ে সেটিংস সফলভাবে সেভ হয়েছে!", true))
+        .catch((err) => showAlert("ত্রুটি: " + err.message, false));
+    }
+
+    db.collection('settings').doc('payment_config').onSnapshot(doc => {
+        if (doc.exists) {
+            const data = doc.data();
+            document.getElementById('gatewayUrlInput').value = data.gatewayUrl || '';
+            document.getElementById('merchantIdInput').value = data.merchantId || '';
+            document.getElementById('bkashApiKeyInput').value = data.bkashApiKey || '';
+            document.getElementById('nagadApiKeyInput').value = data.nagadApiKey || '';
+        }
+    });
+
+    // Verification Plans
+    function saveVerificationPlans() {
+        const monthlyPrice = parseInt(document.getElementById('monthlyPriceInput').value) || 50;
+        const discount6m = parseInt(document.getElementById('discount6mInput').value) || 15;
+        const discount12m = parseInt(document.getElementById('discount12mInput').value) || 30;
+
+        db.collection('settings').doc('verification_plans').set({
+            monthlyPrice: monthlyPrice,
+            discount6m: discount6m,
+            discount12m: discount12m,
+            updatedAt: firebase.firestore.Timestamp.now()
+        }, { merge: true })
+        .then(() => showAlert("ভেরিফিকেশন প্ল্যান ও ডিসকাউন্ট রেট সেভ হয়েছে!", true))
+        .catch((err) => showAlert("ত্রুটি: " + err.message, false));
+    }
+
+    function updatePlanCalculationPreview() {
+        const base = parseInt(document.getElementById('monthlyPriceInput').value) || 50;
+        const d6 = parseInt(document.getElementById('discount6mInput').value) || 15;
+        const d12 = parseInt(document.getElementById('discount12mInput').value) || 30;
+
+        const orig6 = base * 6;
+        const final6 = Math.ceil(orig6 * (1.0 - (d6 / 100.0)));
+
+        const orig12 = base * 12;
+        const final12 = Math.ceil(orig12 * (1.0 - (d12 / 100.0)));
+
+        document.getElementById('preview1M').innerText = `১ মাস: ৳${base}`;
+        document.getElementById('preview6M').innerHTML = `৬ মাস: <del>৳${orig6}</del> <strong>৳${final6}</strong> (${d6}% ছাড়)`;
+        document.getElementById('preview12M').innerHTML = `১ বছর: <del>৳${orig12}</del> <strong>৳${final12}</strong> (${d12}% ছাড়)`;
+    }
+
+    db.collection('settings').doc('verification_plans').onSnapshot(doc => {
+        if (doc.exists) {
+            const data = doc.data();
+            document.getElementById('monthlyPriceInput').value = data.monthlyPrice || 50;
+            document.getElementById('discount6mInput').value = data.discount6m || 15;
+            document.getElementById('discount12mInput').value = data.discount12m || 30;
+            updatePlanCalculationPreview();
+        }
+    });
 
     function getCategoryName(cat) {
         const categories = { 'doctor':'ডাক্তার', 'hospital':'হাসপাতাল', 'police':'পুলিশ স্টেশন', 'fire':'ফায়ার সার্ভিস', 'mechanic':'মেকানিক', 'electronics':'ইলেকট্রনিক্স', 'mobile':'মোবাইল সার্ভিস', 'grocery':'মুদি খানা', 'pharmacy':'ফার্মেসি', 'diagnostic':'ডায়াগনস্টিক', 'computer':'কম্পিউটার', 'hotel':'হোটেল', 'restaurant':'রেস্টুরেন্ট', 'petrol':'পেট্রোল পাম্প', 'gas':'গ্যাস সেবা', 'ambulance':'অ্যাম্বুলেন্স', 'courier':'কুরিয়ার', 'other':'অন্যান্য' };
@@ -431,4 +761,7 @@
     function escapeJs(str) { return (str || '').replace(/'/g, "\\'").replace(/"/g, '\\"'); }
 
     window.onload = function() { loadOpenChatPosts(); };
-</script></body></html>
+</script>
+
+</body>
+</html>

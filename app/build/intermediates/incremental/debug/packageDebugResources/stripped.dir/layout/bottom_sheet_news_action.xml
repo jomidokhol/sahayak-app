@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/badge_bg"
+    android:backgroundTint="#FFFFFF"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <!-- Drag Handle -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:background="#CCCCCC" />
+
+    <!-- Title / Number Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
+
+        <ImageView
+            android:id="@+id/ivActionHeaderIcon"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/ic_phone"
+            app:tint="@color/primary_green"
+            android:contentDescription="Action Icon" />
+
+        <TextView
+            android:id="@+id/tvActionTargetNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="017XXXXXXXX"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Option 1: Copy Number -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnActionCopyNumber"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginBottom="8dp"
+        android:text="📋 নম্বর কপি করুন (Copy)"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:strokeColor="#CCCCCC"
+        app:cornerRadius="8dp" />
+
+    <!-- Option 2: Direct Open (Call / WhatsApp) -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnActionDirectOpen"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/primary_green"
+        android:text="📞 সরাসরি কল করুন"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:cornerRadius="8dp" />
+
+    <!-- Option 3: Open in Browser -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnActionOpenBrowser"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:text="🌐 ব্রাউজারে ওপেন করুন"
+        android:textColor="#555555"
+        android:textSize="13sp" />
+
+</LinearLayout>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/badge_bg"
+    android:backgroundTint="#FFFFFF"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <!-- Drag Handle -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:background="#CCCCCC" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/ic_filter"
+            android:contentDescription="Filter" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="ব্লাড গ্রুপ নির্বাচন করুন"
+            android:textColor="#C62828"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginVertical="12dp"
+        android:background="#EEEEEE" />
+
+    <!-- Blood Group Filter Options Container with Forced White BG & Red Text -->
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/cgSheetBloodFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:singleSelection="true"
+        app:selectionRequired="true"
+        app:chipSpacingHorizontal="8dp"
+        app:chipSpacingVertical="8dp">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipFilterAll"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:text="সকল গ্রুপ"
+            android:textColor="#C62828"
+            android:textStyle="bold"
+            app:chipBackgroundColor="@color/white"
+            app:chipStrokeColor="#E53935"
+            app:chipStrokeWidth="1dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipFilterAPos"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:text="A+"
+            android:textColor="#C62828"
+            android:textStyle="bold"
+            app:chipBackgroundColor="@color/white"
+            app:chipStrokeColor="#E53935"
+            app:chipStrokeWidth="1dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipFilterANeg"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:text="A-"
+            android:textColor="#C62828"
+            android:textStyle="bold"
+            app:chipBackgroundColor="@color/white"
+            app:chipStrokeColor="#E53935"
+            app:chipStrokeWidth="1dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipFilterBPos"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:text="B+"
+            android:textColor="#C62828"
+            android:textStyle="bold"
+            app:chipBackgroundColor="@color/white"
+            app:chipStrokeColor="#E53935"
+            app:chipStrokeWidth="1dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipFilterBNeg"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:text="B-"
+            android:textColor="#C62828"
+            android:textStyle="bold"
+            app:chipBackgroundColor="@color/white"
+            app:chipStrokeColor="#E53935"
+            app:chipStrokeWidth="1dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipFilterOPos"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:text="O+"
+            android:textColor="#C62828"
+            android:textStyle="bold"
+            app:chipBackgroundColor="@color/white"
+            app:chipStrokeColor="#E53935"
+            app:chipStrokeWidth="1dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipFilterONeg"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:text="O-"
+            android:textColor="#C62828"
+            android:textStyle="bold"
+            app:chipBackgroundColor="@color/white"
+            app:chipStrokeColor="#E53935"
+            app:chipStrokeWidth="1dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipFilterABPos"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:text="AB+"
+            android:textColor="#C62828"
+            android:textStyle="bold"
+            app:chipBackgroundColor="@color/white"
+            app:chipStrokeColor="#E53935"
+            app:chipStrokeWidth="1dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipFilterABNeg"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:text="AB-"
+            android:textColor="#C62828"
+            android:textStyle="bold"
+            app:chipBackgroundColor="@color/white"
+            app:chipStrokeColor="#E53935"
+            app:chipStrokeWidth="1dp" />
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCloseBloodFilterSheet"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#E53935"
+        android:text="প্রয়োগ করুন"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:cornerRadius="8dp" />
+
+</LinearLayout>

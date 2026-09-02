@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/llCategoryItemRoot"
+    android:layout_width="76dp"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="10dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <!-- Green Circular Card Background -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        app:cardCornerRadius="28dp"
+        app:cardElevation="3dp"
+        app:strokeWidth="1.5dp"
+        app:strokeColor="#004D36"
+        app:cardBackgroundColor="@color/primary_green">
+
+        <!-- Native Full-Color Category Icon (No Tint Filter) -->
+        <ImageView
+            android:id="@+id/ivCategoryItemIcon"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            android:src="@drawable/cat_doctor"
+            android:contentDescription="Category Icon" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Category Title Text in Bold Green -->
+    <TextView
+        android:id="@+id/tvCategoryItemName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:gravity="center"
+        android:text="ডাক্তার"
+        android:textColor="@color/primary_green"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        android:maxLines="1"
+        android:ellipsize="end" />
+
+</LinearLayout>

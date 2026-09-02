@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/gray_bg">
 
-    <!-- Top Red-Green Gradient Header Bar matching User Screenshot -->
+    <!-- Top Header Bar -->
     <LinearLayout
         android:id="@+id/headerBar"
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
         android:paddingTop="32dp"
         android:paddingBottom="10dp">
 
-        <!-- ONLY Logo Image on Left (No separate app name text) -->
+        <!-- 1. Left Side: ONLY the Original Logo -->
         <ImageView
             android:id="@+id/ivHeaderLogo"
             android:layout_width="wrap_content"
@@ -27,12 +27,26 @@
             android:src="@drawable/logo"
             android:contentDescription="Logo" />
 
+        <!-- Spacer pushing right-side icons to the far right -->
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <!-- Header Add Post/Contact (+) Button -->
+        <!-- 2. Right Side Icons -->
+
+        <!-- Golden Crown Badge (Visible in front of Plus icon for Verified Users) -->
+        <ImageButton
+            android:id="@+id/ivHeaderCrownBadge"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginEnd="2dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_crown"
+            android:visibility="gone"
+            android:contentDescription="Crown Badge" />
+
+        <!-- Plus Action Button -->
         <ImageButton
             android:id="@+id/btnHeaderAddPost"
             android:layout_width="38dp"
@@ -41,20 +55,20 @@
             android:src="@drawable/ic_add"
             app:tint="@color/white"
             android:visibility="gone"
-            android:contentDescription="Add Post" />
+            android:contentDescription="Add" />
 
-        <!-- Header Search Button -->
+        <!-- Search Button -->
         <ImageButton
             android:id="@+id/btnHeaderSearch"
             android:layout_width="38dp"
             android:layout_height="38dp"
-            android:layout_marginStart="6dp"
+            android:layout_marginStart="4dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_search"
             app:tint="@color/white"
             android:contentDescription="Search" />
 
-        <!-- Header Login Button -->
+        <!-- Login Button (Visible when logged out) -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnHeaderLogin"
             android:layout_width="wrap_content"
@@ -70,7 +84,7 @@
 
     </LinearLayout>
 
-    <!-- Scrolling Notice Bar (Big Text + Infinite Smooth Marquee) -->
+    <!-- Scrolling Notice Bar -->
     <LinearLayout
         android:id="@+id/noticeBar"
         android:layout_width="match_parent"
@@ -79,7 +93,8 @@
         android:background="#2E7D32"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingHorizontal="10dp">
+        android:paddingHorizontal="10dp"
+        android:visibility="gone">
 
         <ImageView
             android:layout_width="20dp"
@@ -88,7 +103,6 @@
             app:tint="@color/white"
             android:contentDescription="Notice Icon" />
 
-        <!-- Continuous Scrolling MarqueeTextView with 15sp Bold Text -->
         <com.nur.sahayak.utils.MarqueeTextView
             android:id="@+id/tvNoticeText"
             android:layout_width="0dp"
@@ -96,16 +110,7 @@
             android:layout_weight="1"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:singleLine="true"
-            android:ellipsize="marquee"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:scrollHorizontally="true"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:text="লালপুর উপজেলায় আপনাকে স্বাগতম!"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            android:text="লালপুর উপজেলায় আপনাকে স্বাগতম!" />
 
         <ImageView
             android:id="@+id/btnCloseNotice"
@@ -125,7 +130,32 @@
         android:layout_below="@id/noticeBar"
         android:layout_above="@id/bottomNavigation" />
 
-    <!-- Bottom Navigation Bar -->
+    <!-- Freely Draggable Floating Blood Donation Button (Default margin lifted to 32dp) -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardFloatingBlood"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@id/bottomNavigation"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
+        app:cardCornerRadius="28dp"
+        app:cardElevation="10dp"
+        app:strokeColor="#F42A41"
+        app:strokeWidth="2dp"
+        app:cardBackgroundColor="#FFFFFF">
+
+        <ImageView
+            android:id="@+id/ivFloatingBloodIcon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="6dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/blood"
+            android:contentDescription="Blood Donation" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Bottom Navigation Bar with Multi-Colored Icons -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
@@ -135,7 +165,7 @@
         app:elevation="8dp"
         app:itemIconSize="22dp"
         app:itemTextColor="@color/nav_item_color"
-        app:labelVisibilityMode="labeled"
+        app:labelVisibilityMode="selected"
         app:menu="@menu/bottom_nav_menu" />
 
 </RelativeLayout>

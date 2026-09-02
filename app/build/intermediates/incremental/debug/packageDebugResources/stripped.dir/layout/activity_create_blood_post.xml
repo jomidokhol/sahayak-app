@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_bg">
+
+    <!-- Red-Green Gradient Header Bar -->
+    <LinearLayout
+        android:id="@+id/headerCreateBloodPost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="88dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/header_gradient"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="32dp"
+        android:paddingBottom="12dp">
+
+        <ImageButton
+            android:id="@+id/btnBackCreateBloodPost"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_close"
+            app:tint="@color/white"
+            android:contentDescription="Back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="ইমার্জেন্সি ব্লাড পোস্ট"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/svBloodPostRoot"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/headerCreateBloodPost"
+        android:layout_above="@id/btnSubmitBloodPost"
+        android:fillViewport="true"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="24dp">
+
+            <!-- 1. Patient & Blood Requirements Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="3dp"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="রক্তের প্রয়োজনীয়তার বিবরণ"
+                        android:textColor="@color/accent_red"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <!-- Patient Name -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="রোগীর পুরো নাম (*):"
+                        android:textColor="#333"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etPatientName"
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/badge_bg"
+                        android:backgroundTint="#F8F9FA"
+                        android:hint="রোগীর নাম লিখুন"
+                        android:inputType="textPersonName|textCapWords"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true"
+                        android:paddingHorizontal="12dp"
+                        android:textColor="#000"
+                        android:textSize="14sp" />
+
+                    <!-- Blood Group & Amount Row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="12dp">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="4dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="ব্লাড গ্রুপ (*):"
+                                android:textColor="#333"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnSelectBloodGroupPost"
+                                android:layout_width="match_parent"
+                                android:layout_height="46dp"
+                                android:layout_marginTop="4dp"
+                                android:backgroundTint="#FFF3E0"
+                                android:text="গ্রুপ নির্বাচন ▾"
+                                android:textColor="@color/accent_red"
+                                android:textSize="13sp"
+                                android:textStyle="bold"
+                                app:strokeColor="@color/accent_red"
+                                app:strokeWidth="1dp"
+                                app:cornerRadius="8dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="4dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="রক্তের পরিমাণ (*):"
+                                android:textColor="#333"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                            <EditText
+                                android:id="@+id/etBloodAmount"
+                                android:layout_width="match_parent"
+                                android:layout_height="46dp"
+                                android:layout_marginTop="4dp"
+                                android:background="@drawable/badge_bg"
+                                android:backgroundTint="#F8F9FA"
+                                android:hint="যেমন: ১ ব্যাগ / ২ ইউনিট"
+                                android:inputType="text"
+                                android:imeOptions="actionNext"
+                                android:singleLine="true"
+                                android:paddingHorizontal="12dp"
+                                android:textColor="#000"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- Hospital / Place -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="প্রতিষ্ঠান বা রক্তদানের স্থান (*):"
+                        android:textColor="#333"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etHospitalName"
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/badge_bg"
+                        android:backgroundTint="#F8F9FA"
+                        android:hint="যেমন: লালপুর উপজেলা স্বাস্থ্য কমপ্লেক্স"
+                        android:inputType="textCapWords"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true"
+                        android:paddingHorizontal="12dp"
+                        android:textColor="#000"
+                        android:textSize="14sp" />
+
+                    <!-- Location Address -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="ঠিকানা / এলাকা (*):"
+                        android:textColor="#333"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etLocationAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/badge_bg"
+                        android:backgroundTint="#F8F9FA"
+                        android:hint="যেমন: গোপালপুর, লালপুর, নাটোর"
+                        android:inputType="textCapWords"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true"
+                        android:paddingHorizontal="12dp"
+                        android:textColor="#000"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 2. Contact Methods Card (At least ONE is required) -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="3dp"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="যোগাযোগের মাধ্যম (যেকোনো একটি পূরণ আবশ্যক)"
+                        android:textColor="@color/primary_green"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <!-- Mobile Number -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="মোবাইল নম্বর:"
+                        android:textColor="#333"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etBloodMobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/badge_bg"
+                        android:backgroundTint="#F8F9FA"
+                        android:hint="01711XXXXXX"
+                        android:inputType="phone"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true"
+                        android:paddingHorizontal="12dp"
+                        android:textColor="#000"
+                        android:textSize="14sp" />
+
+                    <!-- WhatsApp Number / Username -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="WhatsApp নম্বর বা ইউজারনেম:"
+                        android:textColor="#25D366"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etBloodWhatsapp"
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/badge_bg"
+                        android:backgroundTint="#F0F9F4"
+                        android:hint="যেমন: 01711XXXXXX বা username"
+                        android:inputType="text"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true"
+                        android:paddingHorizontal="12dp"
+                        android:textColor="#000"
+                        android:textSize="14sp" />
+
+                    <!-- Messenger Link / Username -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Messenger লিংক / ইউজারনেম:"
+                        android:textColor="#1877F2"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etBloodMessenger"
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/badge_bg"
+                        android:backgroundTint="#F0F4FA"
+                        android:hint="যেমন: m.me/username"
+                        android:inputType="textUri"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true"
+                        android:paddingHorizontal="12dp"
+                        android:textColor="#000"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 3. Short Description with Smart Number Detection Card (Max 300 words) -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="3dp"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="সংক্ষিপ্ত বর্ণনা (ঐচ্ছিক - সর্বোচ্চ ৩০০ শব্দ)"
+                        android:textColor="@color/primary_green"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etBloodDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="100dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/badge_bg"
+                        android:backgroundTint="#F8F9FA"
+                        android:gravity="top|start"
+                        android:hint="জরুরি তথ্য, রক্তের সময় বা শর্তাবলী লিখুন..."
+                        android:textColor="#000"
+                        android:textColorHint="#757575"
+                        android:padding="12dp"
+                        android:textSize="14sp"
+                        android:lineSpacingExtra="3dp" />
+
+                    <!-- Smart Number Suggestion Bar inside Description -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardBloodNumberHelper"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:cardBackgroundColor="#F0F7F4"
+                        app:cardCornerRadius="10dp"
+                        app:strokeColor="@color/primary_green"
+                        app:strokeWidth="1.5dp"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="💡 নম্বর সনাক্ত হয়েছে:"
+                                    android:textColor="@color/primary_green"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/tvBloodDetectedNumber"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="01711XXXXXX"
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold" />
+
+                                <ImageButton
+                                    android:id="@+id/btnIgnoreBloodNumber"
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:layout_marginStart="6dp"
+                                    android:background="?attr/selectableItemBackgroundBorderless"
+                                    android:src="@drawable/ic_close"
+                                    app:tint="#666"
+                                    android:contentDescription="Ignore" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="6dp">
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btnSetBloodPhone"
+                                    android:layout_width="0dp"
+                                    android:layout_height="36dp"
+                                    android:layout_weight="1"
+                                    android:layout_marginEnd="3dp"
+                                    android:backgroundTint="@color/primary_green"
+                                    android:text="📞 ফোন বাটন"
+                                    android:textColor="@color/white"
+                                    android:textSize="11sp"
+                                    android:textStyle="bold"
+                                    app:cornerRadius="6dp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btnSetBloodWhatsApp"
+                                    android:layout_width="0dp"
+                                    android:layout_height="36dp"
+                                    android:layout_weight="1"
+                                    android:layout_marginStart="3dp"
+                                    android:backgroundTint="#25D366"
+                                    android:text="💬 WhatsApp বাটন"
+                                    android:textColor="@color/white"
+                                    android:textSize="11sp"
+                                    android:textStyle="bold"
+                                    app:cornerRadius="6dp" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <TextView
+                        android:id="@+id/tvBloodWordCounter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="6dp"
+                        android:text="শব্দ সংখ্যা: ০ / ৩০০"
+                        android:textColor="#666"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 4. Auto Delete Post Expiry Duration Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="3dp"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="পোস্টের মেয়াদ ও অটো ডিলিট (*):"
+                        android:textColor="@color/primary_green"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="নির্দিষ্ট সময় পর পোস্টটি স্বয়ংক্রিয়ভাবে ডাটাবেজ থেকে মুছে যাবে।"
+                        android:textColor="#666"
+                        android:textSize="12sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSelectBloodExpiry"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="8dp"
+                        android:backgroundTint="#FFF3E0"
+                        android:text="২৪ ঘণ্টা (১ দিন) ▾"
+                        android:textColor="#E65100"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:gravity="start|center_vertical"
+                        app:strokeColor="#E65100"
+                        app:strokeWidth="1dp"
+                        app:cornerRadius="8dp" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <ProgressBar
+                android:id="@+id/pbBloodPostSubmit"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/primary_green"
+                android:visibility="gone" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Submit Post Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSubmitBloodPost"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/accent_red"
+        android:text="ইমার্জেন্সি পোস্ট প্রকাশ করুন 🩸"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:cornerRadius="10dp" />
+
+</RelativeLayout>

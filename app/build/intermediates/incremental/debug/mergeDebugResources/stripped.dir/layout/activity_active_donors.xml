@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_bg">
+
+    <!-- 1. Pinned Top Header Bar (Elevation 10dp to ensure search bar slides strictly UNDER it) -->
+    <LinearLayout
+        android:id="@+id/headerActiveDonors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="88dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/header_gradient"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="32dp"
+        android:paddingBottom="12dp"
+        android:elevation="10dp">
+
+        <ImageButton
+            android:id="@+id/btnBackActiveDonors"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_close"
+            app:tint="@color/white"
+            android:contentDescription="Back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="অ্যাক্টিভ রক্তদাতা তালিকা"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Main Content Container below Header -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/headerActiveDonors">
+
+        <!-- SwipeRefresh and Main Donor RecyclerView -->
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshActiveDonors"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!-- Empty State View -->
+                <TextView
+                    android:id="@+id/tvEmptyActiveDonors"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:padding="32dp"
+                    android:text="বর্তমানে কোনো রক্তদাতা পাওয়া যায়নি।"
+                    android:textColor="#757575"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+                <!-- RecyclerView starts below the 66dp floating search bar -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvActiveDonors"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="16dp"
+                    android:paddingTop="70dp"
+                    android:paddingBottom="16dp"
+                    android:clipToPadding="false" />
+
+            </FrameLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <!-- Search Box + Filter Button (Slides UNDER the Pinned Header on Scroll) -->
+        <LinearLayout
+            android:id="@+id/llSearchRowContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@color/white"
+            android:elevation="4dp"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="10dp">
+
+            <EditText
+                android:id="@+id/etSearchDonors"
+                android:layout_width="0dp"
+                android:layout_height="46dp"
+                android:layout_weight="1"
+                android:background="@drawable/badge_bg"
+                android:backgroundTint="#F0F4F2"
+                android:drawableStart="@drawable/ic_search"
+                android:drawableTint="@color/primary_green"
+                app:drawableTint="@color/primary_green"
+                android:drawablePadding="10dp"
+                android:hint="রক্তদাতার নাম বা এলাকা খুঁজুন..."
+                android:textColor="#000000"
+                android:textColorHint="#757575"
+                android:paddingHorizontal="14dp"
+                android:textSize="14sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnOpenBloodFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="46dp"
+                android:layout_marginStart="10dp"
+                android:backgroundTint="#FFF0F0"
+                android:text="ফিল্টার"
+                android:textColor="#E53935"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:icon="@drawable/ic_filter"
+                app:iconTint="#E53935"
+                app:strokeColor="#E53935"
+                app:strokeWidth="1.2dp"
+                app:cornerRadius="8dp" />
+        </LinearLayout>
+
+        <!-- Floating "ডোনার হোন 🩸" Button -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardBecomeDonorFloating"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="24dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="#E53935"
+            app:strokeWidth="1.5dp"
+            app:strokeColor="#FFFFFF"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/blood"
+                    android:contentDescription="Blood" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="ডোনার হোন 🩸"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </FrameLayout>
+
+</RelativeLayout>

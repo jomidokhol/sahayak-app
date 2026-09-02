@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_bg">
+
+    <!-- Top App Bar: Pinned Header & Scrollable Search + Active Donors Bar -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarBlood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:elevation="0dp">
+
+        <!-- 1. Pinned Header Bar (Title: জরুরী রক্তের প্রয়োজন) -->
+        <LinearLayout
+            android:id="@+id/headerBlood"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="88dp"
+            android:background="@drawable/header_gradient"
+            android:gravity="bottom"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="32dp"
+            android:paddingBottom="12dp">
+
+            <ImageButton
+                android:id="@+id/btnBackBlood"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_close"
+                app:tint="@color/white"
+                android:contentDescription="Back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="জরুরী রক্তের প্রয়োজন"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- 2. Wide Search Box + Compact Active Donors Button (Scrolls off-screen on scroll down) -->
+        <LinearLayout
+            android:id="@+id/llSearchAndDonorRow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@color/white"
+            android:elevation="3dp"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="10dp"
+            app:layout_scrollFlags="scroll|enterAlways|snap">
+
+            <!-- Wide Search Input -->
+            <EditText
+                android:id="@+id/etSearchBloodPosts"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_weight="1"
+                android:background="@drawable/badge_bg"
+                android:backgroundTint="#F0F4F2"
+                android:drawableStart="@drawable/ic_search"
+                android:drawableTint="@color/primary_green"
+                app:drawableTint="@color/primary_green"
+                android:drawablePadding="8dp"
+                android:hint="রক্তের গ্রুপ, রোগী বা হাসপাতাল..."
+                android:textColor="#000000"
+                android:textColorHint="#757575"
+                android:paddingHorizontal="12dp"
+                android:textSize="13sp" />
+
+            <!-- Compact Active Donors Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnActiveDonorsTop"
+                android:layout_width="wrap_content"
+                android:layout_height="44dp"
+                android:layout_marginStart="8dp"
+                android:paddingHorizontal="10dp"
+                android:backgroundTint="#FFF0F0"
+                android:text="একটিভ ডোনার"
+                android:textColor="#E53935"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:icon="@drawable/blood"
+                app:iconSize="16dp"
+                app:strokeColor="#E53935"
+                app:strokeWidth="1dp"
+                app:cornerRadius="8dp" />
+
+        </LinearLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Main Content List Area with Scrolling Behavior -->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshBloodPosts"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Empty State View -->
+            <TextView
+                android:id="@+id/tvEmptyBloodPosts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="32dp"
+                android:text="বর্তমানে কোনো জরুরি রক্তের পোস্ট নেই।"
+                android:textColor="#757575"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <!-- Main Blood Posts RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvBloodPosts"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:nestedScrollingEnabled="true"
+                android:padding="16dp"
+                android:clipToPadding="false" />
+
+        </FrameLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <!-- Floating Plus (+) Action Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabCreateBloodPost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="#E53935"
+        app:backgroundTint="#E53935"
+        android:src="@drawable/ic_add"
+        app:tint="@color/white"
+        app:elevation="8dp"
+        android:contentDescription="Create Emergency Post" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

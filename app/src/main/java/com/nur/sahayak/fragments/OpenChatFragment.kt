@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.view.animation.DecelerateInterpolator
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -28,6 +29,7 @@ class OpenChatFragment : Fragment() {
 
     private lateinit var rvOpenChat: RecyclerView
     private lateinit var etChatSearch: EditText
+    private lateinit var llSearchContainer: LinearLayout
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var tvEmptyChat: TextView
     private lateinit var llChatSkeleton: LinearLayout
@@ -38,6 +40,8 @@ class OpenChatFragment : Fragment() {
     private var isLastPage = false
     private var allChatPosts = mutableListOf<OpenChatPost>()
 
+    private var isSearchHidden = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -45,6 +49,7 @@ class OpenChatFragment : Fragment() {
 
         rvOpenChat = view.findViewById(R.id.rvOpenChat)
         etChatSearch = view.findViewById(R.id.etChatSearch)
+        llSearchContainer = view.findViewById(R.id.llChatSearchContainer)
         swipeRefresh = view.findViewById(R.id.swipeRefreshChat)
         tvEmptyChat = view.findViewById(R.id.tvEmptyChat)
         llChatSkeleton = view.findViewById(R.id.llChatSkeleton)
@@ -66,8 +71,27 @@ class OpenChatFragment : Fragment() {
             fetchOpenChatPosts(isRefresh = true)
         }
 
+        // Scroll-Down Hide & Scroll-Up Reveal for Search Bar
         rvOpenChat.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                // Search bar translation animation
+                if (dy > 4 && !isSearchHidden) {
+                    isSearchHidden = true
+                    llSearchContainer.animate()
+                        .translationY(-llSearchContainer.height.toFloat() - 20f)
+                        .setInterpolator(DecelerateInterpolator())
+                        .setDuration(220)
+                        .start()
+                } else if (dy < -4 && isSearchHidden) {
+                    isSearchHidden = false
+                    llSearchContainer.animate()
+                        .translationY(0f)
+                        .setInterpolator(DecelerateInterpolator())
+                        .setDuration(220)
+                        .start()
+                }
+
+                // Pagination Trigger
                 if (dy > 0) {
                     val visibleItemCount = layoutManager.childCount
                     val totalItemCount = layoutManager.itemCount
@@ -139,12 +163,19 @@ class OpenChatFragment : Fragment() {
                         val likedByRaw = doc.get("likedBy") as? List<*>
                         val likedByList = likedByRaw?.map { it.toString() } ?: emptyList()
 
+                        val isVer = FirestoreSafeParser.parseBoolean(doc.get("isVerified"), false)
+                        val verUntil = FirestoreSafeParser.parseLong(doc.get("verifiedUntil"), 0L)
+                        val postImg = FirestoreSafeParser.parseString(doc.get("postImageUrl"))
+
                         OpenChatPost(
                             id = doc.id,
                             userid = FirestoreSafeParser.parseString(doc.get("userid")),
                             userName = FirestoreSafeParser.parseString(doc.get("userName"), "লালপুরবাসী"),
                             userAvatar = FirestoreSafeParser.parseString(doc.get("userAvatar")),
                             content = content,
+                            postImageUrl = postImg,
+                            isVerified = isVer,
+                            verifiedUntil = verUntil,
                             uploadtime = FirestoreSafeParser.parseTimestampToMillis(doc.get("uploadtime")),
                             likesCount = FirestoreSafeParser.parseInt(doc.get("likesCount"), 0),
                             repliesCount = FirestoreSafeParser.parseInt(doc.get("repliesCount"), 0),
@@ -156,14 +187,20 @@ class OpenChatFragment : Fragment() {
                 if (isRefresh) {
                     allChatPosts.clear()
                     allChatPosts.addAll(newPosts)
-                    adapter.setPosts(allChatPosts) // FIXED: Uses setPosts
                 } else {
                     allChatPosts.addAll(newPosts)
-                    adapter.addPosts(newPosts)
                 }
+
+                // Verified Priority Ranking: Verified Posts at Top, then by Newest uploadtime
+                allChatPosts.sortWith(
+                    compareByDescending<OpenChatPost> { it.isCreatorVerified }
+                        .thenByDescending { it.uploadtime }
+                )
+
+                adapter.setPosts(allChatPosts)
             } else if (isRefresh) {
                 allChatPosts.clear()
-                adapter.setPosts(emptyList()) // FIXED: Uses setPosts
+                adapter.setPosts(emptyList())
             }
 
             if (adapter.itemCount == 0) {

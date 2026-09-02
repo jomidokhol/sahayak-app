@@ -14,7 +14,36 @@
         android:background="@color/gray_bg"
         app:elevation="0dp">
 
-        <!-- Search & Filter Header with scroll|enterAlways|snap flags -->
+        <!-- Offline Notification Banner -->
+        <LinearLayout
+            android:id="@+id/llOfflineBanner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#E65100"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingVertical="7dp"
+            android:paddingHorizontal="12dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_offline"
+                app:tint="@color/white"
+                android:contentDescription="Offline" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="আপনি অফলাইনে আছেন (লোকাল ব্যাকআপ থেকে লোড হয়েছে)"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Search & Filter Header (Direct Child with Native scroll|enterAlways|snap) -->
         <LinearLayout
             android:id="@+id/llServicesHeader"
             android:layout_width="match_parent"
@@ -24,7 +53,6 @@
             android:padding="12dp"
             app:layout_scrollFlags="scroll|enterAlways|snap">
 
-            <!-- Search Bar with Green Vector Icon -->
             <EditText
                 android:id="@+id/etSearch"
                 android:layout_width="0dp"
@@ -42,7 +70,6 @@
                 android:paddingHorizontal="14dp"
                 android:textSize="14sp" />
 
-            <!-- Compact Dropdown Filter Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnFilterDropdown"
                 android:layout_width="wrap_content"
@@ -60,7 +87,7 @@
         </LinearLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- Main Content with SwipeRefreshLayout -->
+    <!-- Main Content Area with SwipeRefreshLayout -->
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout 
         android:id="@+id/swipeRefreshServices"
         android:layout_width="match_parent"
@@ -93,7 +120,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:text="এই ক্যাটাগরিতে এখনো কোনো ডাটা যোগ করা হয়নি।"
+                    android:text="এই ক্যাটাগরিতে কোনো কন্টাক্ট পাওয়া যায়নি।"
                     android:textColor="#757575"
                     android:textSize="15sp"
                     android:textStyle="bold"

@@ -1,19 +1,27 @@
 package com.nur.sahayak
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.webkit.WebChromeClient
 import android.webkit.WebResourceRequest
+import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.nur.sahayak.utils.FormatUtils
@@ -69,7 +77,6 @@ class NewsDetailActivity : AppCompatActivity() {
         val viewCount = intent.getIntExtra("viewCount", 0)
         val timestamp = intent.getLongExtra("timestamp", System.currentTimeMillis())
 
-        // Increment View Count
         if (newsId.isNotEmpty()) {
             FirebaseFirestore.getInstance().collection("news_list").document(newsId)
                 .update("viewCount", FieldValue.increment(1))
@@ -81,7 +88,6 @@ class NewsDetailActivity : AppCompatActivity() {
         val viewsStr = "${FormatUtils.formatCount(viewCount + 1)} ভিউ"
         tvDate.text = "$timeStr • $reporterStr • $viewsStr"
 
-        // Reliable Deep Link Share Text
         btnShareHeader.setOnClickListener {
             val shareId = if (newsId.isNotEmpty()) newsId else "article"
             val shareUrl = "https://app-sahayak.vercel.app/news/$shareId"
@@ -105,21 +111,58 @@ class NewsDetailActivity : AppCompatActivity() {
             ivBlurBg.setImageResource(loadingRes)
         }
 
-        wvContent.settings.javaScriptEnabled = true
-        wvContent.settings.domStorageEnabled = true
+        wvContent.settings.apply {
+            javaScriptEnabled = true
+            domStorageEnabled = true
+            mediaPlaybackRequiresUserGesture = false
+            allowFileAccess = true
+            allowContentAccess = true
+            mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+            userAgentString = "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36"
+        }
         wvContent.setBackgroundColor(Color.TRANSPARENT)
+        wvContent.webChromeClient = WebChromeClient()
 
         wvContent.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
-                val url = request?.url?.toString()
-                if (!url.isNullOrEmpty()) {
-                    try {
-                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                        startActivity(intent)
-                        return true
-                    } catch (e: Exception) {}
+                val url = request?.url?.toString() ?: return false
+                val uri = Uri.parse(url)
+
+                // 1. Custom Action Trigger for <phone> and <wa> tags
+                if (url.startsWith("sahayak-action://")) {
+                    val actionType = uri.host ?: ""
+                    val number = uri.path?.removePrefix("/") ?: ""
+                    showActionBottomSheet(actionType, number)
+                    return true
                 }
-                return super.shouldOverrideUrlLoading(view, request)
+
+                // 2. Allow YouTube iframes / subframes to load internal streams without opening browser
+                if (request != null && !request.isForMainFrame) {
+                    return false
+                }
+
+                // 3. User clicked external link in main frame -> Open Phone Default Browser
+                if (url.startsWith("http://") || url.startsWith("https://")) {
+                    if (url == "https://app-sahayak.vercel.app" || url == "https://app-sahayak.vercel.app/") {
+                        return false
+                    }
+                    try {
+                        val browserIntent = Intent(Intent.ACTION_VIEW, uri)
+                        startActivity(browserIntent)
+                    } catch (e: Exception) {
+                        TopNotification.show(this@NewsDetailActivity, "ব্রাউজার ওপেন করা সম্ভব হয়নি")
+                    }
+                    return true
+                }
+
+                if (url.startsWith("tel:") || url.startsWith("mailto:")) {
+                    try {
+                        startActivity(Intent(Intent.ACTION_VIEW, uri))
+                    } catch (e: Exception) {}
+                    return true
+                }
+
+                return true
             }
         }
 
@@ -151,6 +194,127 @@ class NewsDetailActivity : AppCompatActivity() {
         }
     }
 
+    private fun showActionBottomSheet(type: String, rawNumber: String) {
+        val dialog = BottomSheetDialog(this)
+        val sheetView = layoutInflater.inflate(R.layout.bottom_sheet_news_action, null)
+        dialog.setContentView(sheetView)
+
+        val ivIcon = sheetView.findViewById<ImageView>(R.id.ivActionHeaderIcon)
+        val tvNumber = sheetView.findViewById<TextView>(R.id.tvActionTargetNumber)
+        val btnCopy = sheetView.findViewById<Button>(R.id.btnActionCopyNumber)
+        val btnDirect = sheetView.findViewById<Button>(R.id.btnActionDirectOpen)
+        val btnBrowser = sheetView.findViewById<Button>(R.id.btnActionOpenBrowser)
+
+        val isWa = type.equals("wa", ignoreCase = true)
+        tvNumber.text = if (isWa) "$rawNumber (WhatsApp)" else rawNumber
+
+        if (isWa) {
+            ivIcon.setImageResource(R.drawable.ic_whatsapp)
+            ivIcon.setColorFilter(Color.parseColor("#25D366"))
+            btnDirect.setBackgroundColor(Color.parseColor("#25D366"))
+            btnDirect.text = "💬 WhatsApp-এ চ্যাট করুন"
+        } else {
+            ivIcon.setImageResource(R.drawable.ic_phone)
+            ivIcon.setColorFilter(Color.parseColor("#006A4E"))
+            btnDirect.setBackgroundColor(Color.parseColor("#006A4E"))
+            btnDirect.text = "📞 সরাসরি কল করুন"
+        }
+
+        btnCopy.setOnClickListener {
+            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip = ClipData.newPlainText("Contact Number", rawNumber)
+            clipboard.setPrimaryClip(clip)
+            Toast.makeText(this, "নম্বরটি কপি করা হয়েছে: $rawNumber", Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
+        }
+
+        btnDirect.setOnClickListener {
+            dialog.dismiss()
+            if (isWa) {
+                val cleanNum = if (rawNumber.startsWith("0")) "88$rawNumber" else if (rawNumber.startsWith("+")) rawNumber.removePrefix("+") else rawNumber
+                val waUri = Uri.parse("https://wa.me/$cleanNum")
+                val waIntent = Intent(Intent.ACTION_VIEW, waUri).apply {
+                    setPackage("com.whatsapp")
+                }
+                try {
+                    startActivity(waIntent)
+                } catch (e: Exception) {
+                    try {
+                        val browserIntent = Intent(Intent.ACTION_VIEW, waUri)
+                        startActivity(browserIntent)
+                    } catch (e2: Exception) {
+                        Toast.makeText(this, "WhatsApp ওপেন করা সম্ভব হয়নি", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            } else {
+                try {
+                    val callIntent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$rawNumber"))
+                    startActivity(callIntent)
+                } catch (e: Exception) {
+                    Toast.makeText(this, "ডায়ালার ওপেন করা সম্ভব হয়নি", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        btnBrowser.setOnClickListener {
+            dialog.dismiss()
+            if (isWa) {
+                val cleanNum = if (rawNumber.startsWith("0")) "88$rawNumber" else rawNumber
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://wa.me/$cleanNum")))
+            } else {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/search?q=$rawNumber")))
+            }
+        }
+
+        dialog.show()
+    }
+
+    private fun transformCustomTags(html: String): String {
+        var result = html
+
+        val phoneRegex = Regex("""<phone>(.*?)</phone>""", RegexOption.IGNORE_CASE)
+        result = phoneRegex.replace(result) { match ->
+            val num = match.groupValues[1].trim()
+            """<a href="sahayak-action://phone/$num" class="action-pill phone-pill"><span class="pill-icon">📞</span> <span class="pill-text">$num</span></a>"""
+        }
+
+        val waRegex = Regex("""<wa>(.*?)</wa>""", RegexOption.IGNORE_CASE)
+        result = waRegex.replace(result) { match ->
+            val num = match.groupValues[1].trim()
+            """<a href="sahayak-action://wa/$num" class="action-pill wa-pill"><span class="pill-icon">💬</span> <span class="pill-text">$num (WhatsApp)</span></a>"""
+        }
+
+        return result
+    }
+
+    private fun sanitizeYouTubeEmbeds(html: String): String {
+        if (!html.contains("youtube", ignoreCase = true) && !html.contains("youtu.be", ignoreCase = true)) {
+            return html
+        }
+
+        var result = html
+        if (!result.contains("referrerpolicy", ignoreCase = true)) {
+            result = result.replace("<iframe", "<iframe referrerpolicy=\"strict-origin-when-cross-origin\"", ignoreCase = true)
+        }
+
+        val originParam = "origin=https://app-sahayak.vercel.app"
+        val regex = Regex("""src=["'](https?://(?:www\.)?youtube(?:-nocookie)?\.com/embed/[a-zA-Z0-9_-]+)(\?[^"']*)?["']""")
+        result = regex.replace(result) { matchResult ->
+            val baseUrl = matchResult.groupValues[1]
+            val existingQuery = matchResult.groupValues[2]
+            val cleanQuery = if (existingQuery.isEmpty()) {
+                "?enablejsapi=1&$originParam&playsinline=1"
+            } else if (!existingQuery.contains("origin=")) {
+                "$existingQuery&$originParam&playsinline=1"
+            } else {
+                existingQuery
+            }
+            """src="$baseUrl$cleanQuery""""
+        }
+
+        return result
+    }
+
     private fun applyReadingModeTheme() {
         if (isSepiaMode) {
             val sepiaBg = Color.parseColor("#FBF0D9")
@@ -178,12 +342,16 @@ class NewsDetailActivity : AppCompatActivity() {
     private fun renderHtmlContent() {
         val textColorHex = if (isSepiaMode) "#2C221E" else "#212121"
         val linkColorHex = "#006A4E"
+        
+        val contentWithActions = transformCustomTags(rawHtmlDesc)
+        val cleanContent = sanitizeYouTubeEmbeds(contentWithActions)
 
         val styledHtml = """
             <!DOCTYPE html>
             <html>
             <head>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <meta name="referrer" content="strict-origin-when-cross-origin">
                 <style>
                     body {
                         font-family: 'Segoe UI', Roboto, sans-serif;
@@ -199,6 +367,52 @@ class NewsDetailActivity : AppCompatActivity() {
                         height: auto !important;
                         border-radius: 8px;
                         margin: 10px 0;
+                    }
+                    .action-pill {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 6px;
+                        padding: 5px 12px;
+                        border-radius: 18px;
+                        text-decoration: none !important;
+                        font-weight: bold;
+                        font-size: 14px;
+                        margin: 4px 2px;
+                        box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+                    }
+                    .phone-pill {
+                        background-color: #E8F5E9;
+                        color: #006A4E !important;
+                        border: 1px solid #006A4E;
+                    }
+                    .wa-pill {
+                        background-color: #E8F8F0;
+                        color: #25D366 !important;
+                        border: 1px solid #25D366;
+                    }
+                    iframe {
+                        width: 100% !important;
+                        max-width: 100% !important;
+                        border: 0;
+                        border-radius: 10px;
+                        margin: 12px 0;
+                        aspect-ratio: 16 / 9;
+                    }
+                    .video-container {
+                        position: relative;
+                        width: 100%;
+                        padding-bottom: 56.25%;
+                        height: 0;
+                        overflow: hidden;
+                        border-radius: 10px;
+                        margin: 12px 0;
+                    }
+                    .video-container iframe {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100% !important;
+                        height: 100% !important;
                     }
                     a {
                         color: $linkColorHex;
@@ -222,11 +436,11 @@ class NewsDetailActivity : AppCompatActivity() {
                 </style>
             </head>
             <body>
-                $rawHtmlDesc
+                $cleanContent
             </body>
             </html>
         """.trimIndent()
 
-        wvContent.loadDataWithBaseURL(null, styledHtml, "text/html", "UTF-8", null)
+        wvContent.loadDataWithBaseURL("https://app-sahayak.vercel.app", styledHtml, "text/html", "UTF-8", null)
     }
 }

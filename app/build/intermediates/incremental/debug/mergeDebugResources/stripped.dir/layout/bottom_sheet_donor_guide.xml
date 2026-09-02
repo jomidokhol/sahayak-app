@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/badge_bg"
+    android:backgroundTint="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Drag Handle -->
+        <View
+            android:layout_width="40dp"
+            android:layout_height="4dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:background="#CCCCCC" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/ic_info"
+                app:tint="@color/primary_green"
+                android:contentDescription="Info" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="ইউজারনেম যুক্ত করার নিয়মাবলি"
+                android:textColor="@color/primary_green"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="10dp"
+            android:background="#E0E0E0" />
+
+        <!-- 1. WhatsApp Guide Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="১. WhatsApp ইউজারনেম তৈরি:"
+            android:textColor="#25D366"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/badge_bg"
+            android:backgroundTint="#E8F8F0"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="6dp"
+            android:text="3 dot → setting → account → User name"
+            android:textColor="#006A4E"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <!-- WhatsApp 3-Image Slider (Auto-scrolls every 4s & Swipeable) -->
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vpWaGuideSlider"
+            android:layout_width="match_parent"
+            android:layout_height="260dp"
+            android:layout_marginTop="8dp" />
+
+        <!-- 2. Messenger Guide Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="২. Messenger ইউজারনেম কপি:"
+            android:textColor="#1877F2"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/badge_bg"
+            android:backgroundTint="#F0F4FA"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="6dp"
+            android:text="Menu → Setting → User Name → Copy"
+            android:textColor="#1877F2"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <!-- Messenger 4-Image Slider (Auto-scrolls every 4s & Swipeable) -->
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vpMessengerGuideSlider"
+            android:layout_width="match_parent"
+            android:layout_height="260dp"
+            android:layout_marginTop="8dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCloseGuideBottomSheet"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="22dp"
+            android:backgroundTint="@color/primary_green"
+            android:text="বুঝেছি"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:cornerRadius="8dp" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

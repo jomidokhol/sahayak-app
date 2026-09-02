@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/gray_bg">
 
-    <!-- Red-Green Gradient Header Bar positioned below Notch -->
+    <!-- Red-Green Gradient Header Bar -->
     <LinearLayout
         android:id="@+id/headerEditProfile"
         android:layout_width="match_parent"
@@ -32,212 +32,617 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:text="প্রোফাইল এডিট করুন"
+            android:text="প্রোফাইল ও ডোনার তথ্য সম্পাদনা"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>
 
     <ScrollView
+        android:id="@+id/svEditProfileRoot"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/headerEditProfile"
         android:layout_above="@id/btnSaveProfile"
+        android:fillViewport="true"
+        android:isScrollContainer="true"
         android:padding="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="36dp">
 
-            <!-- Cover Photo Section -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="কভার ছবি:"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-
+            <!-- 1. Cover & Avatar Section -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:layout_marginTop="6dp"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="2dp">
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="3dp"
+                android:layout_marginBottom="16dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="220dp">
 
                     <ImageView
-                        android:id="@+id/ivCoverPreview"
+                        android:id="@+id/ivEditCoverPhoto"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="160dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/draft_cover"
-                        android:contentDescription="Cover Preview" />
+                        android:contentDescription="Cover" />
 
-                    <com.google.android.material.button.MaterialButton
+                    <ImageButton
                         android:id="@+id/btnChangeCover"
-                        android:layout_width="wrap_content"
-                        android:layout_height="38dp"
-                        android:layout_alignParentBottom="true"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
                         android:layout_alignParentEnd="true"
                         android:layout_margin="10dp"
+                        android:background="@drawable/badge_bg"
                         android:backgroundTint="#CC000000"
-                        android:text="📷 কভার পরিবর্তন"
-                        android:textColor="@color/white"
-                        android:textSize="12sp"
-                        app:cornerRadius="6dp" />
+                        android:src="@drawable/ic_edit"
+                        app:tint="@color/white"
+                        android:contentDescription="Change Cover" />
+
+                    <!-- Avatar Box with Properly Anchored Pen Icon -->
+                    <RelativeLayout
+                        android:id="@+id/rlAvatarBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginBottom="4dp">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardEditAvatar"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            app:cardCornerRadius="50dp"
+                            app:cardElevation="6dp"
+                            app:strokeWidth="3dp"
+                            app:strokeColor="#FFFFFF">
+
+                            <ImageView
+                                android:id="@+id/ivEditAvatar"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/draft_user"
+                                android:contentDescription="Avatar" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <ImageButton
+                            android:id="@+id/btnChangeAvatar"
+                            android:layout_width="34dp"
+                            android:layout_height="34dp"
+                            android:layout_alignEnd="@id/cardEditAvatar"
+                            android:layout_alignBottom="@id/cardEditAvatar"
+                            android:layout_marginEnd="0dp"
+                            android:layout_marginBottom="2dp"
+                            android:background="@drawable/badge_bg"
+                            android:backgroundTint="@color/primary_green"
+                            android:src="@drawable/ic_edit"
+                            app:tint="@color/white"
+                            android:elevation="10dp"
+                            android:contentDescription="Change Avatar" />
+                    </RelativeLayout>
+
                 </RelativeLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Profile Avatar Section -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="প্রোফাইল ছবি:"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-
-            <LinearLayout
+            <!-- 2. Personal Information Card -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:layout_marginTop="8dp">
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    app:cardCornerRadius="40dp"
-                    app:cardElevation="3dp"
-                    app:strokeWidth="2dp"
-                    app:strokeColor="@color/primary_green">
-
-                    <ImageView
-                        android:id="@+id/ivAvatarPreview"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/draft_user"
-                        android:contentDescription="Avatar Preview" />
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnChangeAvatar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="42dp"
-                    android:layout_marginStart="16dp"
-                    android:backgroundTint="@color/white"
-                    android:text="📷 ছবি পরিবর্তন করুন"
-                    android:textColor="@color/primary_green"
-                    android:textSize="13sp"
-                    android:textStyle="bold"
-                    app:strokeColor="@color/primary_green"
-                    app:strokeWidth="1.5dp"
-                    app:cornerRadius="8dp" />
-
-            </LinearLayout>
-
-            <!-- Name Input -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="আপনার নাম:"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/etEditName"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="6dp"
-                android:background="@drawable/badge_bg"
-                android:backgroundTint="@color/white"
-                android:hint="আপনার পুরো নাম লিখুন"
-                android:paddingHorizontal="16dp"
-                android:textColor="#000000"
-                android:textColorHint="#757575"
-                android:textSize="15sp" />
-
-            <!-- Age & Mobile Row -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:orientation="horizontal">
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="3dp"
+                android:layout_marginBottom="16dp">
 
                 <LinearLayout
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="18dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="বয়স:"
-                        android:textColor="@color/black"
-                        android:textSize="15sp"
+                        android:text="ব্যক্তিগত তথ্য"
+                        android:textColor="@color/primary_green"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <!-- Name Row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="12dp">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="4dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="নামের প্রথম অংশ (*):"
+                                android:textColor="#333"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                            <EditText
+                                android:id="@+id/etFirstName"
+                                android:layout_width="match_parent"
+                                android:layout_height="46dp"
+                                android:layout_marginTop="4dp"
+                                android:background="@drawable/badge_bg"
+                                android:backgroundTint="#F8F9FA"
+                                android:hint="যেমন: মোঃ"
+                                android:inputType="textPersonName|textCapWords"
+                                android:imeOptions="actionNext"
+                                android:singleLine="true"
+                                android:maxLines="1"
+                                android:paddingHorizontal="12dp"
+                                android:textColor="#000"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="4dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="নামের শেষ অংশ (*):"
+                                android:textColor="#333"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                            <EditText
+                                android:id="@+id/etLastName"
+                                android:layout_width="match_parent"
+                                android:layout_height="46dp"
+                                android:layout_marginTop="4dp"
+                                android:background="@drawable/badge_bg"
+                                android:backgroundTint="#F8F9FA"
+                                android:hint="যেমন: করিম"
+                                android:inputType="textPersonName|textCapWords"
+                                android:imeOptions="actionNext"
+                                android:singleLine="true"
+                                android:maxLines="1"
+                                android:paddingHorizontal="12dp"
+                                android:textColor="#000"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- DOB & Age Row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="14dp">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.3"
+                            android:layout_marginEnd="4dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="জন্ম তারিখ (*):"
+                                android:textColor="#333"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnSelectDob"
+                                android:layout_width="match_parent"
+                                android:layout_height="46dp"
+                                android:layout_marginTop="4dp"
+                                android:backgroundTint="#F8F9FA"
+                                android:text="তারিখ নির্বাচন 📅"
+                                android:textColor="@color/primary_green"
+                                android:textSize="13sp"
+                                android:textStyle="bold"
+                                app:strokeColor="#CCCCCC"
+                                app:strokeWidth="1dp"
+                                app:cornerRadius="8dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.9"
+                            android:layout_marginStart="4dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="বয়স (অটো):"
+                                android:textColor="#333"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                            <EditText
+                                android:id="@+id/etAge"
+                                android:layout_width="match_parent"
+                                android:layout_height="46dp"
+                                android:layout_marginTop="4dp"
+                                android:background="@drawable/badge_bg"
+                                android:backgroundTint="#EDEDED"
+                                android:focusable="false"
+                                android:clickable="false"
+                                android:hint="০ বছর"
+                                android:gravity="center"
+                                android:textColor="@color/black"
+                                android:textStyle="bold"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="* রক্তদানের বয়সসীমা ১৮ থেকে ৬০ বছর।"
+                        android:textColor="#E65100"
+                        android:textSize="11sp" />
+
+                    <!-- Weight Field -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:text="ওজন (কেজি) (*):"
+                        android:textColor="#333"
+                        android:textSize="13sp"
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/etEditAge"
+                        android:id="@+id/etWeight"
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:layout_marginTop="6dp"
+                        android:layout_height="46dp"
+                        android:layout_marginTop="4dp"
                         android:background="@drawable/badge_bg"
-                        android:backgroundTint="@color/white"
-                        android:hint="বয়স"
+                        android:backgroundTint="#F8F9FA"
+                        android:hint="যেমন: 65"
                         android:inputType="number"
-                        android:paddingHorizontal="16dp"
-                        android:textColor="#000000"
-                        android:textColorHint="#757575"
-                        android:textSize="15sp" />
+                        android:imeOptions="actionNext"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:paddingHorizontal="12dp"
+                        android:textColor="#000"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="* রক্তদানের জন্য সর্বনিম্ন ওজন ৫০ কেজি হতে হবে।"
+                        android:textColor="#E65100"
+                        android:textSize="11sp" />
+
+                    <!-- Gender Selection Button -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:text="জেন্ডার / লিঙ্গ (*):"
+                        android:textColor="#333"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSelectGender"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="4dp"
+                        android:backgroundTint="#F8F9FA"
+                        android:text="জেন্ডার নির্বাচন করুন ▾"
+                        android:textColor="@color/primary_green"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:gravity="start|center_vertical"
+                        app:strokeColor="#CCCCCC"
+                        app:strokeWidth="1dp"
+                        app:cornerRadius="8dp" />
+
                 </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 3. Blood Donor & Address Information Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="3dp"
+                android:layout_marginBottom="16dp">
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="8dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="18dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="মোবাইল নম্বর:"
-                        android:textColor="@color/black"
-                        android:textSize="15sp"
+                        android:text="রক্তদান ও যোগাযোগের ঠিকানা"
+                        android:textColor="@color/accent_red"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <!-- Blood Group Selector Button -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:text="ব্লাড গ্রুপ (*):"
+                        android:textColor="#333"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSelectBloodGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="4dp"
+                        android:backgroundTint="#FFF3E0"
+                        android:text="ব্লাড গ্রুপ নির্বাচন করুন ▾"
+                        android:textColor="@color/accent_red"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:gravity="start|center_vertical"
+                        app:strokeColor="@color/accent_red"
+                        app:strokeWidth="1dp"
+                        app:cornerRadius="8dp" />
+
+                    <!-- Address Fields -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="14dp">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="4dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="জেলা (*):"
+                                android:textColor="#333"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                            <EditText
+                                android:id="@+id/etDistrict"
+                                android:layout_width="match_parent"
+                                android:layout_height="46dp"
+                                android:layout_marginTop="4dp"
+                                android:background="@drawable/badge_bg"
+                                android:backgroundTint="#F8F9FA"
+                                android:hint="নাটোর"
+                                android:inputType="textCapWords"
+                                android:imeOptions="actionNext"
+                                android:singleLine="true"
+                                android:maxLines="1"
+                                android:paddingHorizontal="12dp"
+                                android:textColor="#000"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="4dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="উপজেলা (*):"
+                                android:textColor="#333"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                            <EditText
+                                android:id="@+id/etUpazila"
+                                android:layout_width="match_parent"
+                                android:layout_height="46dp"
+                                android:layout_marginTop="4dp"
+                                android:background="@drawable/badge_bg"
+                                android:backgroundTint="#F8F9FA"
+                                android:hint="লালপুর"
+                                android:inputType="textCapWords"
+                                android:imeOptions="actionNext"
+                                android:singleLine="true"
+                                android:maxLines="1"
+                                android:paddingHorizontal="12dp"
+                                android:textColor="#000"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="গ্রাম / মহল্লা / এলাকা (*):"
+                        android:textColor="#333"
+                        android:textSize="13sp"
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/etEditMobile"
+                        android:id="@+id/etVillage"
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:layout_marginTop="6dp"
+                        android:layout_height="46dp"
+                        android:layout_marginTop="4dp"
                         android:background="@drawable/badge_bg"
-                        android:backgroundTint="@color/white"
-                        android:hint="মোবাইল নম্বর"
-                        android:inputType="phone"
-                        android:paddingHorizontal="16dp"
-                        android:textColor="#000000"
-                        android:textColorHint="#757575"
-                        android:textSize="15sp" />
-                </LinearLayout>
+                        android:backgroundTint="#F8F9FA"
+                        android:hint="যেমন: গোপালপুর / চকনাজিরপুর"
+                        android:inputType="textCapWords"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:paddingHorizontal="12dp"
+                        android:textColor="#000"
+                        android:textSize="14sp" />
 
-            </LinearLayout>
+                    <!-- Mobile Number -->
+                    <TextView
+                        android:id="@+id/tvMobileLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:text="মোবাইল নম্বর (*):"
+                        android:textColor="#333"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etMobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/badge_bg"
+                        android:backgroundTint="#F8F9FA"
+                        android:hint="01711XXXXXX"
+                        android:inputType="phone"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:paddingHorizontal="12dp"
+                        android:textColor="#000"
+                        android:textSize="14sp" />
+
+                    <!-- Female Privacy Section -->
+                    <LinearLayout
+                        android:id="@+id/llFemalePrivacySection"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="14dp"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="WhatsApp ইউজারনেম (বিকল্প যোগাযোগ):"
+                            android:textColor="#25D366"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/etWhatsappUsername"
+                            android:layout_width="match_parent"
+                            android:layout_height="46dp"
+                            android:layout_marginTop="4dp"
+                            android:background="@drawable/badge_bg"
+                            android:backgroundTint="#F0F9F4"
+                            android:hint="যেমন: username (নম্বর গোপন থাকবে)"
+                            android:inputType="text"
+                            android:imeOptions="actionNext"
+                            android:singleLine="true"
+                            android:maxLines="1"
+                            android:paddingHorizontal="12dp"
+                            android:textColor="#000"
+                            android:textSize="14sp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnHowToAddWa"
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="38dp"
+                            android:layout_marginTop="2dp"
+                            android:text="WhatsApp গাইড"
+                            android:textColor="#25D366"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            app:icon="@drawable/ic_info"
+                            app:iconTint="#25D366" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="Messenger লিংক / ইউজারনেম:"
+                            android:textColor="#1877F2"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/etMessengerLink"
+                            android:layout_width="match_parent"
+                            android:layout_height="46dp"
+                            android:layout_marginTop="4dp"
+                            android:background="@drawable/badge_bg"
+                            android:backgroundTint="#F0F4FA"
+                            android:hint="যেমন: m.me/username"
+                            android:inputType="textUri"
+                            android:imeOptions="actionDone"
+                            android:singleLine="true"
+                            android:maxLines="1"
+                            android:paddingHorizontal="12dp"
+                            android:textColor="#000"
+                            android:textSize="14sp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnHowToAddMessenger"
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="38dp"
+                            android:layout_marginTop="2dp"
+                            android:text="Messenger গাইড"
+                            android:textColor="#1877F2"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            app:icon="@drawable/ic_info"
+                            app:iconTint="#1877F2" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Upload Progress Bar -->
+            <ProgressBar
+                android:id="@+id/pbEditProfileUpload"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/primary_green"
+                android:layout_marginTop="4dp"
+                android:visibility="gone" />
 
         </LinearLayout>
     </ScrollView>
 
-    <!-- Save Button at Bottom -->
+    <!-- Save Changes Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSaveProfile"
         android:layout_width="match_parent"
@@ -245,9 +650,9 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="16dp"
         android:backgroundTint="@color/primary_green"
-        android:text="সেভ করুন"
+        android:text="তথ্য সংরক্ষণ করুন"
         android:textColor="@color/white"
-        android:textSize="17sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:cornerRadius="10dp" />
 

@@ -9,5 +9,6 @@ data class ContactItem(
     val location: String = "",
     val whatsapp: String = "",
     val facebook: String = "",
+    val imageUrl: String = "",
     val isApproved: Boolean = true
 )

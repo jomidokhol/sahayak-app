@@ -10,5 +10,11 @@ data class ReplyPost(
     var userAvatar: String = "",
     var content: String = "",
     var uploadtime: Long = System.currentTimeMillis(),
-    var isEdited: Boolean = false
-)
+    var isEdited: Boolean = false,
+    var isPinned: Boolean = false,
+    var isVerified: Boolean = false,
+    var verifiedUntil: Long = 0L
+) {
+    val isUserVerified: Boolean
+        get() = isVerified && verifiedUntil > System.currentTimeMillis()
+}

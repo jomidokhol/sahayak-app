@@ -20,82 +20,117 @@
             android:layout_height="wrap_content"
             android:background="@drawable/gradient_card_bg"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="14dp">
 
-            <!-- Top Header Row: Red Category Badge on Left, White Location & Share on Right -->
+            <!-- Top Row: Left Square Image + Right Info Container -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <!-- Red Capsule Category Badge matching Screenshot -->
-                <TextView
-                    android:id="@+id/tvContactCategory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/badge_bg"
-                    android:backgroundTint="#E53935"
-                    android:paddingHorizontal="12dp"
-                    android:paddingVertical="5dp"
-                    android:text="মুদি খানা"
-                    android:textColor="@color/white"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
+                <!-- 1:1 Square Rounded Contact Image -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="2dp"
+                    app:strokeWidth="1.5dp"
+                    app:strokeColor="#FFFFFF">
 
-                <View
+                    <ImageView
+                        android:id="@+id/ivContactPhoto"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/draft_con"
+                        android:contentDescription="Contact Photo" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Right Side Details Container -->
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-
-                <!-- Location on Top Right matching Screenshot (White Bold Text) -->
-                <TextView
-                    android:id="@+id/tvContactLocation"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:layout_marginEnd="6dp" />
+                    android:layout_weight="1"
+                    android:layout_marginStart="12dp"
+                    android:orientation="vertical">
 
-                <!-- Share Icon Button -->
-                <ImageButton
-                    android:id="@+id/btnShareContact"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_share"
-                    app:tint="@color/white"
-                    android:contentDescription="Share Contact" />
+                    <!-- Category Badge, Location & Share Row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <!-- Red Category Badge -->
+                        <TextView
+                            android:id="@+id/tvContactCategory"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/badge_bg"
+                            android:backgroundTint="#E53935"
+                            android:paddingHorizontal="10dp"
+                            android:paddingVertical="4dp"
+                            android:text="ডাক্তার"
+                            android:textColor="@color/white"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
+
+                        <!-- Location -->
+                        <TextView
+                            android:id="@+id/tvContactLocation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:layout_marginEnd="4dp" />
+
+                        <!-- Share Button -->
+                        <ImageButton
+                            android:id="@+id/btnShareContact"
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:src="@drawable/ic_share"
+                            app:tint="@color/white"
+                            android:contentDescription="Share Contact" />
+                    </LinearLayout>
+
+                    <!-- Name -->
+                    <TextView
+                        android:id="@+id/tvContactName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textColor="#004D36"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <!-- Title / Designation -->
+                    <TextView
+                        android:id="@+id/tvContactTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1dp"
+                        android:textColor="#212121"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
             </LinearLayout>
 
-            <!-- Name (Bold Dark Green matching Screenshot) -->
-            <TextView
-                android:id="@+id/tvContactName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textColor="#004D36"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <!-- Title / Designation (Dark Black) -->
-            <TextView
-                android:id="@+id/tvContactTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:textColor="#212121"
-                android:textSize="14sp" />
-
-            <!-- Bottom Action Buttons matching Screenshot Colors -->
+            <!-- Bottom Action Buttons (Call, WhatsApp, Facebook) -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="14dp"
                 android:orientation="horizontal">
 
-                <!-- Call Button (Dark Green) -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnCall"
                     android:layout_width="0dp"
@@ -110,7 +145,6 @@
                     app:iconTint="@color/white"
                     app:cornerRadius="8dp" />
 
-                <!-- WhatsApp Button (Bright Green) -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnWhatsapp"
                     android:layout_width="0dp"
@@ -127,7 +161,6 @@
                     app:cornerRadius="8dp"
                     android:visibility="gone" />
 
-                <!-- Facebook Button (Bright Blue) -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnFacebook"
                     android:layout_width="0dp"
@@ -148,7 +181,7 @@
 
         </LinearLayout>
 
-        <!-- Category Watermark Icon placed at Bottom-Right matching Screenshot -->
+        <!-- Category Watermark Icon placed at Bottom-Right -->
         <ImageView
             android:id="@+id/ivWatermark"
             android:layout_width="100dp"

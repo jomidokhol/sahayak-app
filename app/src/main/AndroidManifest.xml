@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:name=".SahayakApp"
@@ -21,25 +23,17 @@
             </intent-filter>
         </activity>
 
-        <!-- MainActivity with Deep Link Intent Filters -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
+            android:windowSoftInputMode="adjustResize"
             android:launchMode="singleTop">
 
-            <!-- Deep Link Filter for Contact and News Sharing -->
-            <intent-filter android:autoVerify="true">
+            <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data
-                    android:scheme="https"
-                    android:host="app-sahayak.vercel.app"
-                    android:pathPrefix="/contact" />
-                <data
-                    android:scheme="https"
-                    android:host="app-sahayak.vercel.app"
-                    android:pathPrefix="/news" />
+                <data android:scheme="sahayak" />
             </intent-filter>
 
             <intent-filter>
@@ -47,42 +41,91 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data
+                    android:scheme="https"
+                    android:host="app-sahayak.vercel.app" />
+                <data
                     android:scheme="http"
+                    android:host="app-sahayak.vercel.app" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".BloodActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="https"
                     android:host="app-sahayak.vercel.app"
-                    android:pathPrefix="/contact" />
+                    android:pathPrefix="/need-emergency-blood" />
                 <data
                     android:scheme="http"
                     android:host="app-sahayak.vercel.app"
-                    android:pathPrefix="/news" />
+                    android:pathPrefix="/need-emergency-blood" />
             </intent-filter>
         </activity>
 
         <activity
             android:name=".LoginActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
 
         <activity
             android:name=".RegisterActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
 
         <activity
             android:name=".CreatePostActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:exported="false" />
+
+        <activity
+            android:name=".CreateBloodPostActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
 
         <activity
             android:name=".AddContactActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
 
         <activity
             android:name=".NewsDetailActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
 
         <activity
             android:name=".EditProfileActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
 
         <activity
             android:name=".CropImageActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".VerifyActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:exported="false" />
+
+        <activity
+            android:name=".CheckoutActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:exported="false" />
+
+        <activity
+            android:name=".ActiveDonorsActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:exported="false" />
+
+        <activity
+            android:name=".UserContactActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
 
         <activity
@@ -92,6 +135,20 @@
         <activity
             android:name=".TermsActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
     </application>
 </manifest>

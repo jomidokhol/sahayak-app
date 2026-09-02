@@ -1,20 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.nur.sahayak.app-mergeDebugResources-39:/values-v16/values-v16.xml",
+            "outputFile": "com.nur.sahayak.app-mergeDebugResources-54:/values-v16/values-v16.xml",
             "map": [
                 {
-                    "source": "/home/codespace/.gradle/caches/transforms-3/f678e523ba7a3129e16879ef09298de1/transformed/core-1.12.0/res/values-v16/values-v16.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "65",
-                        "endOffsets": "116"
-                    }
-                },
-                {
-                    "source": "/home/codespace/.gradle/caches/transforms-3/b487d3dcab67c6b83d1a4e38d4f2f188/transformed/appcompat-1.6.1/res/values-v16/values-v16.xml",
+                    "source": "/home/codespace/.gradle/caches/transforms-3/13221ceaf9c3f7a186051c036be8174d/transformed/appcompat-1.7.0/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -22,14 +12,6 @@
                         "endLines": "5",
                         "endColumns": "12",
                         "endOffsets": "223"
-                    },
-                    "to": {
-                        "startLines": "3",
-                        "startColumns": "4",
-                        "startOffsets": "121",
-                        "endLines": "6",
-                        "endColumns": "12",
-                        "endOffsets": "289"
                     }
                 }
             ]

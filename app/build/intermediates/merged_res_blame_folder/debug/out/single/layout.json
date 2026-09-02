@@ -1,0 +1,246 @@
+[
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/item_active_donor_card.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/item_active_donor_card.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/item_open_chat_card.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/item_open_chat_card.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/item_my_post.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/item_my_post.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/dialog_interstitial_square_ad.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/dialog_interstitial_square_ad.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/activity_news_detail.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/activity_news_detail.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/view_inline_action_chip.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/view_inline_action_chip.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/item_news_card.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/item_news_card.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/activity_crop_image.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/activity_crop_image.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/fragment_services.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/fragment_services.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/activity_settings.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/activity_settings.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/item_news_carousel_skeleton.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/item_news_carousel_skeleton.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/spinner_item.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/spinner_item.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/item_news_carousel.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/item_news_carousel.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/fragment_news.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/fragment_news.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/bottom_sheet_donor_guide.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/bottom_sheet_donor_guide.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/layout_punch_hole_toast.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/layout_punch_hole_toast.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/item_guide_slider_image.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/item_guide_slider_image.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/activity_add_contact.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/activity_add_contact.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/activity_active_donors.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/activity_active_donors.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/bottom_sheet_edit_user_contact.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/bottom_sheet_edit_user_contact.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/activity_create_blood_post.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/activity_create_blood_post.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/activity_checkout.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/activity_checkout.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/item_user_contact_card.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/item_user_contact_card.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/item_open_chat_skeleton.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/item_open_chat_skeleton.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/activity_login.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/activity_login.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/item_public_post.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/item_public_post.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/activity_main.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/dialog_payment_success_celebration.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/dialog_payment_success_celebration.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/bottom_sheet_create_choice.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/bottom_sheet_create_choice.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/bottom_sheet_news_action.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/bottom_sheet_news_action.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/item_contact.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/item_contact.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/bottom_sheet_wa_guide.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/bottom_sheet_wa_guide.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/activity_register.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/activity_register.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/item_reply_card.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/item_reply_card.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/activity_terms.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/activity_terms.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/activity_edit_profile.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/activity_edit_profile.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/bottom_sheet_edit_blood_post.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/bottom_sheet_edit_blood_post.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/item_post_skeleton.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/item_post_skeleton.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/activity_user_contact.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/activity_user_contact.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/fragment_profile.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/fragment_profile.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/item_emergency_blood_post_card.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/item_emergency_blood_post_card.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/activity_verify.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/activity_verify.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/fragment_home.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/bottom_sheet_blood_post_detail.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/bottom_sheet_blood_post_detail.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/dialog_offline_guide.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/dialog_offline_guide.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/item_home_category.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/item_home_category.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/bottom_sheet_blood_filter.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/bottom_sheet_blood_filter.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/bottom_sheet_messenger_guide.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/bottom_sheet_messenger_guide.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/popup_header_plus_menu.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/popup_header_plus_menu.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/activity_blood.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/activity_blood.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/dialog_loading_wave.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/dialog_loading_wave.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/dialog_in_app_update.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/dialog_in_app_update.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/activity_developer.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/activity_developer.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/item_category.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/item_category.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/layout_top_banner.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/layout_top_banner.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/item_profile_post_card.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/item_profile_post_card.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/fragment_open_chat.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/fragment_open_chat.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/item_home_news_carousel.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/item_home_news_carousel.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/dialog_auth_ripple.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/dialog_auth_ripple.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/activity_splash.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/activity_splash.xml"
+    },
+    {
+        "merged": "com.nur.sahayak.app-mergeDebugResources-55:/layout/activity_create_post.xml",
+        "source": "com.nur.sahayak.app-main-58:/layout/activity_create_post.xml"
+    }
+]

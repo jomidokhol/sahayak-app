@@ -1,5 +1,8 @@
 package com.nur.sahayak.fragments
 
+import android.app.Dialog
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -22,8 +25,11 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.firestore.FirebaseFirestore
 import com.nur.sahayak.ContactItem
 import com.nur.sahayak.R
+import com.nur.sahayak.SettingsActivity
 import com.nur.sahayak.adapters.ContactAdapter
 import com.nur.sahayak.utils.FirestoreSafeParser
+import com.nur.sahayak.utils.OfflineContactManager
+import com.nur.sahayak.utils.TopNotification
 
 class ServicesFragment : Fragment() {
 
@@ -37,6 +43,7 @@ class ServicesFragment : Fragment() {
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var btnFilterDropdown: MaterialButton
     private lateinit var llEmptyState: LinearLayout
+    private lateinit var llOfflineBanner: LinearLayout
     private lateinit var adapter: ContactAdapter
 
     private var allContacts = mutableListOf<ContactItem>()
@@ -52,16 +59,19 @@ class ServicesFragment : Fragment() {
         swipeRefresh = view.findViewById(R.id.swipeRefreshServices)
         btnFilterDropdown = view.findViewById(R.id.btnFilterDropdown)
         llEmptyState = view.findViewById(R.id.llEmptyState)
+        llOfflineBanner = view.findViewById(R.id.llOfflineBanner)
 
         rvContacts.layoutManager = LinearLayoutManager(context)
         adapter = ContactAdapter(allContacts)
         rvContacts.adapter = adapter
 
+        checkFirstTimeVisitAndShowGuide()
         checkAndApplyInitialCategory()
-        fetchFirestoreContacts()
+
+        loadContactsData()
 
         swipeRefresh.setOnRefreshListener {
-            fetchFirestoreContacts()
+            loadContactsData()
         }
 
         etSearch.addTextChangedListener(object : TextWatcher {
@@ -79,10 +89,57 @@ class ServicesFragment : Fragment() {
         return view
     }
 
+    private fun checkFirstTimeVisitAndShowGuide() {
+        val context = context ?: return
+        val prefs = context.getSharedPreferences("app_usage_prefs", Context.MODE_PRIVATE)
+        val isFirstVisit = prefs.getBoolean("is_first_services_visit", true)
+
+        if (isFirstVisit) {
+            prefs.edit().putBoolean("is_first_services_visit", false).apply()
+            showOfflineGuideDialog()
+        }
+    }
+
+    private fun showOfflineGuideDialog() {
+        val context = context ?: return
+        val dialog = Dialog(context, R.style.CustomDialogTheme).apply {
+            setContentView(R.layout.dialog_offline_guide)
+            setCancelable(true)
+        }
+
+        val btnDismiss = dialog.findViewById<MaterialButton>(R.id.btnDismissGuide)
+        val btnSettings = dialog.findViewById<MaterialButton>(R.id.btnGoToSettingsFromGuide)
+
+        btnDismiss.setOnClickListener { dialog.dismiss() }
+        btnSettings.setOnClickListener {
+            dialog.dismiss()
+            startActivity(Intent(context, SettingsActivity::class.java))
+        }
+
+        dialog.show()
+    }
+
+    private fun loadContactsData() {
+        val context = context ?: return
+
+        if (!OfflineContactManager.isNetworkAvailable(context)) {
+            llOfflineBanner.visibility = View.VISIBLE
+            val localContacts = OfflineContactManager.loadContactsFromJson(context)
+            allContacts.clear()
+            allContacts.addAll(localContacts)
+            applyFilter()
+            swipeRefresh.isRefreshing = false
+        } else {
+            llOfflineBanner.visibility = View.GONE
+            fetchFirestoreContacts()
+        }
+    }
+
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
         if (!hidden) {
             checkAndApplyInitialCategory()
+            loadContactsData()
         }
     }
 
@@ -98,8 +155,8 @@ class ServicesFragment : Fragment() {
                 btnFilterDropdown.text = "ফিল্টার: ${getCategoryTitle(selectedCategory)} ▾"
             }
             initialCategory = "all"
-            applyFilter()
         }
+        applyFilter()
     }
 
     private fun showFilterDialog() {
@@ -155,11 +212,19 @@ class ServicesFragment : Fragment() {
     }
 
     private fun fetchFirestoreContacts() {
+        val context = context ?: return
         swipeRefresh.isRefreshing = true
         val firestore = FirebaseFirestore.getInstance()
 
         firestore.collection("contacts").addSnapshotListener { snapshot, error ->
             if (error != null || snapshot == null) {
+                val localContacts = OfflineContactManager.loadContactsFromJson(context)
+                if (localContacts.isNotEmpty()) {
+                    llOfflineBanner.visibility = View.VISIBLE
+                    allContacts.clear()
+                    allContacts.addAll(localContacts)
+                    applyFilter()
+                }
                 swipeRefresh.isRefreshing = false
                 return@addSnapshotListener
             }
@@ -169,6 +234,10 @@ class ServicesFragment : Fragment() {
                 val isApproved = FirestoreSafeParser.parseBoolean(doc.get("isApproved"), true)
 
                 if (isApproved) {
+                    val rawImg = FirestoreSafeParser.parseString(doc.get("imageUrl")).ifEmpty {
+                        FirestoreSafeParser.parseString(doc.get("photoUrl"))
+                    }
+
                     val item = ContactItem(
                         id = doc.id,
                         category = FirestoreSafeParser.parseString(doc.get("category")),
@@ -178,12 +247,24 @@ class ServicesFragment : Fragment() {
                         location = FirestoreSafeParser.parseString(doc.get("location")),
                         whatsapp = FirestoreSafeParser.parseString(doc.get("whatsapp")),
                         facebook = FirestoreSafeParser.parseString(doc.get("facebook")),
+                        imageUrl = rawImg,
                         isApproved = isApproved
                     )
                     allContacts.add(item)
                 }
             }
-            applyFilter()
+
+            checkAndApplyInitialCategory()
+
+            if (allContacts.isNotEmpty()) {
+                val lastCount = OfflineContactManager.getLastSyncCount(context)
+                if (OfflineContactManager.isAutoDownloadEnabled(context)) {
+                    OfflineContactManager.saveContactsToJson(context, allContacts)
+                } else if (allContacts.size > lastCount && lastCount > 0) {
+                    TopNotification.show(activity, "নতুন কন্টাক্ট যুক্ত হয়েছে! অফলাইনে পেতে সেটিংসে গিয়ে ডাউনলোড করুন।")
+                }
+            }
+
             swipeRefresh.isRefreshing = false
         }
     }
@@ -201,10 +282,16 @@ class ServicesFragment : Fragment() {
             matchesCategory && matchesQuery
         }
 
-        // Put the target shared contact at the top if coming from Deep Link
+        // Safe Deep Link Sorting: brings target item to position #1
         if (targetContactId.isNotEmpty()) {
-            filteredList = filteredList.sortedByDescending { it.id == targetContactId }
-            targetContactId = "" // Clear after applying
+            val targetItem = filteredList.find { it.id == targetContactId }
+            if (targetItem != null) {
+                filteredList = listOf(targetItem) + filteredList.filter { it.id != targetContactId }
+                targetContactId = ""
+                if (::rvContacts.isInitialized) {
+                    rvContacts.post { rvContacts.scrollToPosition(0) }
+                }
+            }
         }
 
         if (::adapter.isInitialized) {

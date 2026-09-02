@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/gray_bg">
 
-    <!-- Red-Green Gradient Header Bar positioned below Notch -->
+    <!-- Red-Green Gradient Header Bar -->
     <LinearLayout
         android:id="@+id/headerAddContact"
         android:layout_width="match_parent"
@@ -58,10 +58,70 @@
                 android:orientation="vertical"
                 android:padding="20dp">
 
+                <!-- 1:1 Contact Image Selector -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="কন্টাক্ট ছবি (১:১ স্কয়ার রেশিও):"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="1.5dp"
+                        app:strokeColor="@color/primary_green">
+
+                        <ImageView
+                            android:id="@+id/ivContactImagePreview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/draft_con"
+                            android:contentDescription="Contact Image Preview" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSelectContactImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="42dp"
+                        android:layout_marginStart="16dp"
+                        android:backgroundTint="@color/white"
+                        android:text="📷 ছবি সিলেক্ট ও ক্রপ"
+                        android:textColor="@color/primary_green"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        app:strokeColor="@color/primary_green"
+                        app:strokeWidth="1.5dp"
+                        app:cornerRadius="8dp" />
+                </LinearLayout>
+
+                <!-- Upload Progress Bar -->
+                <ProgressBar
+                    android:id="@+id/pbContactUpload"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp"
+                    android:indeterminate="true"
+                    android:indeterminateTint="@color/primary_green"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone" />
+
                 <!-- 1. Name Input -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
                     android:text="১. ব্যক্তি / প্রতিষ্ঠানের নাম (*):"
                     android:textColor="@color/black"
                     android:textSize="14sp"

@@ -11,6 +11,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.nur.sahayak.ContactItem
 import com.nur.sahayak.R
 
@@ -18,6 +19,7 @@ class ContactAdapter(private var contacts: List<ContactItem>) :
     RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
 
     class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val ivPhoto: ImageView = itemView.findViewById(R.id.ivContactPhoto)
         val tvCategory: TextView = itemView.findViewById(R.id.tvContactCategory)
         val tvName: TextView = itemView.findViewById(R.id.tvContactName)
         val tvTitle: TextView = itemView.findViewById(R.id.tvContactTitle)
@@ -45,6 +47,20 @@ class ContactAdapter(private var contacts: List<ContactItem>) :
         holder.tvTitle.text = if (contact.title.isEmpty()) "তথ্য নেই" else contact.title
         holder.tvLocation.text = if (contact.location.isEmpty()) "লালপুর" else contact.location
 
+        // Load Square Contact Image with draft_con.png Placeholder
+        val defaultCon = try { R.drawable.draft_con } catch (e: Exception) { R.drawable.flogo }
+
+        if (contact.imageUrl.isNotEmpty()) {
+            Glide.with(context)
+                .load(contact.imageUrl)
+                .placeholder(defaultCon)
+                .error(defaultCon)
+                .centerCrop()
+                .into(holder.ivPhoto)
+        } else {
+            holder.ivPhoto.setImageResource(defaultCon)
+        }
+
         // Watermark Icon
         val resName = getCategoryDrawableName(categoryStr)
         val resId = context.resources.getIdentifier(resName, "drawable", context.packageName)
@@ -54,7 +70,7 @@ class ContactAdapter(private var contacts: List<ContactItem>) :
             holder.ivWatermark.setImageResource(R.drawable.flogo)
         }
 
-        // Deep Link Share Button Handler
+        // Deep Link Share Handler
         holder.btnShare.setOnClickListener {
             val catKey = if (contact.category.isNotEmpty()) contact.category else "other"
             val shareUrl = "https://app-sahayak.vercel.app/contact/$catKey/${contact.id}"

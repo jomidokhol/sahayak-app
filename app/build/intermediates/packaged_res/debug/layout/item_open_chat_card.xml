@@ -12,12 +12,14 @@
     app:strokeColor="#EAEAEA">
 
     <LinearLayout
+        android:id="@+id/llCardMainContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Top Row: Avatar + Name on Left, Upload Time on Right -->
+        <!-- Top Row: Avatar + Name + Verified Badge + Time + 3-Dot Menu -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,6 +42,16 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
+            <!-- Verified Badge -->
+            <ImageView
+                android:id="@+id/ivChatVerifiedBadge"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="6dp"
+                android:src="@drawable/ic_verified_badge"
+                android:visibility="gone"
+                android:contentDescription="Verified Badge" />
+
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -49,8 +61,19 @@
                 android:id="@+id/tvChatTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
                 android:textColor="#757575"
                 android:textSize="12sp" />
+
+            <!-- 3-Dot Menu Button -->
+            <ImageButton
+                android:id="@+id/btnCardMenu"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_more_vert"
+                app:tint="#666666"
+                android:contentDescription="Menu" />
         </LinearLayout>
 
         <!-- Message Body Content -->
@@ -64,6 +87,77 @@
             android:textColor="#212121"
             android:textSize="15sp" />
 
+        <!-- Post Image Container -->
+        <FrameLayout
+            android:id="@+id/flPostImageContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:id="@+id/llImageLoadingPlaceholder"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="#EAEAEA"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ivImageLoadingLogo"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/flogo"
+                    android:contentDescription="Loading" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/ivPostImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:maxHeight="400dp"
+                android:scaleType="fitCenter"
+                android:contentDescription="Post Image" />
+
+            <!-- Locked / Expired Overlay -->
+            <FrameLayout
+                android:id="@+id/flLockedImageOverlay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#E61A1A1A"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <ImageView
+                        android:layout_width="38dp"
+                        android:layout_height="38dp"
+                        android:src="@drawable/ic_lock"
+                        android:contentDescription="Locked" />
+
+                    <!-- Conditional message for author only -->
+                    <TextView
+                        android:id="@+id/tvLockedImageMessage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="ছবিটি দেখতে ভেরিফিকেশন সক্রিয় করুন"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+                </LinearLayout>
+            </FrameLayout>
+
+        </FrameLayout>
+
         <!-- Like & Comment Action Bar -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -72,7 +166,6 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <!-- Like Button -->
             <LinearLayout
                 android:id="@+id/llLikeBtn"
                 android:layout_width="wrap_content"
@@ -85,7 +178,8 @@
                     android:id="@+id/ivLikeIcon"
                     android:layout_width="22dp"
                     android:layout_height="22dp"
-                    android:src="@drawable/ic_like_outline" />
+                    android:src="@drawable/ic_like_outline"
+                    android:contentDescription="Like" />
                 
                 <TextView
                     android:id="@+id/tvLikeCount"
@@ -98,7 +192,6 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-            <!-- Comment Button -->
             <LinearLayout
                 android:id="@+id/llCommentBtn"
                 android:layout_width="wrap_content"
@@ -109,9 +202,11 @@
                 android:padding="6dp">
                 
                 <ImageView
+                    android:id="@+id/ivCommentIcon"
                     android:layout_width="22dp"
                     android:layout_height="22dp"
-                    android:src="@drawable/ic_comment" />
+                    android:src="@drawable/ic_comment"
+                    android:contentDescription="Comment" />
                 
                 <TextView
                     android:id="@+id/tvCommentCount"
@@ -175,7 +270,6 @@
                     android:textSize="14sp"
                     android:textColor="#000" />
 
-                <!-- Send Button: Transparent Background with Green Icon -->
                 <ImageButton
                     android:id="@+id/btnSendReply"
                     android:layout_width="44dp"

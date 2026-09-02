@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/gray_bg">
 
-    <!-- Red-Green Gradient Header Bar positioned below Notch -->
+    <!-- Red-Green Gradient Header Bar -->
     <LinearLayout
         android:id="@+id/headerCreatePost"
         android:layout_width="match_parent"
@@ -71,14 +71,30 @@
                     android:layout_marginStart="12dp"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tvPostUserName"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="সম্মানিত ইউজার"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvPostUserName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="সম্মানিত ইউজার"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/ivPostUserVerifiedBadge"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_marginStart="6dp"
+                            android:src="@drawable/ic_verified_badge"
+                            android:visibility="gone"
+                            android:contentDescription="Verified" />
+                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/tvPostVisibilityStatus"
@@ -90,12 +106,12 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Expanded Input Box -->
+            <!-- Expanded Input Box Supporting Rich Inline Chips -->
             <EditText
                 android:id="@+id/etPostContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="180dp"
+                android:minHeight="140dp"
                 android:background="@drawable/badge_bg"
                 android:backgroundTint="@color/white"
                 android:gravity="top|start"
@@ -105,6 +121,148 @@
                 android:padding="16dp"
                 android:textSize="15sp"
                 android:lineSpacingExtra="4dp" />
+
+            <!-- Smart Number Detection Suggestion Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardDetectedNumberHelper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:cardBackgroundColor="#F0F7F4"
+                app:cardCornerRadius="10dp"
+                app:strokeColor="@color/primary_green"
+                app:strokeWidth="1.5dp"
+                app:cardElevation="2dp"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="💡 নম্বর সনাক্ত হয়েছে:"
+                            android:textColor="@color/primary_green"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvDetectedNumberDisplay"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="01711XXXXXX"
+                            android:textColor="@color/black"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <ImageButton
+                            android:id="@+id/btnIgnoreDetectedNumber"
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:layout_marginStart="8dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:src="@drawable/ic_close"
+                            app:tint="#666666"
+                            android:contentDescription="Ignore" />
+                    </LinearLayout>
+
+                    <!-- Action Buttons to convert to Phone / WhatsApp -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="8dp">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnSetAsPhone"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="4dp"
+                            android:backgroundTint="@color/primary_green"
+                            android:text="📞 ফোন বাটন"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            app:cornerRadius="6dp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnSetAsWhatsApp"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:layout_marginStart="4dp"
+                            android:backgroundTint="#25D366"
+                            android:text="💬 WhatsApp বাটন"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            app:cornerRadius="6dp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Attached Image Preview Container with Auto-Adjusting Aspect Ratio -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardPostImagePreview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                app:strokeColor="#E0E0E0"
+                app:strokeWidth="1dp"
+                android:visibility="gone">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/ivAttachedPostImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:maxHeight="440dp"
+                        android:scaleType="fitCenter"
+                        android:contentDescription="Attached Image" />
+
+                    <ImageButton
+                        android:id="@+id/btnRemoveAttachedImage"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/badge_bg"
+                        android:backgroundTint="#CC000000"
+                        android:src="@drawable/ic_close"
+                        app:tint="@color/white"
+                        android:contentDescription="Remove Image" />
+                </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Upload Progress Indicator -->
+            <ProgressBar
+                android:id="@+id/pbPostUpload"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/primary_green"
+                android:layout_marginTop="8dp"
+                android:visibility="gone" />
 
             <!-- Word Counter -->
             <TextView
@@ -134,24 +292,41 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="8dp">
 
-                <!-- 1. Schedule Tool -->
+                <!-- 1. Attach Photo Tool -->
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnToolSchedule"
+                    android:id="@+id/btnToolAddPhoto"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="0dp"
                     android:layout_height="44dp"
                     android:layout_weight="1"
                     android:layout_marginEnd="4dp"
                     android:backgroundTint="@color/white"
+                    android:text="ছবি"
+                    android:textColor="#212121"
+                    android:textSize="11sp"
+                    app:icon="@drawable/ic_image"
+                    app:iconTint="@color/primary_green"
+                    app:strokeColor="#CCCCCC"
+                    app:cornerRadius="8dp" />
+
+                <!-- 2. Schedule Tool -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnToolSchedule"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="2dp"
+                    android:backgroundTint="@color/white"
                     android:text="সিডিউল"
                     android:textColor="#212121"
-                    android:textSize="12sp"
+                    android:textSize="11sp"
                     app:icon="@drawable/ic_schedule"
                     app:iconTint="@color/primary_green"
                     app:strokeColor="#CCCCCC"
                     app:cornerRadius="8dp" />
 
-                <!-- 2. Temporary Expiry Tool -->
+                <!-- 3. Temporary Expiry Tool -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnToolTemporary"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -162,22 +337,22 @@
                     android:backgroundTint="@color/white"
                     android:text="মেয়াদ"
                     android:textColor="#212121"
-                    android:textSize="12sp"
+                    android:textSize="11sp"
                     app:icon="@drawable/ic_timer"
                     app:iconTint="@color/primary_green"
                     app:strokeColor="#CCCCCC"
                     app:cornerRadius="8dp" />
 
-                <!-- 3. Anonymous Toggle Tool -->
+                <!-- 4. Anonymous Toggle Tool -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnToolAnonymous"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="0dp"
                     android:layout_height="44dp"
-                    android:layout_weight="1.1"
+                    android:layout_weight="1"
                     android:layout_marginStart="4dp"
                     android:backgroundTint="@color/white"
-                    android:text="Anonymous"
+                    android:text="গোপন"
                     android:textColor="#212121"
                     android:textSize="11sp"
                     app:icon="@drawable/ic_anonymous"
@@ -187,7 +362,7 @@
 
             </LinearLayout>
 
-            <!-- Active Options Badges/Status View -->
+            <!-- Active Options Badges View -->
             <LinearLayout
                 android:id="@+id/llActiveToolBadges"
                 android:layout_width="match_parent"
@@ -196,7 +371,6 @@
                 android:layout_marginTop="10dp"
                 android:visibility="gone">
 
-                <!-- Schedule Badge -->
                 <TextView
                     android:id="@+id/tvActiveScheduleBadge"
                     android:layout_width="wrap_content"
@@ -211,7 +385,6 @@
                     android:layout_marginBottom="4dp"
                     android:visibility="gone" />
 
-                <!-- Expiry Badge -->
                 <TextView
                     android:id="@+id/tvActiveExpiryBadge"
                     android:layout_width="wrap_content"

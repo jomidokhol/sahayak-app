@@ -9,11 +9,15 @@
     <LinearLayout
         android:id="@+id/headerTerms"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
+        android:minHeight="88dp"
+        android:layout_alignParentTop="true"
         android:background="@drawable/header_gradient"
-        android:gravity="center_vertical"
+        android:gravity="bottom"
         android:orientation="horizontal"
-        android:paddingHorizontal="16dp">
+        android:paddingHorizontal="16dp"
+        android:paddingTop="32dp"
+        android:paddingBottom="12dp">
 
         <ImageButton
             android:id="@+id/btnBackTerms"
@@ -38,20 +42,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/headerTerms"
-        android:padding="20dp">
+        android:padding="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="24dp">
 
-            <!-- Pure White Background Card for High Contrast Text -->
+            <!-- Card 1: Permanent Comprehensive App Rules (Always Visible from Code) -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="3dp">
+                app:cardElevation="3dp"
+                android:layout_marginBottom="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -62,9 +68,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ব্যবহার নির্দেশিকা ও শর্তাবলী"
+                        android:text="অ্যাপ ব্যবহার নির্দেশিকা ও সাধারণ নিয়মাবলি"
                         android:textColor="@color/primary_green"
-                        android:textSize="18sp"
+                        android:textSize="17sp"
                         android:textStyle="bold" />
 
                     <View
@@ -76,10 +82,50 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:lineSpacingExtra="5dp"
-                        android:text="১. সহায়ক (Sahayak) অ্যাপের সকল তথ্য লালপুর উপজেলার সর্বসাধারণের কল্যাণে ব্যবহারের জন্য তৈরি করা হয়েছে।\n\n২. অ্যাপের পাবলিক বক্সে কোনো ধরনের উসকানিমূলক, রাজনৈতিক বা অসৌজন্যমূলক বক্তব্য প্রকাশ সম্পূর্ণ নিষিদ্ধ।\n\n৩. অসাধু উদ্দেশ্যে কারো ব্যক্তিগত কন্টাক্ট নম্বর অপব্যবহার করা আইনত দণ্ডনীয় অপরাধ।\n\n৪. কোনো ভুল তথ্য চোখে পড়লে অ্যাপের মাধ্যমে রিপোর্ট বা সংশোধন অনুরোধ পাঠানোর আহ্বান জানানো হচ্ছে।"
+                        android:lineSpacingExtra="6dp"
+                        android:text="১. উদ্দেশ্য ও পরিধি:\nসহায়ক (Sahayak) নাটোর জেলার লালপুর উপজেলার নাগরিকদের জরুরি সেবা ও তথ্যের আদান-প্রদান সহজতর করার লক্ষ্যে নির্মিত একটি অরাজনৈতিক ও সেবামূলক ডিজিটাল প্ল্যাটফর্ম।\n\n২. ওপেন চ্যাট ও বক্তব্য প্রকাশের নীতিমালা:\nঅ্যাপের ওপেন চ্যাটে যেকোনো ধরনের উসকানিমূলক, রাজনৈতিক বা ধর্মীয় বিদ্বেষপূর্ণ, রাষ্ট্রবিরোধী, গুজব কিংবা অসৌজন্যমূলক বক্তব্য প্রকাশ সম্পূর্ণ নিষিদ্ধ।\n\n৩. কন্টাক্ট তথ্যের গোপনীয়তা ও সুরক্ষা:\nঅ্যাপে রক্ষিত ব্যক্তিগত কন্টাক্ট নম্বর ও তথ্যের অপব্যবহার, কাউকে অযথা বিরক্ত করা কিংবা অসাধু উদ্দেশ্যে ব্যবহার করা আইনত দণ্ডনীয় অপরাধ।\n\n৪. কন্টাক্ট সংযোজন ও সংশোধন:\nঅ্যাপ থেকে যেকোনো নতুন কন্টাক্ট যোগ করার অনুরোধ পাঠানো যাবে, যা এডমিন প্যানেল কর্তৃক যাচাই-বাছাই ও অনুমোদনের পরই সেবা পেজে প্রদর্শিত হবে। কোনো ভুল তথ্য নজরে এলে দ্রুত সংশোধনের অনুরোধ জানানোর আহ্বান জানানো হচ্ছে।\n\n৫. অফলাইন ব্যাকআপ ও ইন্টারনেট সুবিধা:\nইন্টারনেট সংযোগ ছাড়াও নিরবচ্ছিন্ন সেবা পাওয়ার জন্য সেটিংস পেজ থেকে কন্টাক্ট ডাটা ডাউনলোড করে রাখা ব্যবহারকারীর জন্য সুবিধাজনক।\n\n৬. দায়মুক্তি:\nকর্তৃপক্ষ সর্বদা হালনাগাদ ও সঠিক তথ্য সরবরাহের সর্বোচ্চ চেষ্টা করে থাকে; তবে কোনো তৃতীয় পক্ষের তথ্যের পরিবর্তনের জন্য কর্তৃপক্ষ দায়ী নয়।"
                         android:textColor="#212121"
-                        android:textSize="15sp" />
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Card 2: Dynamic Admin Updates & YouTube Video Section (Below Static Rules, Auto-Hides if Empty) -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardDynamicTerms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="3dp"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="বিশেষ ঘোষণা ও ভিডিও টিউটোরিয়াল"
+                        android:textColor="@color/primary_green"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginVertical="12dp"
+                        android:background="#E0E0E0" />
+
+                    <!-- Dynamic HTML & YouTube Iframe Embed Window -->
+                    <WebView
+                        android:id="@+id/wvTermsContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

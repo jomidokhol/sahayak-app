@@ -1,190 +1,554 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipeRefreshHome"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/gray_bg">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout 
-        android:id="@+id/swipeRefreshHome"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ScrollView
-            android:id="@+id/scrollViewHome"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="10dp">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="24dp">
 
+            <!-- 1. SECTION 1: News Image Carousel -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="210dp"
+                android:layout_marginBottom="12dp">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/vpHomesNewsSlider"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <LinearLayout
+                    android:id="@+id/llHomeSliderSkeleton"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#2C2C2C"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/ivSliderLoadingNewsImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/news_loading"
+                        android:contentDescription="Loading Banner" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <!-- 2. SECTION 2: Lalpur Weather & Prayer Waqt Card (Weather Icon in Circular Card) -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginBottom="16dp">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardWeatherAndPrayer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp"
+                    app:strokeColor="#E0E0E0"
+                    app:strokeWidth="1dp"
+                    app:cardBackgroundColor="@android:color/transparent">
+
+                    <RelativeLayout
+                        android:id="@+id/rlWeatherCardContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_weather_card_day">
+
+                        <!-- Twinkling Stars Animation Layer -->
+                        <com.nur.sahayak.utils.TwinklingStarsView
+                            android:id="@+id/twinklingStarsView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignTop="@id/llWeatherCardContent"
+                            android:layout_alignBottom="@id/llWeatherCardContent"
+                            android:visibility="gone" />
+
+                        <LinearLayout
+                            android:id="@+id/llWeatherCardContent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="16dp"
+                            android:paddingVertical="14dp"
+                            android:weightSum="2">
+
+                            <!-- Left: Weather (Icon in High-Contrast White Circular Badge) -->
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <com.google.android.material.card.MaterialCardView
+                                        android:layout_width="44dp"
+                                        android:layout_height="44dp"
+                                        app:cardCornerRadius="22dp"
+                                        app:cardElevation="3dp"
+                                        app:strokeWidth="1.5dp"
+                                        app:strokeColor="#FFFFFF"
+                                        app:cardBackgroundColor="#FFFFFF">
+
+                                        <ImageView
+                                            android:id="@+id/ivHomeWeatherIcon"
+                                            android:layout_width="28dp"
+                                            android:layout_height="28dp"
+                                            android:layout_gravity="center"
+                                            android:scaleType="fitCenter"
+                                            android:src="@drawable/ic_weather_sun"
+                                            android:contentDescription="Weather Icon" />
+                                    </com.google.android.material.card.MaterialCardView>
+
+                                    <TextView
+                                        android:id="@+id/tvHomeWeatherTemp"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:text="৩১° সে."
+                                        android:textColor="#FFFFFF"
+                                        android:textSize="20sp"
+                                        android:textStyle="bold"
+                                        android:shadowColor="#000000"
+                                        android:shadowDx="0"
+                                        android:shadowDy="0"
+                                        android:shadowRadius="10" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/tvHomeWeatherCondition"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="3dp"
+                                    android:text="পরিষ্কার রোদ"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    android:shadowColor="#000000"
+                                    android:shadowDx="0"
+                                    android:shadowDy="0"
+                                    android:shadowRadius="10" />
+
+                                <TextView
+                                    android:id="@+id/tvHomeWeatherLocation"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:text="📍 লালপুর, নাটোর"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"
+                                    android:shadowColor="#000000"
+                                    android:shadowDx="0"
+                                    android:shadowDy="0"
+                                    android:shadowRadius="10" />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="match_parent"
+                                android:background="#66FFFFFF"
+                                android:layout_marginHorizontal="8dp" />
+
+                            <!-- Right: Lalpur Prayer Waqt -->
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:layout_width="24dp"
+                                        android:layout_height="24dp"
+                                        android:src="@drawable/ic_mosque"
+                                        android:contentDescription="Mosque" />
+
+                                    <TextView
+                                        android:id="@+id/tvHomeCurrentWaqt"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="6dp"
+                                        android:text="যোহর চলছে"
+                                        android:textColor="#FFFFFF"
+                                        android:textSize="17sp"
+                                        android:textStyle="bold"
+                                        android:shadowColor="#000000"
+                                        android:shadowDx="0"
+                                        android:shadowDy="0"
+                                        android:shadowRadius="10" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/tvHomeWaqtEndTime"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:text="ওয়াক্ত শেষ: ০৪:১৫"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold"
+                                    android:shadowColor="#000000"
+                                    android:shadowDx="0"
+                                    android:shadowDy="0"
+                                    android:shadowRadius="10" />
+
+                                <TextView
+                                    android:id="@+id/tvHomeNextWaqtTime"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:text="পরবর্তী: আসর (০৪:১৫)"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold"
+                                    android:shadowColor="#000000"
+                                    android:shadowDx="0"
+                                    android:shadowDy="0"
+                                    android:shadowRadius="10" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </RelativeLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardWeatherPrayerSkeleton"
+                    android:layout_width="match_parent"
+                    android:layout_height="96dp"
+                    app:cardBackgroundColor="#E0E0E0"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+            <!-- 3. SECTION 3: Emergency Contact Category Horizontal Bar -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingHorizontal="16dp"
+                android:layout_marginBottom="16dp">
 
-                <!-- 18 Categories Header -->
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="জরুরি সেবাসমূহ"
-                    android:textColor="@color/primary_green"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:letterSpacing="0.02"
-                    android:layout_marginBottom="8dp" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="10dp">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_phone"
+                        app:tint="@color/primary_green"
+                        android:contentDescription="Phone Icon" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="6dp"
+                        android:text="জরুরি কন্টাক্ট সমূহ"
+                        android:textColor="@color/primary_green"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvHomeViewAllServices"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="সকল সেবা ➔"
+                        android:textColor="@color/primary_green"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvCategories"
+                    android:id="@+id/rvHomeCategories"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false"
-                    android:layout_marginBottom="16dp" />
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false" />
 
-                <!-- Centered "লালপুর সংবাদ" Header -->
+            </LinearLayout>
+
+            <!-- 4. SECTION 4: Latest 3 Emergency Blood Posts -->
+            <LinearLayout
+                android:id="@+id/llHomeBloodSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="16dp"
+                android:layout_marginBottom="16dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="10dp">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="8dp">
 
                     <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="🩸 জরুরী রক্তের প্রয়োজন"
+                        android:textColor="#C62828"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvHeaderBloodViewMore"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="লালপুর সংবাদ"
-                        android:textColor="@color/primary_green"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:letterSpacing="0.03" />
-
-                    <View
-                        android:layout_width="60dp"
-                        android:layout_height="3dp"
-                        android:layout_marginTop="4dp"
-                        android:background="@color/primary_green" />
+                        android:text="সকল দেখুন ➔"
+                        android:textColor="#C62828"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
-                <!-- News Skeleton Loader -->
-                <include
-                    android:id="@+id/incNewsSkeleton"
-                    layout="@layout/item_news_carousel_skeleton"
-                    android:visibility="gone" />
-
-                <!-- News Carousel ViewPager2 -->
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/vpNewsCarousel"
+                <LinearLayout
+                    android:id="@+id/llHomeBloodSkeleton"
                     android:layout_width="match_parent"
-                    android:layout_height="210dp"
-                    android:layout_marginBottom="20dp" />
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
-                <!-- Centered "লালপুর ওপেন চ্যাট" Header -->
+                    <include layout="@layout/item_open_chat_skeleton" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvHomeBloodPosts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnViewMoreBloodPosts"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="4dp"
+                    android:text="View All ➔"
+                    android:textColor="#C62828"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:strokeColor="#FFCDD2"
+                    app:cornerRadius="8dp" />
+            </LinearLayout>
+
+            <!-- 5. SECTION 5: Latest 10 Open Chat Posts -->
+            <LinearLayout
+                android:id="@+id/llHomeChatSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="16dp"
+                android:layout_marginBottom="16dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="10dp">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="8dp">
 
                     <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="💬 ওপেন চ্যাট"
+                        android:textColor="@color/primary_green"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvHeaderChatViewMore"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="লালপুর ওপেন চ্যাট"
+                        android:text="ওপেন চ্যাট ➔"
                         android:textColor="@color/primary_green"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:letterSpacing="0.03" />
-
-                    <View
-                        android:layout_width="60dp"
-                        android:layout_height="3dp"
-                        android:layout_marginTop="4dp"
-                        android:background="@color/primary_green" />
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
-                <!-- Open Chat Skeleton Loaders -->
                 <LinearLayout
                     android:id="@+id/llHomeChatSkeleton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:visibility="gone">
+
                     <include layout="@layout/item_open_chat_skeleton" />
                     <include layout="@layout/item_open_chat_skeleton" />
                 </LinearLayout>
 
-                <!-- Open Chat RecyclerView (Max 10 Items) -->
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvHomeOpenChat"
+                    android:id="@+id/rvHomeChatPosts"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:nestedScrollingEnabled="false" />
 
-                <!-- View More Button for Open Chat -->
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnViewMoreChat"
+                    android:id="@+id/btnViewMoreChatPosts"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="24dp"
-                    android:text="View More (আরও দেখুন) ▾"
-                    android:textColor="@color/primary_green"
-                    android:textStyle="bold"
-                    app:strokeColor="@color/primary_green"
-                    app:cornerRadius="20dp"
-                    android:visibility="gone" />
-
-                <!-- Square WebView Container for Ad -->
-                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp">
+                    android:layout_height="44dp"
+                    android:layout_marginTop="4dp"
+                    android:text="আরও আলোচনা দেখুন ➔"
+                    android:textColor="@color/primary_green"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:strokeColor="#C8E6C9"
+                    app:cornerRadius="8dp" />
+            </LinearLayout>
 
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintDimensionRatio="1:1"
-                        app:cardCornerRadius="12dp"
-                        app:cardElevation="2dp">
+            <!-- 6. SECTION 6: 9:16 In-Feed Ad Window (Restored & Functional) -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutNineSixteenAdParent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="6dp">
 
-                        <RelativeLayout
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardNineSixteenAdContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintDimensionRatio="9:16"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp"
+                    app:strokeWidth="1.2dp"
+                    app:strokeColor="#E0E0E0"
+                    app:cardBackgroundColor="#FFFFFF">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <!-- Loading Cover Layer with App Logo -->
+                        <LinearLayout
+                            android:id="@+id/llNineSixteenAdCover"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="#EAEAEA">
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:background="#F8F9FA">
 
-                            <!-- Placeholder during load -->
+                            <ImageView
+                                android:layout_width="72dp"
+                                android:layout_height="72dp"
+                                android:src="@drawable/flogo"
+                                android:contentDescription="Sahayak Logo" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:text="বিজ্ঞাপন প্রস্তুত হচ্ছে..."
+                                android:textColor="@color/primary_green"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <!-- 9:16 In-Feed WebView Window -->
+                        <WebView
+                            android:id="@+id/wvNineSixteenAd"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:visibility="gone" />
+
+                        <!-- Verified Member Blur & Lock Overlay -->
+                        <FrameLayout
+                            android:id="@+id/flVerifiedAdLockOverlay"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#F21A1A1A"
+                            android:visibility="gone">
+
                             <LinearLayout
-                                android:id="@+id/llAdPlaceholder"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
                                 android:gravity="center"
-                                android:orientation="vertical">
+                                android:orientation="vertical"
+                                android:padding="24dp">
 
                                 <ImageView
-                                    android:id="@+id/ivAdLogo"
-                                    android:layout_width="80dp"
-                                    android:layout_height="80dp"
-                                    android:src="@drawable/logo2"
-                                    android:contentDescription="Loading Ad" />
+                                    android:layout_width="48dp"
+                                    android:layout_height="48dp"
+                                    android:src="@drawable/ic_lock"
+                                    app:tint="@color/white"
+                                    android:contentDescription="Lock" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="12dp"
+                                    android:text="বিজ্ঞাপন মুক্ত অভিজ্ঞতা"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:text="ভেরিফাইড মেম্বার প্রিভিলেজ সক্রিয়"
+                                    android:textColor="#00E676"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold" />
                             </LinearLayout>
+                        </FrameLayout>
 
-                            <!-- Silent Web Browser -->
-                            <WebView
-                                android:id="@+id/wvAdBrowser"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:visibility="gone" />
+                        <!-- Ad Badge -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/badge_bg"
+                            android:backgroundTint="#CC000000"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="3dp"
+                            android:text="বিজ্ঞাপন"
+                            android:textColor="@color/white"
+                            android:textSize="10sp" />
+                    </RelativeLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                        </RelativeLayout>
-                    </com.google.android.material.card.MaterialCardView>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </LinearLayout>
-        </ScrollView>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-</RelativeLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

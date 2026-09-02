@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#D9000000">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="20dp">
+
+        <!-- 1:1 Square Ad Card Container -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardSquareAdBox"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="10dp"
+            app:cardBackgroundColor="#FFFFFF">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!-- Loading Placeholder with Sahayak Logo -->
+                <LinearLayout
+                    android:id="@+id/llSquareAdPlaceholder"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="#FFFFFF">
+
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/flogo"
+                        android:contentDescription="Loading Logo" />
+
+                    <TextView
+                        android:id="@+id/tvSquareAdPlaceholderMsg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="বিজ্ঞাপন লোড হচ্ছে..."
+                        android:textColor="@color/primary_green"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Ad WebView -->
+                <WebView
+                    android:id="@+id/wvSquareAd"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone" />
+
+                <!-- Top Header Bar Inside the Card (Unclipped Badge, Countdown & Close Button) -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/badge_bg"
+                        android:backgroundTint="#CC000000"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="3dp"
+                        android:text="বিজ্ঞাপন"
+                        android:textColor="@color/white"
+                        android:textSize="10sp" />
+
+                    <!-- Countdown Badge -->
+                    <TextView
+                        android:id="@+id/tvSquareAdCountdown"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/badge_bg"
+                        android:backgroundTint="#CC000000"
+                        android:gravity="center"
+                        android:paddingHorizontal="10dp"
+                        android:text="অপেক্ষা করুন ১০ সে."
+                        android:textColor="@color/white"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <!-- Close Button (Appears after 10s) -->
+                    <ImageButton
+                        android:id="@+id/btnCloseSquareAd"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/badge_bg"
+                        android:backgroundTint="#E53935"
+                        android:src="@drawable/ic_close"
+                        app:tint="@color/white"
+                        android:visibility="gone"
+                        android:contentDescription="Close Ad" />
+                </RelativeLayout>
+
+                <!-- 10-Second Progress Bar at Bottom of 1:1 Card -->
+                <ProgressBar
+                    android:id="@+id/pbSquareAdTimer"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp"
+                    android:layout_alignParentBottom="true"
+                    android:max="10"
+                    android:progress="0"
+                    android:indeterminate="false"
+                    android:progressTint="@color/primary_green" />
+
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

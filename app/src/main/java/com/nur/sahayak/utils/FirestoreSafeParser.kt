@@ -5,40 +5,52 @@ import java.util.Date
 
 object FirestoreSafeParser {
 
-    fun parseTimestampToMillis(obj: Any?, defaultMillis: Long = System.currentTimeMillis()): Long {
-        if (obj == null) return defaultMillis
+    fun parseString(obj: Any?, defaultVal: String = ""): String {
+        if (obj == null) return defaultVal
         return when (obj) {
-            is Timestamp -> obj.toDate().time
-            is Long -> obj
-            is Double -> obj.toLong()
-            is Int -> obj.toLong()
-            is Number -> obj.toLong()
-            is Date -> obj.time
-            is String -> obj.toLongOrNull() ?: defaultMillis
-            else -> defaultMillis
+            is String -> obj.trim()
+            else -> obj.toString().trim()
         }
     }
 
-    fun parseString(obj: Any?, defaultStr: String = ""): String {
-        return obj?.toString() ?: defaultStr
-    }
-
-    fun parseInt(obj: Any?, defaultInt: Int = 0): Int {
-        if (obj == null) return defaultInt
+    fun parseInt(obj: Any?, defaultVal: Int = 0): Int {
+        if (obj == null) return defaultVal
         return when (obj) {
             is Number -> obj.toInt()
-            is String -> obj.toIntOrNull() ?: defaultInt
-            else -> defaultInt
+            is String -> obj.toIntOrNull() ?: defaultVal
+            else -> defaultVal
         }
     }
 
-    fun parseBoolean(obj: Any?, defaultBool: Boolean = true): Boolean {
-        if (obj == null) return defaultBool
+    fun parseLong(obj: Any?, defaultVal: Long = 0L): Long {
+        if (obj == null) return defaultVal
+        return when (obj) {
+            is Number -> obj.toLong()
+            is String -> obj.toLongOrNull() ?: defaultVal
+            is Timestamp -> obj.toDate().time
+            is Date -> obj.time
+            else -> defaultVal
+        }
+    }
+
+    fun parseBoolean(obj: Any?, defaultVal: Boolean = false): Boolean {
+        if (obj == null) return defaultVal
         return when (obj) {
             is Boolean -> obj
             is String -> obj.equals("true", ignoreCase = true)
             is Number -> obj.toInt() != 0
-            else -> defaultBool
+            else -> defaultVal
+        }
+    }
+
+    fun parseTimestampToMillis(obj: Any?, defaultTime: Long = System.currentTimeMillis()): Long {
+        if (obj == null) return defaultTime
+        return when (obj) {
+            is Timestamp -> obj.toDate().time
+            is Date -> obj.time
+            is Number -> obj.toLong()
+            is String -> obj.toLongOrNull() ?: defaultTime
+            else -> defaultTime
         }
     }
 }

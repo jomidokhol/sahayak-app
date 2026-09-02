@@ -1,39 +1,36 @@
 package com.nur.sahayak
 
 import android.app.Application
-import android.util.Log
-import android.widget.Toast
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreSettings
-import com.google.firebase.firestore.MemoryCacheSettings
+import androidx.work.Constraints
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.NetworkType
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
+import com.google.firebase.FirebaseApp
+import com.nur.sahayak.workers.BloodNotificationWorker
+import java.util.concurrent.TimeUnit
 
 class SahayakApp : Application() {
     override fun onCreate() {
         super.onCreate()
+        FirebaseApp.initializeApp(this)
 
-        try {
-            // Disable buggy disk caching & force live server reads
-            val firestore = FirebaseFirestore.getInstance()
-            val settings = FirebaseFirestoreSettings.Builder()
-                .setLocalCacheSettings(MemoryCacheSettings.newBuilder().build())
-                .build()
-            firestore.firestoreSettings = settings
-        } catch (e: Exception) {
-            Log.e("SahayakApp", "Firestore settings init error", e)
-        }
+        setupEmergencyBloodBackgroundWorker()
+    }
 
-        // Global Uncaught Exception Handler
-        Thread.setDefaultUncaughtExceptionHandler { _, throwable ->
-            Log.e("SahayakApp", "Global Crash Prevented: ${throwable.message}", throwable)
-            try {
-                Toast.makeText(
-                    applicationContext,
-                    "মেসেজ: ${throwable.localizedMessage ?: "সমস্যা সমাধান করা হয়েছে"}",
-                    Toast.LENGTH_LONG
-                ).show()
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
+    private fun setupEmergencyBloodBackgroundWorker() {
+        val constraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
+
+        val bloodWorkRequest = PeriodicWorkRequestBuilder<BloodNotificationWorker>(
+            15, TimeUnit.MINUTES
+        ).setConstraints(constraints).build()
+
+        WorkManager.getInstance(this).enqueueUniquePeriodicWork(
+            "EmergencyBloodSyncWork",
+            ExistingPeriodicWorkPolicy.KEEP,
+            bloodWorkRequest
+        )
     }
 }

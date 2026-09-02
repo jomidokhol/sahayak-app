@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="0dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- 1. Background Layer: Duplicate Blurred Image filling empty sides -->
+        <ImageView
+            android:id="@+id/ivCarouselBlurBg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:alpha="0.40"
+            android:contentDescription="Blur Background" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#4D000000" />
+
+        <!-- 2. Loading Placeholder (Animates Fade In/Out until image is ready) -->
+        <ImageView
+            android:id="@+id/ivCarouselLoadingPlaceholder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/news_loading"
+            android:contentDescription="Loading Image" />
+
+        <!-- 3. Foreground Main Image (Preserves Exact Aspect Ratio, No Crop) -->
+        <ImageView
+            android:id="@+id/ivCarouselMainImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:contentDescription="News Banner" />
+
+        <!-- 4. Subtle Dark Bottom Gradient for crisp text contrast (No white shadow) -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/bottom_dark_gradient" />
+
+        <!-- 5. News Title Text -->
+        <TextView
+            android:id="@+id/tvCarouselNewsTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="12dp"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:shadowColor="#CC000000"
+            android:shadowDx="0"
+            android:shadowDy="2"
+            android:shadowRadius="6" />
+
+    </FrameLayout>
+</com.google.android.material.card.MaterialCardView>

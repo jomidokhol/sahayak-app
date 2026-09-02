@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/badge_bg"
+    android:backgroundTint="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Drag Handle -->
+        <View
+            android:layout_width="40dp"
+            android:layout_height="4dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:background="#CCCCCC" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="কন্টাক্ট তথ্য সম্পাদনা"
+            android:textColor="@color/primary_green"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="* তথ্য এডিট করে সেভ করলে তা পুনরায় এডমিন অনুমোদনের জন্য অপেক্ষমাণ থাকবে।"
+            android:textColor="#E65100"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="12dp"
+            android:background="#EEEEEE" />
+
+        <!-- 1. Interactive 1:1 Crop Avatar Box with Pen/Edit Button -->
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="14dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardEditContactAvatar"
+                android:layout_width="84dp"
+                android:layout_height="84dp"
+                app:cardCornerRadius="42dp"
+                app:cardElevation="3dp"
+                app:strokeWidth="2.5dp"
+                app:strokeColor="@color/primary_green">
+
+                <ImageView
+                    android:id="@+id/ivEditContactAvatar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/draft_user"
+                    android:contentDescription="Avatar" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Floating Edit Button to trigger Gallery & 1:1 Crop -->
+            <ImageButton
+                android:id="@+id/btnChangeContactImage"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignEnd="@id/cardEditContactAvatar"
+                android:layout_alignBottom="@id/cardEditContactAvatar"
+                android:layout_marginEnd="-2dp"
+                android:layout_marginBottom="-2dp"
+                android:background="@drawable/badge_bg"
+                android:backgroundTint="@color/primary_green"
+                android:src="@drawable/ic_edit"
+                app:tint="@color/white"
+                android:elevation="6dp"
+                android:contentDescription="Change Photo" />
+        </RelativeLayout>
+
+        <!-- 2. Fixed / Non-Editable Category & Location Info Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/badge_bg"
+            android:backgroundTint="#F8F9FA"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:id="@+id/tvFixedCategoryDisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ক্যাটাগরি: ডাক্তার (অপরিবর্তনযোগ্য)"
+                android:textColor="#555555"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvFixedLocationDisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="ঠিকানা: লালপুর বাজার (অপরিবর্তনযোগ্য)"
+                android:textColor="#757575"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- Name -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="নাম (*):"
+            android:textColor="#333333"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etEditContactName"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/badge_bg"
+            android:backgroundTint="#F8F9FA"
+            android:hint="কন্টাক্টধারীর নাম"
+            android:inputType="textPersonName"
+            android:paddingHorizontal="12dp"
+            android:textColor="#000"
+            android:textSize="14sp" />
+
+        <!-- Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="পদবি বা বিবরণ (*):"
+            android:textColor="#333333"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etEditContactTitle"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/badge_bg"
+            android:backgroundTint="#F8F9FA"
+            android:hint="যেমন: মেডিসিন বিশেষজ্ঞ"
+            android:inputType="text"
+            android:paddingHorizontal="12dp"
+            android:textColor="#000"
+            android:textSize="14sp" />
+
+        <!-- Phone Number -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="মোবাইল নম্বর (*):"
+            android:textColor="#333333"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etEditContactPhone"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/badge_bg"
+            android:backgroundTint="#F8F9FA"
+            android:hint="01711XXXXXX"
+            android:inputType="phone"
+            android:paddingHorizontal="12dp"
+            android:textColor="#000"
+            android:textSize="14sp" />
+
+        <!-- WhatsApp -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="WhatsApp নম্বর / লিংক (ঐচ্ছিক):"
+            android:textColor="#25D366"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etEditContactWhatsapp"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/badge_bg"
+            android:backgroundTint="#F8F9FA"
+            android:hint="যেমন: 8801711XXXXXX"
+            android:inputType="phone"
+            android:paddingHorizontal="12dp"
+            android:textColor="#000"
+            android:textSize="14sp" />
+
+        <!-- Facebook -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Facebook লিংক (ঐচ্ছিক):"
+            android:textColor="#1877F2"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etEditContactFacebook"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/badge_bg"
+            android:backgroundTint="#F8F9FA"
+            android:hint="https://facebook.com/username"
+            android:inputType="textUri"
+            android:paddingHorizontal="12dp"
+            android:textColor="#000"
+            android:textSize="14sp" />
+
+        <ProgressBar
+            android:id="@+id/pbEditContactUpload"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/primary_green"
+            android:layout_marginTop="10dp"
+            android:visibility="gone" />
+
+        <!-- Action Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSaveUserContactEdit"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                android:backgroundTint="@color/primary_green"
+                android:text="আপডেট ও জমা দিন"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:cornerRadius="8dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCancelUserContactEdit"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="0.8"
+                android:layout_marginStart="6dp"
+                android:text="বাতিল"
+                android:textColor="#555555"
+                android:textSize="14sp"
+                app:strokeColor="#CCCCCC"
+                app:cornerRadius="8dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
