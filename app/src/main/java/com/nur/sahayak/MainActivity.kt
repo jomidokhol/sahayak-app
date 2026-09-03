@@ -1,12 +1,15 @@
 package com.nur.sahayak
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,7 +22,9 @@ import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
@@ -56,6 +61,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var cardFloatingBlood: MaterialCardView
 
     private var userVerifiedUntil: Long = 0L
+
+    // Runtime Notification Permission Request Launcher (Android 13+)
+    private val notificationPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (!isGranted) {
+            Log.d("MainActivity", "Notification permission denied by user")
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,6 +109,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             loadFirestoreNotice()
+            askNotificationPermissionIfNeeded()
 
             btnCloseNotice.setOnClickListener {
                 noticeBar.visibility = View.GONE
@@ -165,6 +180,14 @@ class MainActivity : AppCompatActivity() {
 
         } catch (e: Exception) {
             Log.e("MainActivity", "Fatal Inflation Error", e)
+        }
+    }
+
+    private fun askNotificationPermissionIfNeeded() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
         }
     }
 

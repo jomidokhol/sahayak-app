@@ -16,25 +16,25 @@ to this project's gradle.properties.
 > Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
 > Task :app:checkKotlinGradlePluginConfigurationErrors
 > Task :app:generateDebugResValues
-> Task :app:generateDebugResources
 > Task :app:dataBindingMergeDependencyArtifactsDebug
+> Task :app:generateDebugResources
 > Task :app:processDebugGoogleServices
+> Task :app:mergeDebugResources
 > Task :app:packageDebugResources
 > Task :app:parseDebugLocalResources
 > Task :app:generateDebugBuildConfig
 > Task :app:checkDebugAarMetadata
+> Task :app:dataBindingGenBaseClassesDebug
 > Task :app:mapDebugSourceSetPaths
 > Task :app:createDebugCompatibleScreenManifests
 > Task :app:extractDeepLinksDebug
-> Task :app:mergeDebugResources
 > Task :app:processDebugMainManifest
-> Task :app:dataBindingGenBaseClassesDebug
 > Task :app:processDebugManifest
 > Task :app:javaPreCompileDebug
-> Task :app:processDebugManifestForPackage
 > Task :app:mergeDebugShaders
 > Task :app:compileDebugShaders NO-SOURCE
 > Task :app:generateDebugAssets UP-TO-DATE
+> Task :app:processDebugManifestForPackage
 > Task :app:mergeDebugAssets
 > Task :app:compressDebugAssets
 > Task :app:processDebugResources
@@ -108,10 +108,10 @@ w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/LoginActivit
 w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/LoginActivity.kt:63:23 'GoogleSignInOptions' is deprecated. Deprecated in Java
 w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/LoginActivity.kt:63:51 'GoogleSignInOptions' is deprecated. Deprecated in Java
 w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/LoginActivity.kt:67:34 'GoogleSignIn' is deprecated. Deprecated in Java
-w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/MainActivity.kt:65:20 'setter for statusBarColor: Int' is deprecated. Deprecated in Java
-w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/MainActivity.kt:66:30 'setter for systemUiVisibility: Int' is deprecated. Deprecated in Java
-w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/MainActivity.kt:67:22 'SYSTEM_UI_FLAG_LAYOUT_STABLE: Int' is deprecated. Deprecated in Java
-w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/MainActivity.kt:67:59 'SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/MainActivity.kt:79:20 'setter for statusBarColor: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/MainActivity.kt:80:30 'setter for systemUiVisibility: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/MainActivity.kt:81:22 'SYSTEM_UI_FLAG_LAYOUT_STABLE: Int' is deprecated. Deprecated in Java
+w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/MainActivity.kt:81:59 'SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN: Int' is deprecated. Deprecated in Java
 w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/NewsDetailActivity.kt:51:16 'setter for statusBarColor: Int' is deprecated. Deprecated in Java
 w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/NewsDetailActivity.kt:52:26 'setter for systemUiVisibility: Int' is deprecated. Deprecated in Java
 w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/NewsDetailActivity.kt:53:18 'SYSTEM_UI_FLAG_LAYOUT_STABLE: Int' is deprecated. Deprecated in Java
@@ -183,5 +183,5 @@ w: file:///workspaces/sahayak-app/app/src/main/java/com/nur/sahayak/utils/Notifi
 > Task :app:createDebugApkListingFileRedirect
 > Task :app:assembleDebug
 
-BUILD SUCCESSFUL in 3m 31s
+BUILD SUCCESSFUL in 3m 43s
 37 actionable tasks: 37 executed
